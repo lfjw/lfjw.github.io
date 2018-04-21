@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>vue-devtools安装的问题以及解决的方式 | 小哇的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="换了一个电脑，安装vue-devtools，因为以前安装过一次，没当回事。结果打脸了，搞了半天才安装好 报错，提示了不识别build/hook.js” 这是什么鬼 结果发现，这是模式应用的错误，更改为development就OK了 更改两处，然后就可以安装了 第一处manifest.json  第二处webpack.config.js  这里的production更改为development 看到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue-devtools安装的问题以及解决的方式">
+<meta property="og:url" content="http://yoursite.com/2018/04/21/vue-devtools安装的问题以及解决的方式/index.html">
+<meta property="og:site_name" content="小哇的个人博客">
+<meta property="og:description" content="换了一个电脑，安装vue-devtools，因为以前安装过一次，没当回事。结果打脸了，搞了半天才安装好 报错，提示了不识别build/hook.js” 这是什么鬼 结果发现，这是模式应用的错误，更改为development就OK了 更改两处，然后就可以安装了 第一处manifest.json  第二处webpack.config.js  这里的production更改为development 看到">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/04/21/vue-devtools安装的问题以及解决的方式/first.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/21/vue-devtools安装的问题以及解决的方式/second.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/21/vue-devtools安装的问题以及解决的方式/third.jpg">
+<meta property="og:updated_time" content="2018-04-21T10:37:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue-devtools安装的问题以及解决的方式">
+<meta name="twitter:description" content="换了一个电脑，安装vue-devtools，因为以前安装过一次，没当回事。结果打脸了，搞了半天才安装好 报错，提示了不识别build/hook.js” 这是什么鬼 结果发现，这是模式应用的错误，更改为development就OK了 更改两处，然后就可以安装了 第一处manifest.json  第二处webpack.config.js  这里的production更改为development 看到">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/21/vue-devtools安装的问题以及解决的方式/first.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="小哇的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">小哇的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vue-devtools安装的问题以及解决的方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/21/vue-devtools安装的问题以及解决的方式/" class="article-date">
+  <time datetime="2018-04-21T10:29:40.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vue-devtools安装的问题以及解决的方式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>换了一个电脑，安装vue-devtools，因为以前安装过一次，没当回事。结果打脸了，搞了半天才安装好</p>
+<p>报错，提示了不识别build/hook.js”</p>
+<p>这是什么鬼</p>
+<p>结果发现，这是模式应用的错误，更改为development就OK了</p>
+<p>更改两处，然后就可以安装了</p>
+<p>第一处manifest.json</p>
+<p><img src="/2018/04/21/vue-devtools安装的问题以及解决的方式/first.jpg" alt="bg"></p>
+<p>第二处webpack.config.js</p>
+<p><img src="/2018/04/21/vue-devtools安装的问题以及解决的方式/second.jpg" alt="bg"></p>
+<p>这里的production更改为development</p>
+<p>看到这里，然后在执行npm run build</p>
+<p>然后在浏览器中扩展程序就好了</p>
+<p><img src="/2018/04/21/vue-devtools安装的问题以及解决的方式/third.jpg" alt="bg"></p>
+<p>这样就ok了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/21/vue-devtools安装的问题以及解决的方式/" data-id="cjg98smfs0002mvfyvyyonneq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/21/如何做一个带有毛玻璃效果的css样式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">如何做一个带有毛玻璃效果的css样式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/21/vue-devtools安装的问题以及解决的方式/">vue-devtools安装的问题以及解决的方式</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/21/如何做一个带有毛玻璃效果的css样式/">如何做一个带有毛玻璃效果的css样式</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/vue-cli无法在打开ip，并且一个局域网下无法在手机调试/">vue-cli无法在打开ip，并且一个局域网下无法在手机调试</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 小 哇<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
