@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>arguments的那些事 | lf小哇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="arguments 定义: arguments 是一个对应于传递给函数的参数的类数组对象。 有几个比较重要的知识点是应该注意的 arguments对象是所有（非箭头）函数中都可用的局部变量。  你可以使用arguments对象在函数中引用函数的参数。此对象包含传递给函数的每个参数的条目，第一个条目的索引从0开始。例如，如果一个函数传递了三个参数，你可以以如下方式引用他们 123arguments[">
+<meta property="og:type" content="article">
+<meta property="og:title" content="arguments的那些事">
+<meta property="og:url" content="http://yoursite.com/2018/04/25/arguments的那些事/index.html">
+<meta property="og:site_name" content="lf小哇">
+<meta property="og:description" content="arguments 定义: arguments 是一个对应于传递给函数的参数的类数组对象。 有几个比较重要的知识点是应该注意的 arguments对象是所有（非箭头）函数中都可用的局部变量。  你可以使用arguments对象在函数中引用函数的参数。此对象包含传递给函数的每个参数的条目，第一个条目的索引从0开始。例如，如果一个函数传递了三个参数，你可以以如下方式引用他们 123arguments[">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-25T06:28:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="arguments的那些事">
+<meta name="twitter:description" content="arguments 定义: arguments 是一个对应于传递给函数的参数的类数组对象。 有几个比较重要的知识点是应该注意的 arguments对象是所有（非箭头）函数中都可用的局部变量。  你可以使用arguments对象在函数中引用函数的参数。此对象包含传递给函数的每个参数的条目，第一个条目的索引从0开始。例如，如果一个函数传递了三个参数，你可以以如下方式引用他们 123arguments[">
+  
+    <link rel="alternate" href="/atom.xml" title="lf小哇" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">lf小哇</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">创新的动力，其实是为了更懒</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-arguments的那些事" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/25/arguments的那些事/" class="article-date">
+  <time datetime="2018-04-25T06:17:10.000Z" itemprop="datePublished">2018-04-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      arguments的那些事
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>arguments 定义: arguments 是一个对应于传递给函数的参数的类数组对象。</p>
+<h3 id="有几个比较重要的知识点是应该注意的"><a href="#有几个比较重要的知识点是应该注意的" class="headerlink" title="有几个比较重要的知识点是应该注意的"></a>有几个比较重要的知识点是应该注意的</h3><ul>
+<li><p>arguments对象是所有（非箭头）函数中都可用的局部变量。</p>
+</li>
+<li><p>你可以使用arguments对象在函数中引用函数的参数。此对象包含传递给函数的每个参数的条目，第一个条目的索引从0开始。例如，如果一个函数传递了三个参数，你可以以如下方式引用他们</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arguments[0]</span><br><span class="line">arguments[1]</span><br><span class="line">arguments[2]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>参数可以被设置</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arguments[1] = &apos;new value&apos;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>arguments对象不是一个 Array 。它类似于Array，但除了length属性和索引元素之外没有任何Array属性。例如，它没有 pop 方法。但是它可以被转换为一个真正的Array：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var args = Array.prototype.slice.call(arguments);</span><br><span class="line">var args = [].slice.call(arguments);</span><br><span class="line"></span><br><span class="line">// ES2015</span><br><span class="line">const args = Array.from(arguments);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>对参数使用扩展语法</li>
+</ul>
+<p>您还可以使用Array.from()方法或扩展运算符将参数转换为真实数组：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var args = Array.from(arguments);</span><br><span class="line">var args = [...arguments];</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/25/arguments的那些事/" data-id="cjgepj3fe00000pfycqi6x5e4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/24/javascript中的apply和call/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">javascript中的apply和call</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/25/arguments的那些事/">arguments的那些事</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/24/javascript中的apply和call/">javascript中的apply和call</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/23/关于svg-sprite-loader/">关于svg-sprite-loader</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/21/vue-devtools安装的问题以及解决的方式/">vue-devtools安装的问题以及解决的方式</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/21/如何做一个带有毛玻璃效果的css样式/">如何做一个带有毛玻璃效果的css样式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 小 哇<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
