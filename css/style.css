@@ -1287,6 +1287,20 @@ pre .javascript .function {
     color: #fff;
   }
 }
+#header {
+  height: 200px;
+}
+#banner {
+  background: url("images/banner1.jpg") center #000;
+}
+#logo {
+  color: #333;
+  font-weight: bold;
+}
+#subtitle {
+  color: #333;
+  font-weight: bold;
+}
 @media screen and (min-width: 768px) {
   #sidebar {
     display: inline;
