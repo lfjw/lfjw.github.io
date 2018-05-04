@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>elementui中el-upload自定义上传方法中遇到的问题 | lf小哇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="由于el-upload控件中自定义的upload方法在上传文件中是以FormData的格式上传，后台服务器无法解析这种格式的body，所以通过http-request属性自定义了一个上传方法。12345678910111213141516&amp;lt;el-upload    class=&quot;upload-demo&quot;     ref=&quot;upload&quot;    action=&quot;http://127.0.0.1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="elementui中el-upload自定义上传方法中遇到的问题">
+<meta property="og:url" content="http://yoursite.com/2018/05/04/elementui中el-upload自定义上传方法中遇到的问题/index.html">
+<meta property="og:site_name" content="lf小哇">
+<meta property="og:description" content="由于el-upload控件中自定义的upload方法在上传文件中是以FormData的格式上传，后台服务器无法解析这种格式的body，所以通过http-request属性自定义了一个上传方法。12345678910111213141516&amp;lt;el-upload    class=&quot;upload-demo&quot;     ref=&quot;upload&quot;    action=&quot;http://127.0.0.1">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-04T12:47:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="elementui中el-upload自定义上传方法中遇到的问题">
+<meta name="twitter:description" content="由于el-upload控件中自定义的upload方法在上传文件中是以FormData的格式上传，后台服务器无法解析这种格式的body，所以通过http-request属性自定义了一个上传方法。12345678910111213141516&amp;lt;el-upload    class=&quot;upload-demo&quot;     ref=&quot;upload&quot;    action=&quot;http://127.0.0.1">
+
+  
+    <link rel="alternate" href="/atom.xml" title="lf小哇" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+<!--   <a href="https://github.com/lfjw"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png"></a>
+ -->
+
+  <a href="https://github.com/lfjw" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#fff; color:#151513; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+  
+
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">lf小哇</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">创新的动力，其实是为了更懒</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+       
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-elementui中el-upload自定义上传方法中遇到的问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/04/elementui中el-upload自定义上传方法中遇到的问题/" class="article-date">
+  <time datetime="2018-05-04T12:44:50.000Z" itemprop="datePublished">2018-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      elementui中el-upload自定义上传方法中遇到的问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="由于el-upload控件中自定义的upload方法在上传文件中是以FormData的格式上传，后台服务器无法解析这种格式的body，所以通过http-request属性自定义了一个上传方法。"><a href="#由于el-upload控件中自定义的upload方法在上传文件中是以FormData的格式上传，后台服务器无法解析这种格式的body，所以通过http-request属性自定义了一个上传方法。" class="headerlink" title="由于el-upload控件中自定义的upload方法在上传文件中是以FormData的格式上传，后台服务器无法解析这种格式的body，所以通过http-request属性自定义了一个上传方法。"></a>由于el-upload控件中自定义的upload方法在上传文件中是以FormData的格式上传，后台服务器无法解析这种格式的body，所以通过http-request属性自定义了一个上传方法。</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">el-upload</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"upload-demo"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ref</span>=<span class="string">"upload"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">action</span>=<span class="string">"http://127.0.0.1:5000/json/import"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:http-request</span>=<span class="string">"myUpload"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:on-preview</span>=<span class="string">"handlePreview"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:on-remove</span>=<span class="string">"handleRemove"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:on-error</span>=<span class="string">"handleError"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:on-success</span>=<span class="string">"handleSuccess"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:file-list</span>=<span class="string">"fileList"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:auto-upload</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">slot</span>=<span class="string">"trigger"</span> <span class="attr">size</span>=<span class="string">"small"</span> <span class="attr">type</span>=<span class="string">"primary"</span>&gt;</span>选取文件<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">style</span>=<span class="string">"margin-left: 10px;"</span> <span class="attr">size</span>=<span class="string">"small"</span> <span class="attr">type</span>=<span class="string">"success"</span> @<span class="attr">click</span>=<span class="string">"submitUpload"</span>&gt;</span>上传到服务器<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">slot</span>=<span class="string">"tip"</span> <span class="attr">class</span>=<span class="string">"el-upload__tip"</span>&gt;</span>只能上传json文件，且不超过500kb<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-upload</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">myUpload(content) &#123;</span><br><span class="line">    console.log(‘myUpload...‘);</span><br><span class="line">    this.$axios(&#123;</span><br><span class="line">        method: ‘post‘,</span><br><span class="line">        url: content.action,</span><br><span class="line">        timeout: 20000,</span><br><span class="line">        data: content.file</span><br><span class="line">    &#125;).then(res =&gt; &#123;</span><br><span class="line">         content.onSuccess(‘配时文件上传成功‘)</span><br><span class="line">    &#125;).catch(error =&gt; &#123;</span><br><span class="line">        if (error.response) &#123;</span><br><span class="line">             // The request was made and the server responded with a status code</span><br><span class="line">             // that falls out of the range of 2xx</span><br><span class="line">             content.onError(‘配时文件上传失败(‘ + error.response.status + ‘)，‘ + error.response.data);</span><br><span class="line">        &#125; else if (error.request) &#123;</span><br><span class="line">             // The request was made but no response was received</span><br><span class="line">             // `error.request` is an instance of XMLHttpRequest in the browser and an instance of</span><br><span class="line">             // http.ClientRequest in node.js</span><br><span class="line">            content.onError(‘配时文件上传失败，服务器端无响应‘);</span><br><span class="line">       	&#125; else &#123;</span><br><span class="line">             // Something happened in setting up the request that triggered an Error</span><br><span class="line">             content.onError(‘配时文件上传失败，请求封装失败‘);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种方式很常见，唯一要注意的点是在上传方法调用后判断结果成功或者失败的时候，需要回调el-upload控件的onSuccess和onError方法，为的是能够复用el-upload原生的一些动作，比如如果成功了，页面上的文件列表会有一个绿勾标记上传成功的文件，如果失败则会把失败的文件从文件列表中删除，如果不回调是没有这些功能的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/04/elementui中el-upload自定义上传方法中遇到的问题/" data-id="cjgryc4qu000153fyggnijrqi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/28/cordova安装及使用之android篇/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">cordova安装及使用之android篇</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/04/elementui中el-upload自定义上传方法中遇到的问题/">elementui中el-upload自定义上传方法中遇到的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/28/cordova安装及使用之android篇/">cordova安装及使用之android篇</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/27/如何查看页面是否开启了gzip压缩/">如何查看页面是否开启了gzip压缩</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/27/小程序api封装/">小程序api封装</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/27/函数式编程和面向对象编程的区别和优劣/">函数式编程和面向对象编程的区别和优劣</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 小 哇<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

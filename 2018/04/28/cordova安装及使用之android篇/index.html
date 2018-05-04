@@ -5,23 +5,19 @@
   
 
   
-  <title>vue-devtools安装的问题以及解决的方式 | lf小哇</title>
+  <title>cordova安装及使用之android篇 | lf小哇</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="换了一个电脑，安装vue-devtools，因为以前安装过一次，没当回事。结果打脸了，搞了半天才安装好 报错，提示了不识别build/hook.js” 这是什么鬼 结果发现，这是模式应用的错误，更改为development就OK了 更改两处，然后就可以安装了 第一处manifest.json  第二处webpack.config.js  这里的production更改为development 看到">
+  <meta name="description" content="机型：mac本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本纯属个人瞎搞，如果有不对的地方欢迎指正先进入正题，使用此cordova首先是配备java环境，然后安装android-sdk 一、安装jdk以及环境变量 MAC系统安装JDK1.8及环境变量配置 👉 https://blog.csdn.net/deliciousion/article/d">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue-devtools安装的问题以及解决的方式">
-<meta property="og:url" content="http://yoursite.com/2018/04/21/vue-devtools安装的问题以及解决的方式/index.html">
+<meta property="og:title" content="cordova安装及使用之android篇">
+<meta property="og:url" content="http://yoursite.com/2018/04/28/cordova安装及使用之android篇/index.html">
 <meta property="og:site_name" content="lf小哇">
-<meta property="og:description" content="换了一个电脑，安装vue-devtools，因为以前安装过一次，没当回事。结果打脸了，搞了半天才安装好 报错，提示了不识别build/hook.js” 这是什么鬼 结果发现，这是模式应用的错误，更改为development就OK了 更改两处，然后就可以安装了 第一处manifest.json  第二处webpack.config.js  这里的production更改为development 看到">
+<meta property="og:description" content="机型：mac本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本纯属个人瞎搞，如果有不对的地方欢迎指正先进入正题，使用此cordova首先是配备java环境，然后安装android-sdk 一、安装jdk以及环境变量 MAC系统安装JDK1.8及环境变量配置 👉 https://blog.csdn.net/deliciousion/article/d">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/04/21/vue-devtools安装的问题以及解决的方式/first.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/04/21/vue-devtools安装的问题以及解决的方式/second.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/04/21/vue-devtools安装的问题以及解决的方式/third.jpg">
-<meta property="og:updated_time" content="2018-04-21T10:37:05.000Z">
+<meta property="og:updated_time" content="2018-04-28T11:46:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue-devtools安装的问题以及解决的方式">
-<meta name="twitter:description" content="换了一个电脑，安装vue-devtools，因为以前安装过一次，没当回事。结果打脸了，搞了半天才安装好 报错，提示了不识别build/hook.js” 这是什么鬼 结果发现，这是模式应用的错误，更改为development就OK了 更改两处，然后就可以安装了 第一处manifest.json  第二处webpack.config.js  这里的production更改为development 看到">
-<meta name="twitter:image" content="http://yoursite.com/2018/04/21/vue-devtools安装的问题以及解决的方式/first.jpg">
+<meta name="twitter:title" content="cordova安装及使用之android篇">
+<meta name="twitter:description" content="机型：mac本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本纯属个人瞎搞，如果有不对的地方欢迎指正先进入正题，使用此cordova首先是配备java环境，然后安装android-sdk 一、安装jdk以及环境变量 MAC系统安装JDK1.8及环境变量配置 👉 https://blog.csdn.net/deliciousion/article/d">
 
   
     <link rel="alternate" href="/atom.xml" title="lf小哇" type="application/atom+xml">
@@ -79,10 +75,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-vue-devtools安装的问题以及解决的方式" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-cordova安装及使用之android篇" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/04/21/vue-devtools安装的问题以及解决的方式/" class="article-date">
-  <time datetime="2018-04-21T10:29:40.000Z" itemprop="datePublished">2018-04-21</time>
+    <a href="/2018/04/28/cordova安装及使用之android篇/" class="article-date">
+  <time datetime="2018-04-28T09:52:56.000Z" itemprop="datePublished">2018-04-28</time>
 </a>
     
   </div>
@@ -93,7 +89,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      vue-devtools安装的问题以及解决的方式
+      cordova安装及使用之android篇
     </h1>
   
 
@@ -101,25 +97,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>换了一个电脑，安装vue-devtools，因为以前安装过一次，没当回事。结果打脸了，搞了半天才安装好</p>
-<p>报错，提示了不识别build/hook.js”</p>
-<p>这是什么鬼</p>
-<p>结果发现，这是模式应用的错误，更改为development就OK了</p>
-<p>更改两处，然后就可以安装了</p>
-<p>第一处manifest.json</p>
-<p><img src="/2018/04/21/vue-devtools安装的问题以及解决的方式/first.jpg" alt="bg"></p>
-<p>第二处webpack.config.js</p>
-<p><img src="/2018/04/21/vue-devtools安装的问题以及解决的方式/second.jpg" alt="bg"></p>
-<p>这里的production更改为development</p>
-<p>看到这里，然后在执行npm run build</p>
-<p>然后在浏览器中扩展程序就好了</p>
-<p><img src="/2018/04/21/vue-devtools安装的问题以及解决的方式/third.jpg" alt="bg"></p>
-<p>这样就ok了</p>
+        <h3 id="机型：mac"><a href="#机型：mac" class="headerlink" title="机型：mac"></a>机型：mac</h3><h3 id="本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本"><a href="#本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本" class="headerlink" title="本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本"></a>本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本</h3><h3 id="纯属个人瞎搞，如果有不对的地方欢迎指正"><a href="#纯属个人瞎搞，如果有不对的地方欢迎指正" class="headerlink" title="纯属个人瞎搞，如果有不对的地方欢迎指正"></a>纯属个人瞎搞，如果有不对的地方欢迎指正</h3><p>先进入正题，使用此cordova首先是配备java环境，然后安装android-sdk</p>
+<p>一、安装jdk以及环境变量</p>
+<p>MAC系统安装JDK1.8及环境变量配置 👉 <a href="https://blog.csdn.net/deliciousion/article/details/78046007" target="_blank" rel="noopener">https://blog.csdn.net/deliciousion/article/details/78046007</a></p>
+<ul>
+<li><p>下载：jdk下载  👉 <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p>
+</li>
+<li><p>Mac设置安卓sdk环境变量   👉 <a href="https://blog.csdn.net/free_co/article/details/77115920" target="_blank" rel="noopener">https://blog.csdn.net/free_co/article/details/77115920</a></p>
+</li>
+</ul>
+<p>以下是我的配置</p>
+<p>设置JAVA_HOME环境变量，指定为JDK安装路径<br>设置ANDROID_HOME环境变量，指定为Android SDK安装路径<br>同时也建议你添加Android SDK的tools和platform-tools目录到你的PATH</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home</span><br><span class="line">export ANDROID_HOME=/Users/你的用户名/library/Android/sdk</span><br><span class="line">export PATH=$&#123;PATH&#125;:/Users/你的用户名/library/Android/sdk/platform-tools:/Users/你的用户名/library/Android/sdk/tool</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/21/vue-devtools安装的问题以及解决的方式/" data-id="cjgryc4r0000653fyc2qksqd8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/28/cordova安装及使用之android篇/" data-id="cjgryc4qw000253fybk212d2x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -128,19 +122,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/04/23/关于svg-sprite-loader/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/05/04/elementui中el-upload自定义上传方法中遇到的问题/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          关于svg-sprite-loader
+          elementui中el-upload自定义上传方法中遇到的问题
         
       </div>
     </a>
   
   
-    <a href="/2018/04/21/如何做一个带有毛玻璃效果的css样式/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/04/27/如何查看页面是否开启了gzip压缩/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">如何做一个带有毛玻璃效果的css样式</div>
+      <div class="article-nav-title">如何查看页面是否开启了gzip压缩</div>
     </a>
   
 </nav>
