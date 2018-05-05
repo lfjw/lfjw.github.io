@@ -73,6 +73,63 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-使用Vuejs-Vue-router-开发单页面，如何使得切换页面时能销毁原组件？" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/05/使用Vuejs-Vue-router-开发单页面，如何使得切换页面时能销毁原组件？/" class="article-date">
+  <time datetime="2018-05-05T13:55:49.000Z" itemprop="datePublished">2018-05-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/05/使用Vuejs-Vue-router-开发单页面，如何使得切换页面时能销毁原组件？/">使用Vuejs + Vue-router 开发单页面，如何使得切换页面时能销毁原组件？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>问题：(javascript)使用Vuejs + Vue-router 开发单页面，如何使得切换页面时能销毁原组件？<br>描述:</p>
+<p>我有一个单页面应用，有页面A和页面B，二者是同级组件，关系是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">router.map(&#123;</span><br><span class="line">&apos;/a&apos;: &#123;</span><br><span class="line">    component: A</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">&apos;/b&apos;: &#123;</span><br><span class="line">    component: B</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>例如，第一次打开时，显示页面 A，页面 A 有一个setInterval事件，每隔一秒钟会向后台发送一个Ajax请求。这时我点击页面 A 上的跳转按钮，跳到页面 B，通过观察网络连接，发现页面 A 上的Ajax请求仍然在继续。</p>
+<p>请问应当进行什么样的设置，才能使得页面切换时，原来的组件就被销毁？</p>
+<p>这是个非常严重的问题，同级组件绑定的事件，还会在另一个组件里继续监听。所以我猜想会有简单的配置方法，但我看遍了 Vue 的文档和 Vue-router 的文档，也未发现相关配置。</p>
+<p>参考文档：</p>
+<p><a href="http://vuejs.github.io/vue-router/zh-cn/options.html" target="_blank" rel="noopener">http://vuejs.github.io/vue-router/zh-cn/options.html</a></p>
+<p><a href="http://vuejs.org/guide/" target="_blank" rel="noopener">http://vuejs.org/guide/</a></p>
+<p>解决方案1:</p>
+<p>1、setInterval事件和组件的生命周期没有直接关系。<br>2、setInterval会返回一个ID 值。setInterval() 方法会不停地调用函数，直到 clearInterval() 被调用或窗口被关闭。由 setInterval() 返回的 ID 值可用作 clearInterval() 方法的参数。</p>
+<p>解决方案2:</p>
+<p>router切换时，原来的组件确实已经销毁了，你可以看到ready生命周期函数是每次都触发了的。你这里的问题不在于组件是否销毁，因为setInterval事件本身和组件没有关系。</p>
+<p>setInterval相当于该组件申请的一种资源，在使用该组件时获取，在离开该组件时释放。这个过程只能是你手动进行的。所以你应该在离开该组件时，比如route的deactivate或者beforeDestory生命周期函数里手动clearInterval。</p>
+<p>其实很多框架里都是这样，比如桌面程序中某个窗口初始化时需要打开数据库连接（我们也可以视为一种资源），当窗口关闭时，程序本身并不知道“打开数据库连接”的反向操作是什么。所以我们需要在窗口销毁的回调方法里手动去释放这个资源，去写断开连接的代码。</p>
+<p>解决方案3:</p>
+<p><a href="http://stackoverflow.com/questions/35104770/how-to-destroy-a-component-when-building-spa-with-vue-js-and-vue-router" target="_blank" rel="noopener">http://stackoverflow.com/questions/35104770/how-to-destroy-a-component-when-building-spa-with-vue-js-and-vue-router</a></p>
+<p><a href="http://vuejs.github.io/vue-router/zh-cn/pipeline/deactivate.html" target="_blank" rel="noopener">http://vuejs.github.io/vue-router/zh-cn/pipeline/deactivate.html</a></p>
+<p>以上介绍了“(javascript)使用Vuejs + Vue-router 开发单页面，如何使得切换页面时能销毁原组件？”的问题解答，希望对有需要的网友有所帮助。<br>本文网址链接：<a href="http://www.codes51.com/itwd/1037580.html" target="_blank" rel="noopener">http://www.codes51.com/itwd/1037580.html</a></p>
+<p>最后我根据解决方案1解决了，贴下我的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">created () &#123;</span><br><span class="line">  this.n = setInterval(() =&gt; &#123;</span><br><span class="line">    //...</span><br><span class="line">  &#125;, 20000)</span><br><span class="line">  this.n1 = setInterval(() =&gt; &#123;</span><br><span class="line">     //...</span><br><span class="line">  &#125;, 60000)</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">beforeDestroy () &#123;</span><br><span class="line">  clearInterval(this.n)</span><br><span class="line">  clearInterval(this.n1)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/05/使用Vuejs-Vue-router-开发单页面，如何使得切换页面时能销毁原组件？/" data-id="cjgtgfh4d0004whfyw1yaa9g7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-elementui中el-upload自定义上传方法中遇到的问题" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/04/elementui中el-upload自定义上传方法中遇到的问题/" class="article-date">
@@ -102,7 +159,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/04/elementui中el-upload自定义上传方法中遇到的问题/" data-id="cjgryc4qu000153fyggnijrqi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/04/elementui中el-upload自定义上传方法中遇到的问题/" data-id="cjgtgfh4c0003whfy4cnaow1u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -150,7 +207,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/28/cordova安装及使用之android篇/" data-id="cjgryc4qw000253fybk212d2x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/28/cordova安装及使用之android篇/" data-id="cjgtgfh440000whfysp8ktjsi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -208,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/27/如何查看页面是否开启了gzip压缩/" data-id="cjgryc4r5000a53fyhnhrfb67" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/27/如何查看页面是否开启了gzip压缩/" data-id="cjgtgfh4l000bwhfyjtq0zmgv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -246,7 +303,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/27/小程序api封装/" data-id="cjgryc4r6000b53fyeypoxa6o" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/27/小程序api封装/" data-id="cjgtgfh4x000cwhfyqpdjt5aq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -334,7 +391,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/27/函数式编程和面向对象编程的区别和优劣/" data-id="cjgryc4r2000853fymoi7ajjj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/27/函数式编程和面向对象编程的区别和优劣/" data-id="cjgtgfh4j0009whfyx4p16oni" class="article-share-link">Share</a>
       
       
     </footer>
@@ -389,7 +446,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/25/arguments的那些事/" data-id="cjgryc4qq000053fyaeu4w7fr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/25/arguments的那些事/" data-id="cjgtgfh470001whfytp0wl6lf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -476,7 +533,7 @@ https://blog.csdn.net/bao19901210/article/details/21614761 -->
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/24/javascript中的apply和call/" data-id="cjgryc4r0000553fy3cewdtig" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/24/javascript中的apply和call/" data-id="cjgtgfh4d0005whfyp3ybrzqt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -547,7 +604,7 @@ https://blog.csdn.net/bao19901210/article/details/21614761 -->
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/23/关于svg-sprite-loader/" data-id="cjgryc4r1000753fyymoboqve" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/23/关于svg-sprite-loader/" data-id="cjgtgfh4h0008whfyhnpv1l9m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -597,49 +654,7 @@ https://blog.csdn.net/bao19901210/article/details/21614761 -->
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/21/vue-devtools安装的问题以及解决的方式/" data-id="cjgryc4r0000653fyc2qksqd8" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-如何做一个带有毛玻璃效果的css样式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/21/如何做一个带有毛玻璃效果的css样式/" class="article-date">
-  <time datetime="2018-04-21T07:42:35.000Z" itemprop="datePublished">2018-04-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/21/如何做一个带有毛玻璃效果的css样式/">如何做一个带有毛玻璃效果的css样式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="先来看看毛玻璃效果"><a href="#先来看看毛玻璃效果" class="headerlink" title="先来看看毛玻璃效果"></a>先来看看毛玻璃效果</h3><p><img src="/2018/04/21/如何做一个带有毛玻璃效果的css样式/bg1.png" alt="bg"></p>
-<h3 id="再来看看没有毛玻璃的效果"><a href="#再来看看没有毛玻璃的效果" class="headerlink" title="再来看看没有毛玻璃的效果"></a>再来看看没有毛玻璃的效果</h3><p><img src="/2018/04/21/如何做一个带有毛玻璃效果的css样式/bg.png" alt="bg"></p>
-<h3 id="效果很明显有木有"><a href="#效果很明显有木有" class="headerlink" title="效果很明显有木有"></a>效果很明显有木有</h3><h3 id="让我们来看看如何实现"><a href="#让我们来看看如何实现" class="headerlink" title="让我们来看看如何实现"></a>让我们来看看如何实现</h3><ul>
-<li>以下是我写的一段代码，你可以直接copy到你的编辑器，查看</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">		.box&#123;</span></span><br><span class="line"><span class="undefined">			height: 300px;</span></span><br><span class="line"><span class="undefined">			width: 300px;</span></span><br><span class="line"><span class="undefined">			border: 1px solid #ccc;</span></span><br><span class="line"><span class="undefined">			position: relative;</span></span><br><span class="line"><span class="undefined">			background: url(http://img.ivsky.com/img/tupian/slides/201803/15/fangsuo_shudian.jpg) no-repeat center center;</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">		.box_inner&#123;</span></span><br><span class="line"><span class="undefined">			position: absolute;</span></span><br><span class="line"><span class="undefined">			height: 100px;</span></span><br><span class="line"><span class="undefined">			width: 100px;</span></span><br><span class="line"><span class="undefined">			overflow: hidden;</span></span><br><span class="line"><span class="undefined">			left: 50%;</span></span><br><span class="line"><span class="undefined">			top: 50%;</span></span><br><span class="line"><span class="undefined">			transform: translate(-50%,-50%);</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">		.img_inner&#123;</span></span><br><span class="line"><span class="undefined">			height: 100px;</span></span><br><span class="line"><span class="undefined">			width: 100px;</span></span><br><span class="line"><span class="undefined">			filter: blur(5px);</span></span><br><span class="line"><span class="undefined">			background: url(http://img.ivsky.com/img/tupian/slides/201803/15/fangsuo_shudian.jpg) no-repeat center center;</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">		.text_inner&#123;</span></span><br><span class="line"><span class="undefined">			height: 100px;</span></span><br><span class="line"><span class="undefined">			width: 100px;</span></span><br><span class="line"><span class="undefined">			position: absolute;</span></span><br><span class="line"><span class="undefined">			z-index: 99;</span></span><br><span class="line"><span class="undefined">			text-align: center;</span></span><br><span class="line"><span class="undefined">			color: #ffffff;</span></span><br><span class="line"><span class="undefined">			left: 0px;</span></span><br><span class="line"><span class="undefined">			top: 0px;</span></span><br><span class="line"><span class="undefined">			line-height: 100px;</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">	</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'box'</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box_inner"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"img_inner"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"text_inner"</span>&gt;</span>文字<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		</span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/21/如何做一个带有毛玻璃效果的css样式/" data-id="cjgryc4r4000953fy5xvjbvdi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/21/vue-devtools安装的问题以及解决的方式/" data-id="cjgtgfh4f0007whfyekfva8ey" class="article-share-link">Share</a>
       
       
     </footer>
@@ -685,6 +700,10 @@ https://blog.csdn.net/bao19901210/article/details/21614761 -->
       <ul>
         
           <li>
+            <a href="/2018/05/05/使用Vuejs-Vue-router-开发单页面，如何使得切换页面时能销毁原组件？/">使用Vuejs + Vue-router 开发单页面，如何使得切换页面时能销毁原组件？</a>
+          </li>
+        
+          <li>
             <a href="/2018/05/04/elementui中el-upload自定义上传方法中遇到的问题/">elementui中el-upload自定义上传方法中遇到的问题</a>
           </li>
         
@@ -698,10 +717,6 @@ https://blog.csdn.net/bao19901210/article/details/21614761 -->
         
           <li>
             <a href="/2018/04/27/小程序api封装/">小程序api封装</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/27/函数式编程和面向对象编程的区别和优劣/">函数式编程和面向对象编程的区别和优劣</a>
           </li>
         
       </ul>
