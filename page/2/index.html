@@ -73,6 +73,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-vue-devtools安装的问题以及解决的方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/21/vue-devtools安装的问题以及解决的方式/" class="article-date">
+  <time datetime="2018-04-21T10:29:40.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/21/vue-devtools安装的问题以及解决的方式/">vue-devtools安装的问题以及解决的方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>换了一个电脑，安装vue-devtools，因为以前安装过一次，没当回事。结果打脸了，搞了半天才安装好</p>
+<p>报错，提示了不识别build/hook.js”</p>
+<p>这是什么鬼</p>
+<p>结果发现，这是模式应用的错误，更改为development就OK了</p>
+<p>更改两处，然后就可以安装了</p>
+<p>第一处manifest.json</p>
+<p><img src="/2018/04/21/vue-devtools安装的问题以及解决的方式/first.jpg" alt="bg"></p>
+<p>第二处webpack.config.js</p>
+<p><img src="/2018/04/21/vue-devtools安装的问题以及解决的方式/second.jpg" alt="bg"></p>
+<p>这里的production更改为development</p>
+<p>看到这里，然后在执行npm run build</p>
+<p>然后在浏览器中扩展程序就好了</p>
+<p><img src="/2018/04/21/vue-devtools安装的问题以及解决的方式/third.jpg" alt="bg"></p>
+<p>这样就ok了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/21/vue-devtools安装的问题以及解决的方式/" data-id="cjguqe0xl0006mpfy804k69xt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-如何做一个带有毛玻璃效果的css样式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/04/21/如何做一个带有毛玻璃效果的css样式/" class="article-date">
@@ -105,7 +155,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/21/如何做一个带有毛玻璃效果的css样式/" data-id="cjgtgfh4k000awhfyrnrudp4e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/21/如何做一个带有毛玻璃效果的css样式/" data-id="cjguqe0xq000ampfyc1q9mgpj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -195,7 +245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/20/vue-cli无法在打开ip，并且一个局域网下无法在手机调试/" data-id="cjgtgfh4e0006whfyifgfcnse" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/20/vue-cli无法在打开ip，并且一个局域网下无法在手机调试/" data-id="cjguqe0xk0005mpfyg6wp9ngu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -240,7 +290,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/19/hello-world/" data-id="cjgtgfh490002whfyn63bj42n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/19/hello-world/" data-id="cjguqe0xh0003mpfy43704q8o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -286,6 +336,10 @@
       <ul>
         
           <li>
+            <a href="/2018/05/06/手把手教你撸electron/">手把手教你撸electron</a>
+          </li>
+        
+          <li>
             <a href="/2018/05/05/使用Vuejs-Vue-router-开发单页面，如何使得切换页面时能销毁原组件？/">使用Vuejs + Vue-router 开发单页面，如何使得切换页面时能销毁原组件？</a>
           </li>
         
@@ -299,10 +353,6 @@
         
           <li>
             <a href="/2018/04/27/如何查看页面是否开启了gzip压缩/">如何查看页面是否开启了gzip压缩</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/27/小程序api封装/">小程序api封装</a>
           </li>
         
       </ul>
