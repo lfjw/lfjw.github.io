@@ -73,6 +73,131 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-深入了解跨域问题，以及解决的方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/09/深入了解跨域问题，以及解决的方式/" class="article-date">
+  <time datetime="2018-05-09T01:29:28.000Z" itemprop="datePublished">2018-05-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/09/深入了解跨域问题，以及解决的方式/">深入了解跨域问题，以及解决的方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对于前后端分离的项目，跨域问题是必然会遇到的问题，有些同学可能去的公司没有从0开始搭建，被前人解决掉了，没有亲身遇到。那我将会从我参与到的从0开始搭建的项目，来说说跨域的那些事</p>
+<h4 id="跨域的含义"><a href="#跨域的含义" class="headerlink" title="跨域的含义"></a>跨域的含义</h4><p>跨域是指从一个域名的网页去请求另一个域名的资源。比如从<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 页面去请求 <a href="http://www.google.com" target="_blank" rel="noopener">www.google.com</a> 的资源。跨域的严格一点的定义是：只要 协议，域名，端口有任何一个的不同，就被当作是跨域</p>
+<h4 id="为什么浏览器要限制跨域访问呢？"><a href="#为什么浏览器要限制跨域访问呢？" class="headerlink" title="为什么浏览器要限制跨域访问呢？"></a>为什么浏览器要限制跨域访问呢？</h4><p>原因就是安全问题：如果一个网页可以随意地访问另外一个网站的资源，那么就有可能在客户完全不知情的情况下出现安全问题。比如下面的操作就有安全问题：</p>
+<ul>
+<li>用户访问<a href="http://www.mybank.com" target="_blank" rel="noopener">www.mybank.com</a> ，登陆并进行网银操作，这时cookie啥的都生成并存放在浏览器</li>
+<li>用户突然想起件事，并迷迷糊糊地访问了一个邪恶的网站 <a href="http://www.xiee.com" target="_blank" rel="noopener">www.xiee.com</a></li>
+<li>这时该网站就可以在它的页面中，拿到银行的cookie，比如用户名，登陆token等，然后发起对<a href="http://www.mybank.com" target="_blank" rel="noopener">www.mybank.com</a> 的操作。 </li>
+<li>如果这时浏览器不予限制，并且银行也没有做响应的安全处理的话，那么用户的信息有可能就这么泄露了。</li>
+</ul>
+<h4 id="如何解决跨域"><a href="#如何解决跨域" class="headerlink" title="如何解决跨域"></a>如何解决跨域</h4><p>看到这，我要吐个槽，在我以前面试的经历当中，有一位年轻的面试官，问了我一个问题，怎么解决跨域，我说通过nginx反向代理，他跟我说，没用过jsonp么，那个表情，好比再说，你连jsonp都不知道么。所以说，技术面试，一般不仅仅是对面试者的考验，更是面的人的一种考验。</p>
+<p>继续咱们的！！！</p>
+<p>不知道同学们有木有用过vue-cli脚手架，在config/index.js中有一段本地开发如何解决跨域的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">proxyTable: &#123;</span><br><span class="line">    &apos;/apis&apos;: &#123;</span><br><span class="line">        target: &apos;http://xxx/&apos;,</span><br><span class="line">        changeOrigin: true,</span><br><span class="line">        pathRewrite: &#123;</span><br><span class="line">          &apos;^/apis&apos;: &apos;&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>首先让我们来看看这个东西实现的原理，</p>
+<p>他依赖的是http-proxy-middleware，了解它的自行百度</p>
+<p>这段代码的意思就是，本地反向代理。此原理同样应用到服务器端，在nginx上，配置一个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location ^~/apis/&#123;</span><br><span class="line">	rewrite ^/apis/(.*)$ /$1 break;</span><br><span class="line">	proxy_pass http://xxx/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以下做一个解释</p>
+<p>1.’^~ /apis/ ‘</p>
+<ul>
+<li>这是是一个匹配规则，用于拦截请求，匹配任何以 /apis/开头的地址，匹配符合以后，停止往下搜索正则。</li>
+</ul>
+<p>2.rewrite ^/apis/(.*)$ /$1 break;</p>
+<ul>
+<li>代表重写拦截进来的请求，并且只能对域名后边的除去传递的参数外的字符串起作用，例如<a href="http://www.c.com/apis/api/msg?method=1&amp;para=2重写。只对/apis/api/msg重写。" target="_blank" rel="noopener">www.c.com/apis/api/msg?method=1&amp;para=2重写。只对/apis/api/msg重写。</a></li>
+</ul>
+<p>　　<em> rewrite后面的参数是一个简单的正则 ^/apis/(.</em>)$ ,$1代表正则中的第一个(),$2代表第二个()的值,以此类推。</p>
+<p>　　* break代表匹配一个之后停止匹配。</p>
+<p>3.proxy_pass</p>
+<ul>
+<li><p>既是把请求代理到其他主机，其中 <a href="http://www.b.com/" target="_blank" rel="noopener">http://www.b.com/</a> 写法和 <a href="http://www.b.com写法的区别如下" target="_blank" rel="noopener">http://www.b.com写法的区别如下</a>:</p>
+</li>
+<li><p>不带/</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /apis/&#123;</span><br><span class="line">　　proxy_pass http://b.com:8300; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>带/</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /apis/ &#123; </span><br><span class="line">    proxy_pass http://b.com:8300/; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面两种配置，区别只在于proxy_pass转发的路径后是否带 “/”。</p>
+<ul>
+<li><p>针对情况1，如果访问url = <a href="http://server/apis/test.jsp，则被nginx代理后，请求路径会便问http://proxy_pass/apis/test.jsp，将test/" target="_blank" rel="noopener">http://server/apis/test.jsp，则被nginx代理后，请求路径会便问http://proxy_pass/apis/test.jsp，将test/</a> 作为根路径，请求test/路径下的资源。</p>
+</li>
+<li><p>针对情况2，如果访问url = <a href="http://server/apis/test.jsp，则被nginx代理后，请求路径会变为" target="_blank" rel="noopener">http://server/apis/test.jsp，则被nginx代理后，请求路径会变为</a> <a href="http://proxy_pass/test.jsp，直接访问server的根资源。" target="_blank" rel="noopener">http://proxy_pass/test.jsp，直接访问server的根资源。</a></p>
+</li>
+</ul>
+<p>修改配置后重启nginx代理就成功了。</p>
+<p>至此，我们的跨域问题配置大功告成。</p>
+<p>有什么疑问，可以上github，有我的练习方式，欢迎大家指正。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/09/深入了解跨域问题，以及解决的方式/" data-id="cjgyff56y000ekcfy4bn0vag5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-使用nuxt" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/07/使用nuxt/" class="article-date">
+  <time datetime="2018-05-07T09:59:11.000Z" itemprop="datePublished">2018-05-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/07/使用nuxt/">使用nuxt</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>关于nuxt，我在这里就不过多介绍了</p>
+<p><a href="https://zh.nuxtjs.org/" target="_blank" rel="noopener">https://zh.nuxtjs.org/</a></p>
+<p>大家可以自行查看</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/07/使用nuxt/" data-id="cjgyff56s0008kcfy0s0cnz90" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-手把手教你撸electron" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/06/手把手教你撸electron/" class="article-date">
@@ -107,7 +232,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/06/手把手教你撸electron/" data-id="cjguqe0xr000bmpfy0hofbscb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/06/手把手教你撸electron/" data-id="cjgyff56z000fkcfyhkz84q3a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -164,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/05/使用Vuejs-Vue-router-开发单页面，如何使得切换页面时能销毁原组件？/" data-id="cjguqe0xm0007mpfyfjbr7p20" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/05/使用Vuejs-Vue-router-开发单页面，如何使得切换页面时能销毁原组件？/" data-id="cjgyff56r0007kcfyr3zmtcsg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -203,7 +328,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/04/elementui中el-upload自定义上传方法中遇到的问题/" data-id="cjguqe0xf0002mpfykb8ucsgy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/04/elementui中el-upload自定义上传方法中遇到的问题/" data-id="cjgyff56l0002kcfyrchht5a1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -251,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/28/cordova安装及使用之android篇/" data-id="cjguqe0xd0001mpfymit0y05p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/28/cordova安装及使用之android篇/" data-id="cjgyff56f0000kcfybyohxgly" class="article-share-link">Share</a>
       
       
     </footer>
@@ -309,7 +434,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/27/如何查看页面是否开启了gzip压缩/" data-id="cjguqe0xs000cmpfyzf24i55a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/27/如何查看页面是否开启了gzip压缩/" data-id="cjgyff56x000dkcfyuye0nzav" class="article-share-link">Share</a>
       
       
     </footer>
@@ -347,7 +472,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/27/小程序api封装/" data-id="cjguqe0xt000dmpfy13zxypd9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/27/小程序api封装/" data-id="cjgyff56w000ckcfyivhoni53" class="article-share-link">Share</a>
       
       
     </footer>
@@ -435,7 +560,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/27/函数式编程和面向对象编程的区别和优劣/" data-id="cjguqe0xp0009mpfynsuzuhlp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/27/函数式编程和面向对象编程的区别和优劣/" data-id="cjgyff56w000bkcfyf64t304i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -490,165 +615,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/25/arguments的那些事/" data-id="cjguqe0xa0000mpfy3de5ksu9" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-javascript中的apply和call" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/24/javascript中的apply和call/" class="article-date">
-  <time datetime="2018-04-24T08:17:16.000Z" itemprop="datePublished">2018-04-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/24/javascript中的apply和call/">javascript中的apply和call</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天深入理解一下js中的这个点</p>
-<h3 id="apply：方法能劫持另外一个对象的方法，继承另外一个对象的属性"><a href="#apply：方法能劫持另外一个对象的方法，继承另外一个对象的属性" class="headerlink" title="apply：方法能劫持另外一个对象的方法，继承另外一个对象的属性."></a>apply：方法能劫持另外一个对象的方法，继承另外一个对象的属性.</h3><ul>
-<li><p>Function.apply(obj,args)方法能接收两个参数</p>
-</li>
-<li><p>obj：这个对象将代替Function类里this对象</p>
-</li>
-<li><p>args：这个是数组，它将作为参数传给Function（args–&gt;arguments）</p>
-</li>
-</ul>
-<p>来个例子可以更好的理解</p>
-<p>eg :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function Parent (name,age) &#123;</span><br><span class="line">	this.name = name</span><br><span class="line">	this.age = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Children (name,age,className) &#123;</span><br><span class="line">	Parent.apply(this,arguments)</span><br><span class="line">	this.className = className </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let p = new Children(1,2,3)</span><br><span class="line"></span><br><span class="line">//p =&gt; Children &#123;name: 1, age: 2, className: 3&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="如果你看到-arguments有点懵逼，请查看我的另一个文章可查看我的另一篇内容"><a href="#如果你看到-arguments有点懵逼，请查看我的另一个文章可查看我的另一篇内容" class="headerlink" title="如果你看到 arguments有点懵逼，请查看我的另一个文章可查看我的另一篇内容"></a>如果你看到 arguments有点懵逼，请查看我的另一个文章可查看我的另一篇内容</h4><h3 id="call：和apply的意思一样-只不过是参数列表不一样"><a href="#call：和apply的意思一样-只不过是参数列表不一样" class="headerlink" title="call：和apply的意思一样,只不过是参数列表不一样."></a>call：和apply的意思一样,只不过是参数列表不一样.</h3><ul>
-<li><p>Function.call(obj,[param1[,param2[,…[,paramN]]]])</p>
-</li>
-<li><p>obj：这个对象将代替Function类里this对象</p>
-</li>
-<li><p>params：这个是一个参数列表</p>
-</li>
-</ul>
-<p>eg:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function Parent (name,age) &#123;</span><br><span class="line">	this.name = name</span><br><span class="line">	this.age = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Children (name,age,className) &#123;</span><br><span class="line">	Parent.call(this,name,age)</span><br><span class="line">	this.className = className </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let p = new Children(1,2,3)</span><br><span class="line"></span><br><span class="line">//p =&gt; Children &#123;name: 1, age: 2, className: 3&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="apply和call-应用场景"><a href="#apply和call-应用场景" class="headerlink" title="apply和call 应用场景"></a>apply和call 应用场景</h3><ul>
-<li><p>在给对象参数的情况下,如果参数的形式是数组的时候,比如apply示例里面传递了参数arguments,这个参数是数组类型,并且在调用Parent的时候参数的列表是对应一致的(也就是Parent和Children的参数列表前两位是一致的) 就可以采用 apply </p>
-</li>
-<li><p>如果我的Parent的参数列表是这样的(age,name),而Children的参数列表是(name,age,grade),这样就可以用call来实现了,也就是直接指定参数列表对应值的位置(Parent.call(this,age,name,grade))</p>
-</li>
-</ul>
-<h3 id="apply的巧妙用法"><a href="#apply的巧妙用法" class="headerlink" title="apply的巧妙用法"></a>apply的巧妙用法</h3><p>这个就是apply的一个巧妙的用处,可以将一个数组默认的转换为一个参数列表([param1,param2,param3] 转换为 param1,param2,param3) 这个如果让我们用程序来实现将数组的每一个项,来装换为参数的列表,可能都得费一会功夫,借助apply的这点特性,所以就有了以下高效率的方法:</p>
-<ul>
-<li>Math.max 可以实现得到数组中最大的一项</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">let arr = [1,2,3,5]</span><br><span class="line"></span><br><span class="line">let n = Math.max.apply(null ,arr)</span><br><span class="line"></span><br><span class="line">// n 5</span><br></pre></td></tr></table></figure>
-<ul>
-<li>数组合并</li>
-</ul>
-<p>再比如数组的push方法</p>
-<p>var arr1=[1,3,4]</p>
-<p>var arr2=[3,4,5]</p>
-<p>如果我们要把 arr2展开，然后一个一个追加到 arr1中去，最后让  arr1=[1,3,4,3,4,5]</p>
-<p>arr1.push(arr2)  显然是不行的。 因为这样做会得到  [1,3,4, [3,4,5] ]</p>
-<p>我们只能用一个循环去一个一个的push (当然也可以用 arr1.concat(arr2) 但是concat方法并不改变 arr1本身)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var arrLen=arr2.length</span><br><span class="line"></span><br><span class="line">for(var i=0;i&lt;arrLen;i++)&#123;</span><br><span class="line"></span><br><span class="line">    arr1.push(arr2[i])</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>自从有了 Apply ,事情就变得如此简单</p>
-<p>Array.prototype.push.apply(arr1,arr2)</p>
-<p>点滴汇聚能量!</p>
-<!-- 参考学习文章链接
-
-http://www.cnblogs.com/xiaohongwu/archive/2011/06/15/2081237.html
-
-https://blog.csdn.net/bao19901210/article/details/21614761 -->
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/24/javascript中的apply和call/" data-id="cjguqe0xj0004mpfy1f4fqlxr" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-关于svg-sprite-loader" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/23/关于svg-sprite-loader/" class="article-date">
-  <time datetime="2018-04-23T06:54:36.000Z" itemprop="datePublished">2018-04-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/23/关于svg-sprite-loader/">关于svg-sprite-loader</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>现在我们要接触的是一个叫 svg-sprite-loader 的插件，用来根据导入的 svg 文件自动生成 symbol 标签并插入 html，接下来就可以在模版中方便地使用 svg-sprite 技术了</p>
-<h3 id="如果不知道-svg-sprite-是什么，"><a href="#如果不知道-svg-sprite-是什么，" class="headerlink" title="如果不知道 svg-sprite 是什么，"></a>如果不知道 svg-sprite 是什么，</h3><p>目前，SVG Sprite最佳实践是使用symbol元素。symbol元素是什么呢？单纯翻译的话，是“符号”的意思。然，这个释义并不符合这里的场景。不知大家有没有用过Flash，symbol实际上就类似于Flash中的“影片剪辑”、或者“元件”。</p>
-<p>因此，我个人觉得，symbol应该解释为“元件”最为恰当！</p>
-<p>那，symbol和SVG Sprite又有什么关系呢？</p>
-<p>我们可以把SVG元素看成一个舞台，而symbol则是舞台上一个一个组装好的元件，这这些一个一个的元件就是我们即将使用的一个一个SVG图标。</p>
-<h2 id="使用svg-sprite的好处"><a href="#使用svg-sprite的好处" class="headerlink" title="使用svg-sprite的好处"></a>使用svg-sprite的好处</h2><ul>
-<li>页面代码清爽</li>
-<li>随处重复调用</li>
-<li>每个 SVG 图标都可以更改大小颜色</li>
-</ul>
-<p>结合vue-cli项目来简单说下</p>
-<h2 id="1-创建组件-SvgIcon"><a href="#1-创建组件-SvgIcon" class="headerlink" title="1 创建组件 SvgIcon"></a>1 创建组件 SvgIcon</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;svg :class=&quot;svgClass&quot; aria-hidden=&quot;true&quot;&gt;</span><br><span class="line">    &lt;use :xlink:href=&quot;iconName&quot;&gt;&lt;/use&gt;</span><br><span class="line">  &lt;/svg&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &apos;svg-icon&apos;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    iconClass: &#123;</span><br><span class="line">      type: String,</span><br><span class="line">      required: true</span><br><span class="line">    &#125;,</span><br><span class="line">    className: &#123;</span><br><span class="line">      type: String</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    iconName() &#123;</span><br><span class="line">      return `#icon-$&#123;this.iconClass&#125;`</span><br><span class="line">    &#125;,</span><br><span class="line">    svgClass() &#123;</span><br><span class="line">      if (this.className) &#123;</span><br><span class="line">        return &apos;svg-icon &apos; + this.className</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        return &apos;svg-icon&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">.svg-icon &#123;</span><br><span class="line">  width: 1em;</span><br><span class="line">  height: 1em;</span><br><span class="line">  vertical-align: -0.15em;</span><br><span class="line">  fill: currentColor;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="2-src目录下创建icon"><a href="#2-src目录下创建icon" class="headerlink" title="2 src目录下创建icon"></a>2 src目录下创建icon</h2><p>目录结构为</p>
-<p>icon/svg 此处放置svg图片</p>
-<p>icon/index.js</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">import SvgIcon from &apos;@/components/SvgIcon&apos;// svg组件</span><br><span class="line"></span><br><span class="line">// register globally</span><br><span class="line">Vue.component(&apos;svg-icon&apos;, SvgIcon)</span><br><span class="line"></span><br><span class="line">const requireAll = requireContext =&gt; requireContext.keys().map(requireContext)</span><br><span class="line">const req = require.context(&apos;./svg&apos;, false, /\.svg$/)</span><br><span class="line">requireAll(req)</span><br></pre></td></tr></table></figure>
-<h3 id="此处多补充一下扩展知识点-require-context"><a href="#此处多补充一下扩展知识点-require-context" class="headerlink" title="此处多补充一下扩展知识点  require.context"></a>此处多补充一下扩展知识点  require.context</h3><h3 id="可以使用-require-context-方法来创建自己的（模块）上下文，这个方法有-3-个参数："><a href="#可以使用-require-context-方法来创建自己的（模块）上下文，这个方法有-3-个参数：" class="headerlink" title="可以使用 require.context() 方法来创建自己的（模块）上下文，这个方法有 3 个参数："></a>可以使用 require.context() 方法来创建自己的（模块）上下文，这个方法有 3 个参数：</h3><ul>
-<li>要搜索的文件夹目录</li>
-<li>是否还应该搜索它的子目录</li>
-<li>以及一个匹配文件的正则表达式</li>
-</ul>
-<hr>
-<h4 id="require-context模块导出（返回）一个（require）函数，这个函数可以接收一个参数：request-函数–这里的-request-应该是指在-require-语句中的表达式"><a href="#require-context模块导出（返回）一个（require）函数，这个函数可以接收一个参数：request-函数–这里的-request-应该是指在-require-语句中的表达式" class="headerlink" title="require.context模块导出（返回）一个（require）函数，这个函数可以接收一个参数：request 函数–这里的 request 应该是指在 require() 语句中的表达式"></a>require.context模块导出（返回）一个（require）函数，这个函数可以接收一个参数：request 函数–这里的 request 应该是指在 require() 语句中的表达式</h4><p>导出的方法有 3 个属性： resolve, keys, id。</p>
-<p>resolve 是一个函数，它返回请求被解析后得到的模块 id。<br>keys 也是一个函数，它返回一个数组，由所有可能被上下文模块处理的请求组成。<br>id 是上下文模块里面所包含的模块 id. 它可能在你使用 module.hot.accept 的时候被用到</p>
-<h3 id="eg："><a href="#eg：" class="headerlink" title="eg："></a>eg：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">require.context(&quot;./test&quot;, false, /\.test\.js$/);</span><br><span class="line">//（创建了）一个包含了 test 文件夹（不包含子目录）下面的、所有文件名以 `.test.js` 结尾的、能被 require 请求到的文件的上下文。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">require.context(&quot;../&quot;, true, /\.stories\.js$/);</span><br><span class="line">////（创建了）一个包含了父级文件夹（包含子目录）下面，所有文件名以 `.stories.js` 结尾的文件的上下文。</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="3-webpack-base-conf中配置如下："><a href="#3-webpack-base-conf中配置如下：" class="headerlink" title="3 webpack.base.conf中配置如下："></a>3 webpack.base.conf中配置如下：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	test: /\.svg$/,</span><br><span class="line">	loader: &apos;svg-sprite-loader&apos;,</span><br><span class="line">	include: [resolve(&apos;src/icons&apos;)],</span><br><span class="line">	options: &#123;</span><br><span class="line">	  symbolId: &apos;icon-[name]&apos;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,</span><br><span class="line">	loader: &apos;url-loader&apos;,</span><br><span class="line">	exclude: [resolve(&apos;src/icons&apos;)],</span><br><span class="line">	options: &#123;</span><br><span class="line">	  limit: 10000,</span><br><span class="line">	  name: utils.assetsPath(&apos;img/[name].[hash:7].[ext]&apos;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-<p>发现不同了没</p>
-<p>include 引入 src/icons<br>exclude 排除 src/icons </p>
-<p>不写exclude就会报错，因为它将svg处理了<br>否侧此处会报错</p>
-<p>引用</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg-icon</span> <span class="attr">icon-class</span>=<span class="string">"user"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>大功告成！</p>
-<p>当你想定义颜色时，通过定义class,直接定义样式</p>
-<p>很完美有么有</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/23/关于svg-sprite-loader/" data-id="cjguqe0xn0008mpfyb2b7kxwi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/25/arguments的那些事/" data-id="cjgyff56j0001kcfy5xwizuqf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -694,6 +661,14 @@ https://blog.csdn.net/bao19901210/article/details/21614761 -->
       <ul>
         
           <li>
+            <a href="/2018/05/09/深入了解跨域问题，以及解决的方式/">深入了解跨域问题，以及解决的方式</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/07/使用nuxt/">使用nuxt</a>
+          </li>
+        
+          <li>
             <a href="/2018/05/06/手把手教你撸electron/">手把手教你撸electron</a>
           </li>
         
@@ -703,14 +678,6 @@ https://blog.csdn.net/bao19901210/article/details/21614761 -->
         
           <li>
             <a href="/2018/05/04/elementui中el-upload自定义上传方法中遇到的问题/">elementui中el-upload自定义上传方法中遇到的问题</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/28/cordova安装及使用之android篇/">cordova安装及使用之android篇</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/27/如何查看页面是否开启了gzip压缩/">如何查看页面是否开启了gzip压缩</a>
           </li>
         
       </ul>
