@@ -1,1 +1,129 @@
-<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><link rel="shortcut icon" href=/static/favicon.ico><title>lf小哇</title><link href=/static/css/app.c64eadfc8d3abfc9d85514dba4054813.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.992b63bf2abbf3194771.js></script><script type=text/javascript src=/static/js/vendor.e12dc8c9af1f7aa12436.js></script><script type=text/javascript src=/static/js/app.bc036f9167871d39aecf.js></script></body></html>
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/logo_miccall.png"/>
+	<link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			    <title>
+    lf小哇
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    <meta name="keywords" content="LFJW" />
+    
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+    <style type="text/css">
+        body:before {
+          content: ' ';
+          position: fixed;
+          top: 0;
+          background: url('/img/bg.jpg') center 0 no-repeat;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-size: cover; 
+        }
+    </style>
+
+			    
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+</head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_coy.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">LFJW</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1"></a>
+	                    <ul class="submenu">
+	                        <li>
+	                        
+	                    </ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+		            
+		                <li><a href="https://github.com/lfjw" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		            
+		            
+		            
+		            
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(http://d302.paixin.com/thumbs/1734770/151563472/staff_1024.jpg?imageView2/2/w/400/h/400);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >小程序api封装</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p>微信小程序如今很火热🔥，尤其对于开发者来说，支持的越来越好。例如美团的框架mpvue的推出更是让小程序的开发表的高效。</p>
+<p>mpvue传送门 👉<a href="http://mpvue.com/" target="_blank" rel="noopener">http://mpvue.com/</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var API_URL = &quot;http://xxx&quot;</span><br><span class="line"></span><br><span class="line">//请求</span><br><span class="line">var requestHandler = &#123;</span><br><span class="line">    url: &apos;&apos;,</span><br><span class="line">    params:&#123;&#125;,</span><br><span class="line">    success: function(res)&#123;</span><br><span class="line">        // success</span><br><span class="line">    &#125;,</span><br><span class="line">    fail: function() &#123;</span><br><span class="line">        // fail</span><br><span class="line">    &#125;,</span><br><span class="line">    complete: function () &#123;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//接口统一状态码</span><br><span class="line">var code = &#123;</span><br><span class="line">    &quot;success&quot;: 1,</span><br><span class="line">    &quot;fail&quot;: 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//GET请求</span><br><span class="line">function GET(requestHandler) &#123;</span><br><span class="line">    request(&apos;GET&apos;,requestHandler)</span><br><span class="line">&#125;</span><br><span class="line">//POST请求</span><br><span class="line">function POST(requestHandler) &#123;</span><br><span class="line">    request(&apos;POST&apos;,requestHandler)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function request(method,requestHandler) &#123;</span><br><span class="line">    //注意：可以对params加密等处理</span><br><span class="line">    var params = requestHandler.params;</span><br><span class="line"></span><br><span class="line">    wx.request(&#123;</span><br><span class="line">    	//默认为API_URL，当输入url变更为https://XXX 以url变化的为主</span><br><span class="line">	    url: /^\s*http\s*/gi.test(requestHandler.url) ? requestHandler.url : API_URL + requestHandler.url,</span><br><span class="line">	    data: params,</span><br><span class="line">	    method: method, // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT</span><br><span class="line">	    header: &#123;		// 设置请求的 header</span><br><span class="line">	    	&apos;content-type&apos;: &apos;application/x-www-form-urlencoded&apos;</span><br><span class="line">	    &#125;, </span><br><span class="line">	    success: function(res)&#123;</span><br><span class="line">	        //注意：可以对参数解密等处理</span><br><span class="line">	        //requestHandler.success()</span><br><span class="line">	        if (res.data &amp;&amp; res.data.code == code.success)&#123;</span><br><span class="line">	          	requestHandler.success &amp;&amp; requestHandler.success(res.data);</span><br><span class="line">	        &#125;else&#123;</span><br><span class="line">	          	wx.showModal(&#123;</span><br><span class="line">	            	title: &apos;数据加载失败&apos;,</span><br><span class="line">	            	content: res.data.message || &apos;服务异常，请稍后重试~&apos;,</span><br><span class="line">	          	&#125;);</span><br><span class="line">	        &#125;</span><br><span class="line"></span><br><span class="line">	    &#125;,</span><br><span class="line">	    fail: function() &#123;</span><br><span class="line">	        requestHandler.fail()</span><br><span class="line">	    &#125;,</span><br><span class="line">	    complete: function() &#123;</span><br><span class="line">	        // complete</span><br><span class="line">	        requestHandler.complete()</span><br><span class="line">	    &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  	GET: GET,</span><br><span class="line">  	POST: POST</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            </div>
+
+            <!-- Post Comments -->
+            
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+               
+            </ul>
+            
+				<span id="busuanzi_container_site_pv"> 2018 </span> 
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>
