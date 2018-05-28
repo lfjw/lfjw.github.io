@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang=>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>浅谈js闭包 | lf小哇</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>lf小哇</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>浅谈js闭包</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/05/28</time>
+            
+            
+          </div>
+          <p>现在发展到现在，其实闭包被很多人提及，但是因为很多人其实都没有理解很透，所以阐述会有些问题。那现在让我们一起帮大家彻底理解闭包</p>
+<p>从三部分来理解一下</p>
+<ul>
+<li><p>闭包是一种特殊的对象</p>
+</li>
+<li><p>他有两部分组成，执行上下文（代号A）,以及在该执行上下文中创建的函数（代号B）</p>
+</li>
+<li><p>当B执行时，如果访问了A中的变量对象中的值，那么闭包就会产生</p>
+</li>
+</ul>
+<p>了解了这三个重要的概念，那么恭喜你，离进一步掌握不远了</p>
+<p>干说不行，必须来个例子</p>
+<p>demo1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function foo () &#123;</span><br><span class="line">	let a = 20 </span><br><span class="line">	let b = 30</span><br><span class="line">	function bar() &#123;</span><br><span class="line">		return a + b</span><br><span class="line">	&#125;</span><br><span class="line">	return bar</span><br><span class="line">&#125;</span><br><span class="line">let bar = foo()</span><br><span class="line">bar()</span><br></pre></td></tr></table></figure>
+<p>让我们来看看在具体的浏览器中的模式</p>
+<p><img src="/2018/05/28/浅谈js闭包/1.png" alt="bg"></p>
+<p>来扩展一下上面的知识点：</p>
+<p>Call Stack: 当前函数的调用栈</p>
+<p>Scope: 当前正在被执行函数的作用域链</p>
+<p>Local: 当前活动对象</p>
+<p>Closure: 闭包（在谷歌中以当前执行上下文A的函数名代指闭包，此时，我们可以看到B访问了A中的两个变量）</p>
+<p>此处一定要结合上面的三个部分理解来看</p>
+<h3 id="在这里我在给大家来两个例子，你就会对这个更加深刻了"><a href="#在这里我在给大家来两个例子，你就会对这个更加深刻了" class="headerlink" title="在这里我在给大家来两个例子，你就会对这个更加深刻了"></a>在这里我在给大家来两个例子，你就会对这个更加深刻了</h3><ul>
+<li>第一个例子</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">let name = &apos;zhangsan&apos;</span><br><span class="line"></span><br><span class="line">let obj = &#123;</span><br><span class="line">	name : &apos;lisi&apos;,</span><br><span class="line">	getName: function () &#123;</span><br><span class="line">		return function () &#123;</span><br><span class="line">			return this.name</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let n = obj.getName()</span><br><span class="line"></span><br><span class="line">let _name = n.call(obj)</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/05/28/浅谈js闭包/2.png" alt="bg"></p>
+<ul>
+<li>第二个例子</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">let name = &apos;zhangsan&apos;</span><br><span class="line"></span><br><span class="line">let obj = &#123;</span><br><span class="line">	name : &apos;lisi&apos;,</span><br><span class="line">	getName: function () &#123;</span><br><span class="line">		let self = this</span><br><span class="line">		return function () &#123;</span><br><span class="line">			return self.name</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">let n = obj.getName()</span><br><span class="line"></span><br><span class="line">let _name = n()</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/05/28/浅谈js闭包/3.png" alt="bg"></p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#在这里我在给大家来两个例子，你就会对这个更加深刻了"><span class="toc-number">1.</span> <span class="toc-text">在这里我在给大家来两个例子，你就会对这个更加深刻了</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
