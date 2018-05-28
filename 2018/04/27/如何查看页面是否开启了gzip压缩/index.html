@@ -1,1 +1,168 @@
-<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><link rel="shortcut icon" href=/static/favicon.ico><title>lf小哇</title><link href=/static/css/app.c64eadfc8d3abfc9d85514dba4054813.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.992b63bf2abbf3194771.js></script><script type=text/javascript src=/static/js/vendor.e12dc8c9af1f7aa12436.js></script><script type=text/javascript src=/static/js/app.bc036f9167871d39aecf.js></script></body></html>
+<!DOCTYPE html>
+<html lang=>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>如何查看页面是否开启了gzip压缩 | lf小哇</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>lf小哇</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>如何查看页面是否开启了gzip压缩</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/04/27</time>
+            
+            
+          </div>
+          <h3 id="前情简要：我们是前后端分离项目，通过nginx进行反向代理。vue由于是客户端渲染，所以项目很大。我让运维的小伙伴，帮忙在服务器端配置一下开启gzip传输，结果人家说，nginx默认就是这个请求。明显是欺负哥们不懂呐，也可能是没有get到我的点。但是你也没脾气，怎么办，那就自己研究明白，也好跟他沟通啊。"><a href="#前情简要：我们是前后端分离项目，通过nginx进行反向代理。vue由于是客户端渲染，所以项目很大。我让运维的小伙伴，帮忙在服务器端配置一下开启gzip传输，结果人家说，nginx默认就是这个请求。明显是欺负哥们不懂呐，也可能是没有get到我的点。但是你也没脾气，怎么办，那就自己研究明白，也好跟他沟通啊。" class="headerlink" title="前情简要：我们是前后端分离项目，通过nginx进行反向代理。vue由于是客户端渲染，所以项目很大。我让运维的小伙伴，帮忙在服务器端配置一下开启gzip传输，结果人家说，nginx默认就是这个请求。明显是欺负哥们不懂呐，也可能是没有get到我的点。但是你也没脾气，怎么办，那就自己研究明白，也好跟他沟通啊。"></a>前情简要：我们是前后端分离项目，通过nginx进行反向代理。vue由于是客户端渲染，所以项目很大。我让运维的小伙伴，帮忙在服务器端配置一下开启gzip传输，结果人家说，nginx默认就是这个请求。明显是欺负哥们不懂呐，也可能是没有get到我的点。但是你也没脾气，怎么办，那就自己研究明白，也好跟他沟通啊。</h3><h3 id="既然如此，让我们从以下几个方面说起"><a href="#既然如此，让我们从以下几个方面说起" class="headerlink" title="既然如此，让我们从以下几个方面说起"></a>既然如此，让我们从以下几个方面说起</h3><h4 id="HTTP-协议中的-Content-Encoding"><a href="#HTTP-协议中的-Content-Encoding" class="headerlink" title="HTTP 协议中的 Content-Encoding"></a>HTTP 协议中的 Content-Encoding</h4><pre><code>Accept-Encoding 和 Content-Encoding 是 HTTP 中用来对「采用何种编码格式传输正文」进行协定的一对头部字段。
+工作原理：
+1、浏览器发送请求时，通过 Accept-Encoding 带上自己支持的内容编码格式列表；
+2、服务端从中挑选一种用来对正文进行编码，并通过 Content-Encoding 响应头指明选定的格式；
+3、浏览器拿到响应正文后，依据 Content-Encoding 进行解压。
+4、当然，服务端也可以返回未压缩的正文，但这种情况不允许返回 Content-Encoding。这个过程就是 HTTP 的内容编码机制。
+</code></pre><p>【内容编码】目的是优化传输内容大小，通俗地讲就是进行压缩。一般经过 gzip 压缩过的文本响应，只有原始大小的 1/4。对于文本类响应是否开启了内容压缩，是我们做性能优化时首先要检查的重要项目；而对于 JPG / PNG 这类本身已经高度压缩过的二进制文件，不推荐开启内容压缩，效果微乎其微还浪费 CPU。</p>
+<ul>
+<li><p>DEFLATE、ZLIB、GZIP 这种大写字符，表示数据压缩格式；</p>
+</li>
+<li><p>deflate、gzip 这种小写字符，表示 HTTP 中 Content-Encoding 的取值；</p>
+</li>
+<li><p>Gzip 特指 GUN zip 文件压缩程序，Zlib 特指 Zlib 库；</p>
+</li>
+</ul>
+<h4 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a>nginx配置</h4><p>这个详细内容请查看这个 👉 （Nginx配置详解）<a href="https://www.cnblogs.com/brant/p/7209048.html" target="_blank" rel="noopener">https://www.cnblogs.com/brant/p/7209048.html</a></p>
+<h4 id="详解gzip"><a href="#详解gzip" class="headerlink" title="详解gzip"></a>详解gzip</h4><p>gzip是一种数据格式，默认且目前仅使用deflate算法压缩data部分；</p>
+<p>Gzip压缩传输能更加有效节约带宽流量。他先把文本压缩为.gz然后传输给浏览器，最后由浏览器负责解压缩呈现给用户。</p>
+<p>老版本的浏览器可能不能显示，但是现在大多数浏览器都能显示。</p>
+<h4 id="如何查看是否开启gizp"><a href="#如何查看是否开启gizp" class="headerlink" title="如何查看是否开启gizp"></a>如何查看是否开启gizp</h4><h5 id="先来看看开启的请求"><a href="#先来看看开启的请求" class="headerlink" title="先来看看开启的请求"></a>先来看看开启的请求</h5><p><img src="/2018/04/27/如何查看页面是否开启了gzip压缩/gzip.jpeg" style="height: 500px;width: auto;"></p>
+<h5 id="再来看看没开启的请求"><a href="#再来看看没开启的请求" class="headerlink" title="再来看看没开启的请求"></a>再来看看没开启的请求</h5><p><img src="/2018/04/27/如何查看页面是否开启了gzip压缩/nogzip.jpeg" style="height: 500px;width: auto;"></p>
+<p>看到这个就可以给你的小伙伴说了，看吧，人家的开启了，你没开启，自己研究研究吧！！！</p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前情简要：我们是前后端分离项目，通过nginx进行反向代理。vue由于是客户端渲染，所以项目很大。我让运维的小伙伴，帮忙在服务器端配置一下开启gzip传输，结果人家说，nginx默认就是这个请求。明显是欺负哥们不懂呐，也可能是没有get到我的点。但是你也没脾气，怎么办，那就自己研究明白，也好跟他沟通啊。"><span class="toc-number">1.</span> <span class="toc-text">前情简要：我们是前后端分离项目，通过nginx进行反向代理。vue由于是客户端渲染，所以项目很大。我让运维的小伙伴，帮忙在服务器端配置一下开启gzip传输，结果人家说，nginx默认就是这个请求。明显是欺负哥们不懂呐，也可能是没有get到我的点。但是你也没脾气，怎么办，那就自己研究明白，也好跟他沟通啊。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#既然如此，让我们从以下几个方面说起"><span class="toc-number">2.</span> <span class="toc-text">既然如此，让我们从以下几个方面说起</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP-协议中的-Content-Encoding"><span class="toc-number">2.1.</span> <span class="toc-text">HTTP 协议中的 Content-Encoding</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#nginx配置"><span class="toc-number">2.2.</span> <span class="toc-text">nginx配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#详解gzip"><span class="toc-number">2.3.</span> <span class="toc-text">详解gzip</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如何查看是否开启gizp"><span class="toc-number">2.4.</span> <span class="toc-text">如何查看是否开启gizp</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#先来看看开启的请求"><span class="toc-number">2.4.1.</span> <span class="toc-text">先来看看开启的请求</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#再来看看没开启的请求"><span class="toc-number">2.4.2.</span> <span class="toc-text">再来看看没开启的请求</span></a></li></ol></li></ol></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

@@ -10,7 +10,7 @@
     <link rel="icon" href="">
   
     
-  <title>git实际开发遇到的问题以及解决方式 | lf小哇</title>
+  <title>来细细探讨一下vue如何优化seo | lf小哇</title>
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -44,49 +44,19 @@
   <div class="content">
     <article>
         <section class="content markdown-body">
-          <h1>git实际开发遇到的问题以及解决方式</h1>
+          <h1>来细细探讨一下vue如何优化seo</h1>
           <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/05/18</time>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/05/24</time>
             
             
           </div>
-          <p>在实际工作当中，我们会遇到git的一些问题，总结了一些解决方法</p>
-<h2 id="1、git-如何把远程分支搞下来"><a href="#1、git-如何把远程分支搞下来" class="headerlink" title="1、git 如何把远程分支搞下来"></a>1、git 如何把远程分支搞下来</h2><p>当我想从远程仓库里拉取一条本地不存在的分支时</p>
-<p>git checkout -b 本地分支名 origin/远程分支名</p>
-<p>如果出现提示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fatal: Cannot update paths and switch to branch &apos;dev2&apos; at the same time.</span><br><span class="line">Did you intend to checkout &apos;origin/dev2&apos; which can not be resolved as commit?</span><br></pre></td></tr></table></figure>
-<p>表示拉取不成功。我们需要先执行</p>
-<p>git fetch</p>
-<p>然后再执行</p>
-<p>git checkout -b 本地分支名 origin/远程分支名</p>
-<p>即可。</p>
-<h2 id="2、本地检出一个新的分支并推送到远程仓库"><a href="#2、本地检出一个新的分支并推送到远程仓库" class="headerlink" title="2、本地检出一个新的分支并推送到远程仓库"></a>2、本地检出一个新的分支并推送到远程仓库</h2><ul>
-<li>创建本地分支</li>
-</ul>
-<p>git checkout -b 新分支名</p>
-<p>执行该指令后，会在本地创建一个新分支，该分支是从当前分支上检出的，所以所有文件内容都和当前分支一模一样，这是正常的。创建成功后，将自动切换至新分支上。</p>
-<p>比如我要创建一个名为dev1的新分支：</p>
-<p>此时，再执行git branch查看当前本地所有分支，就会看到两个分支：master与dev1.</p>
-<ul>
-<li>推送本地分支到远程仓库</li>
-</ul>
-<p>git push –set-upstream origin 分支名</p>
-<!-- https://www.cnblogs.com/hamsterPP/p/6810831.html
- -->
-
+          
         </section>
     </article>
     
         
   </div>
   <aside>
-    
-    <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、git-如何把远程分支搞下来"><span class="toc-number">1.</span> <span class="toc-text">1、git 如何把远程分支搞下来</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、本地检出一个新的分支并推送到远程仓库"><span class="toc-number">2.</span> <span class="toc-text">2、本地检出一个新的分支并推送到远程仓库</span></a></li></ol>
-        </div>
-    </div>
     
   </aside>
 </main>

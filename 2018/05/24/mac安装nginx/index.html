@@ -1,1 +1,198 @@
-<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><link rel="shortcut icon" href=/static/favicon.ico><title>lf小哇</title><link href=/static/css/app.c64eadfc8d3abfc9d85514dba4054813.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.992b63bf2abbf3194771.js></script><script type=text/javascript src=/static/js/vendor.e12dc8c9af1f7aa12436.js></script><script type=text/javascript src=/static/js/app.bc036f9167871d39aecf.js></script></body></html>
+<!DOCTYPE html>
+<html lang=>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>mac安装nginx | lf小哇</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>lf小哇</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>mac安装nginx</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/05/24</time>
+            
+            
+          </div>
+          <p>首先在你的终端上输入brew</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Example usage:</span><br><span class="line">  brew search [TEXT|/REGEX/]</span><br><span class="line">  brew info [FORMULA...]</span><br><span class="line">  brew install FORMULA...</span><br><span class="line">  brew update</span><br><span class="line">  brew upgrade [FORMULA...]</span><br><span class="line">  brew uninstall FORMULA...</span><br><span class="line">  brew list [FORMULA...]</span><br><span class="line"></span><br><span class="line">Troubleshooting:</span><br><span class="line">  brew config</span><br><span class="line">  brew doctor</span><br><span class="line">  brew install --verbose --debug FORMULA</span><br><span class="line"></span><br><span class="line">Contributing:</span><br><span class="line">  brew create [URL [--no-fetch]]</span><br><span class="line">  brew edit [FORMULA...]</span><br><span class="line"></span><br><span class="line">Further help:</span><br><span class="line">  brew commands</span><br><span class="line">  brew help [COMMAND]</span><br><span class="line">  man brew</span><br><span class="line">  https://docs.brew.sh</span><br></pre></td></tr></table></figure>
+<p>如果是这玩意恭喜你，可以直接安装了</p>
+<p>如果提示是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-bash: brew: command not found</span><br></pre></td></tr></table></figure>
+<p>那么需要进行安装</p>
+<p>可以移步查看brew的官网👉<a href="https://brew.sh/index_zh-cn" target="_blank" rel="noopener">https://brew.sh/index_zh-cn</a></p>
+<p>很多人可能不了解 Homebrew, 其实它相当于开发软件界的 Appstore.</p>
+<p>比如,如果我要安装 python 的最新版本,那么传统的做法是 </p>
+<ul>
+<li>1 到官方网站下载 python 的最新版本 </li>
+<li>2 极其麻烦和小心翼翼的删除自带的 python 版本 </li>
+<li>3 安装新的版本 </li>
+<li>4 设置环境变量</li>
+</ul>
+<p>而借助 Homebrew, 需要做的仅仅是:<br>brew uninstall python<br>brew install python</p>
+<p>整个过程只是等待而已,不需要百度 python 的官方网址,不需要找卸载安装配置环境变量教程…</p>
+<h3 id="如何安装brew"><a href="#如何安装brew" class="headerlink" title="如何安装brew"></a>如何安装brew</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ul>
+<li><p>因网络的原因,可能会不成功,请多尝试几次,一直到成功安装.</p>
+</li>
+<li><p>中间会出现一个 Press RETURN to continue or any other key to abort,【请及时回车,并输入密码】</p>
+</li>
+</ul>
+<p>当结尾出现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">==&gt; Next steps:</span><br><span class="line">- Run `brew help` to get started</span><br><span class="line">- Further documentation: </span><br><span class="line">    https://docs.brew.sh</span><br></pre></td></tr></table></figure>
+<p>可以在输入brew进行查看，如果为开头说提示的内容，恭喜你安装成功💥💥</p>
+<h3 id="那么接下里看nginx"><a href="#那么接下里看nginx" class="headerlink" title="那么接下里看nginx"></a>那么接下里看nginx</h3><p>不要输入 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo brew install nginx</span><br></pre></td></tr></table></figure>
+<p>会提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Error: Running Homebrew as root is extremely dangerous and no longer supported.</span><br><span class="line">As Homebrew does not drop privileges on installation you would be giving all</span><br><span class="line">build scripts full access to your system.</span><br><span class="line">bogon:~ jiwei$ brew install nginx</span><br><span class="line">Updating Homebrew...</span><br></pre></td></tr></table></figure>
+<p>直接输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install nginx</span><br></pre></td></tr></table></figure>
+<p>安装完成</p>
+<p>输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -v</span><br></pre></td></tr></table></figure>
+<p>会提示版本号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx version: nginx/1.13.12</span><br></pre></td></tr></table></figure>
+<p>启动nginx 输入 <a href="http://localhost:8080，" target="_blank" rel="noopener">http://localhost:8080，</a></p>
+<p>这里告诉大家几个常见的命令</p>
+<h4 id="启动-nginx"><a href="#启动-nginx" class="headerlink" title="启动 nginx"></a>启动 nginx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx</span><br></pre></td></tr></table></figure>
+<h4 id="关闭nginx"><a href="#关闭nginx" class="headerlink" title="关闭nginx"></a>关闭nginx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop</span><br></pre></td></tr></table></figure>
+<h4 id="重新加载nginx【例如你修改了nginx的配置，需要这个命令来让你的内容生效】"><a href="#重新加载nginx【例如你修改了nginx的配置，需要这个命令来让你的内容生效】" class="headerlink" title="重新加载nginx【例如你修改了nginx的配置，需要这个命令来让你的内容生效】"></a>重新加载nginx【例如你修改了nginx的配置，需要这个命令来让你的内容生效】</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nginx -s reload</span><br></pre></td></tr></table></figure>
+<p>到此你的mac上就有了nginx</p>
+<p>扩展个内容在这需要了解的几个路径</p>
+<p>1、</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/etc/nginx</span><br></pre></td></tr></table></figure>
+<p>这个文件下的nginx.conf，可以进行一些配置。</p>
+<p>2、</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/Cellar/nginx/1.13.12/html</span><br></pre></td></tr></table></figure>
+<p>这是放置静态资源的内容</p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何安装brew"><span class="toc-number">1.</span> <span class="toc-text">如何安装brew</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#那么接下里看nginx"><span class="toc-number">2.</span> <span class="toc-text">那么接下里看nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#启动-nginx"><span class="toc-number">2.1.</span> <span class="toc-text">启动 nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关闭nginx"><span class="toc-number">2.2.</span> <span class="toc-text">关闭nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重新加载nginx【例如你修改了nginx的配置，需要这个命令来让你的内容生效】"><span class="toc-number">2.3.</span> <span class="toc-text">重新加载nginx【例如你修改了nginx的配置，需要这个命令来让你的内容生效】</span></a></li></ol></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

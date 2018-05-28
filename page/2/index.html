@@ -1,1 +1,306 @@
-<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><link rel="shortcut icon" href=/static/favicon.ico><title>lf小哇</title><link href=/static/css/app.c64eadfc8d3abfc9d85514dba4054813.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.992b63bf2abbf3194771.js></script><script type=text/javascript src=/static/js/vendor.e12dc8c9af1f7aa12436.js></script><script type=text/javascript src=/static/js/app.bc036f9167871d39aecf.js></script></body></html>
+<!DOCTYPE html>
+<html lang=>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>lf小哇</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>lf小哇</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='index'>
+  <div class="posts-list">
+    
+      <section>
+        <a href="/2018/05/04/elementui中el-upload自定义上传方法中遇到的问题/">
+          <h3 class='post-head'>
+            elementui中el-upload自定义上传方法中遇到的问题
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <h3 id="由于el-upload控件中自定义的upload方法在上传文件中是以FormData的格式上传，后台服务器无法解析这种格式的body，所以通过http-request属性自定义了一个上传方法。"><a href="#由于el-upload控件中自定义的upload方法在上传文件中是以FormData的格式上传，后台服务器无法解析这种格式的body，所以通过http-request属性自定义了一个上传方法。" class="headerlink" title="由于el-upload控件中自定义的upload方法在上传文件中是以FormData的格式上传，后台服务器无法解析这种格式的body，所以通过http-request属性自定义了一个上传方法。"></a>由于el-upload控件中自定义的upload方法在上传文件中是以FormData的格式上传，后台服务器无法解析这种格式的body，所以通过http-request属性自定义了一个上传方法。</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">el-upload</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"upload-demo"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ref</span>=<span class="string">"upload"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">action</span>=<span class="string">"http://127.0.0.1:5000/json/import"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:http-request</span>=<span class="string">"myUpload"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:on-preview</span>=<span class="string">"handlePreview"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:on-remove</span>=<span class="string">"handleRemove"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:on-error</span>=<span class="string">"handleError"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:on-success</span>=<span class="string">"handleSuccess"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:file-list</span>=<span class="string">"fileList"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:auto-upload</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">slot</span>=<span class="string">"trigger"</span> <span class="attr">size</span>=<span class="string">"small"</span> <span class="attr">type</span>=<span class="string">"primary"</span>&gt;</span>选取文件<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">style</span>=<span class="string">"margin-left: 10px;"</span> <span class="attr">size</span>=<span class="string">"small"</span> <span class="attr">type</span>=<span class="string">"success"</span> @<span class="attr">click</span>=<span class="string">"submitUpload"</span>&gt;</span>上传到服务器<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">slot</span>=<span class="string">"tip"</span> <span class="attr">class</span>=<span class="string">"el-upload__tip"</span>&gt;</span>只能上传json文件，且不超过500kb<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-upload</span>&gt;</span></span><br></pre></td></tr></table></figure>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/05/04</time>
+          
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2018/04/28/cordova安装及使用之android篇/">
+          <h3 class='post-head'>
+            cordova安装及使用之android篇
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <h3 id="机型：mac"><a href="#机型：mac" class="headerlink" title="机型：mac"></a>机型：mac</h3><h3 id="本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本"><a href="#本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本" class="headerlink" title="本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本"></a>本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本</h3><h3 id="纯属个人瞎搞，如果有不对的地方欢迎指正"><a href="#纯属个人瞎搞，如果有不对的地方欢迎指正" class="headerlink" title="纯属个人瞎搞，如果有不对的地方欢迎指正"></a>纯属个人瞎搞，如果有不对的地方欢迎指正</h3><p>先进入正题，使用此cordova首先是配备java环境，然后安装android-sdk</p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/04/28</time>
+          
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2018/04/27/如何查看页面是否开启了gzip压缩/">
+          <h3 class='post-head'>
+            如何查看页面是否开启了gzip压缩
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <h3 id="前情简要：我们是前后端分离项目，通过nginx进行反向代理。vue由于是客户端渲染，所以项目很大。我让运维的小伙伴，帮忙在服务器端配置一下开启gzip传输，结果人家说，nginx默认就是这个请求。明显是欺负哥们不懂呐，也可能是没有get到我的点。但是你也没脾气，怎么办，那就自己研究明白，也好跟他沟通啊。"><a href="#前情简要：我们是前后端分离项目，通过nginx进行反向代理。vue由于是客户端渲染，所以项目很大。我让运维的小伙伴，帮忙在服务器端配置一下开启gzip传输，结果人家说，nginx默认就是这个请求。明显是欺负哥们不懂呐，也可能是没有get到我的点。但是你也没脾气，怎么办，那就自己研究明白，也好跟他沟通啊。" class="headerlink" title="前情简要：我们是前后端分离项目，通过nginx进行反向代理。vue由于是客户端渲染，所以项目很大。我让运维的小伙伴，帮忙在服务器端配置一下开启gzip传输，结果人家说，nginx默认就是这个请求。明显是欺负哥们不懂呐，也可能是没有get到我的点。但是你也没脾气，怎么办，那就自己研究明白，也好跟他沟通啊。"></a>前情简要：我们是前后端分离项目，通过nginx进行反向代理。vue由于是客户端渲染，所以项目很大。我让运维的小伙伴，帮忙在服务器端配置一下开启gzip传输，结果人家说，nginx默认就是这个请求。明显是欺负哥们不懂呐，也可能是没有get到我的点。但是你也没脾气，怎么办，那就自己研究明白，也好跟他沟通啊。</h3><h3 id="既然如此，让我们从以下几个方面说起"><a href="#既然如此，让我们从以下几个方面说起" class="headerlink" title="既然如此，让我们从以下几个方面说起"></a>既然如此，让我们从以下几个方面说起</h3><h4 id="HTTP-协议中的-Content-Encoding"><a href="#HTTP-协议中的-Content-Encoding" class="headerlink" title="HTTP 协议中的 Content-Encoding"></a>HTTP 协议中的 Content-Encoding</h4><pre><code>Accept-Encoding 和 Content-Encoding 是 HTTP 中用来对「采用何种编码格式传输正文」进行协定的一对头部字段。
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/04/27</time>
+          
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2018/04/27/小程序api封装/">
+          <h3 class='post-head'>
+            小程序api封装
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <p>微信小程序如今很火热🔥，尤其对于开发者来说，支持的越来越好。例如美团的框架mpvue的推出更是让小程序的开发表的高效。</p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/04/27</time>
+          
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2018/04/27/函数式编程和面向对象编程的区别和优劣/">
+          <h3 class='post-head'>
+            函数式编程和面向对象编程的区别和优劣
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <h3 id="一、先来看一下两者的定义"><a href="#一、先来看一下两者的定义" class="headerlink" title="一、先来看一下两者的定义"></a>一、先来看一下两者的定义</h3><ul>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/04/27</time>
+          
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2018/04/25/arguments的那些事/">
+          <h3 class='post-head'>
+            arguments的那些事
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <p>arguments 定义: arguments 是一个对应于传递给函数的参数的类数组对象。</p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/04/25</time>
+          
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2018/04/24/javascript中的apply和call/">
+          <h3 class='post-head'>
+            javascript中的apply和call
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <p>今天深入理解一下js中的这个点</p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/04/24</time>
+          
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2018/04/23/关于svg-sprite-loader/">
+          <h3 class='post-head'>
+            关于svg-sprite-loader
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <p>现在我们要接触的是一个叫 svg-sprite-loader 的插件，用来根据导入的 svg 文件自动生成 symbol 标签并插入 html，接下来就可以在模版中方便地使用 svg-sprite 技术了</p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/04/23</time>
+          
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2018/04/21/vue-devtools安装的问题以及解决的方式/">
+          <h3 class='post-head'>
+            vue-devtools安装的问题以及解决的方式
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <p>换了一个电脑，安装vue-devtools，因为以前安装过一次，没当回事。结果打脸了，搞了半天才安装好</p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/04/21</time>
+          
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2018/04/21/如何做一个带有毛玻璃效果的css样式/">
+          <h3 class='post-head'>
+            如何做一个带有毛玻璃效果的css样式
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <h3 id="先来看看毛玻璃效果"><a href="#先来看看毛玻璃效果" class="headerlink" title="先来看看毛玻璃效果"></a>先来看看毛玻璃效果</h3><p><img src="/2018/04/21/如何做一个带有毛玻璃效果的css样式/bg1.png" alt="bg"></p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/04/21</time>
+          
+          
+        </div>
+      </section>
+    
+  </div>
+  <aside>
+    
+    
+    
+    
+  </aside>
+</main>
+
+  <div class="paging">
+  <div class="paging-container">
+    
+    <div class='page-prev'>
+      <a href="/">Prev</a>
+    </div>
+    
+    
+    <div class='page-next'>
+      <a href="/page/3/">Next</a>
+    </div>
+    
+  </div>
+</div>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+
+</body>
+</html>

@@ -1,1 +1,181 @@
-<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><link rel="shortcut icon" href=/static/favicon.ico><title>lf小哇</title><link href=/static/css/app.c64eadfc8d3abfc9d85514dba4054813.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.992b63bf2abbf3194771.js></script><script type=text/javascript src=/static/js/vendor.e12dc8c9af1f7aa12436.js></script><script type=text/javascript src=/static/js/app.bc036f9167871d39aecf.js></script></body></html>
+<!DOCTYPE html>
+<html lang=>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>关于svg-sprite-loader | lf小哇</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>lf小哇</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>关于svg-sprite-loader</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/04/23</time>
+            
+            
+          </div>
+          <p>现在我们要接触的是一个叫 svg-sprite-loader 的插件，用来根据导入的 svg 文件自动生成 symbol 标签并插入 html，接下来就可以在模版中方便地使用 svg-sprite 技术了</p>
+<h3 id="如果不知道-svg-sprite-是什么，"><a href="#如果不知道-svg-sprite-是什么，" class="headerlink" title="如果不知道 svg-sprite 是什么，"></a>如果不知道 svg-sprite 是什么，</h3><p>目前，SVG Sprite最佳实践是使用symbol元素。symbol元素是什么呢？单纯翻译的话，是“符号”的意思。然，这个释义并不符合这里的场景。不知大家有没有用过Flash，symbol实际上就类似于Flash中的“影片剪辑”、或者“元件”。</p>
+<p>因此，我个人觉得，symbol应该解释为“元件”最为恰当！</p>
+<p>那，symbol和SVG Sprite又有什么关系呢？</p>
+<p>我们可以把SVG元素看成一个舞台，而symbol则是舞台上一个一个组装好的元件，这这些一个一个的元件就是我们即将使用的一个一个SVG图标。</p>
+<h2 id="使用svg-sprite的好处"><a href="#使用svg-sprite的好处" class="headerlink" title="使用svg-sprite的好处"></a>使用svg-sprite的好处</h2><ul>
+<li>页面代码清爽</li>
+<li>随处重复调用</li>
+<li>每个 SVG 图标都可以更改大小颜色</li>
+</ul>
+<p>结合vue-cli项目来简单说下</p>
+<h2 id="1-创建组件-SvgIcon"><a href="#1-创建组件-SvgIcon" class="headerlink" title="1 创建组件 SvgIcon"></a>1 创建组件 SvgIcon</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;svg :class=&quot;svgClass&quot; aria-hidden=&quot;true&quot;&gt;</span><br><span class="line">    &lt;use :xlink:href=&quot;iconName&quot;&gt;&lt;/use&gt;</span><br><span class="line">  &lt;/svg&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &apos;svg-icon&apos;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    iconClass: &#123;</span><br><span class="line">      type: String,</span><br><span class="line">      required: true</span><br><span class="line">    &#125;,</span><br><span class="line">    className: &#123;</span><br><span class="line">      type: String</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    iconName() &#123;</span><br><span class="line">      return `#icon-$&#123;this.iconClass&#125;`</span><br><span class="line">    &#125;,</span><br><span class="line">    svgClass() &#123;</span><br><span class="line">      if (this.className) &#123;</span><br><span class="line">        return &apos;svg-icon &apos; + this.className</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        return &apos;svg-icon&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">.svg-icon &#123;</span><br><span class="line">  width: 1em;</span><br><span class="line">  height: 1em;</span><br><span class="line">  vertical-align: -0.15em;</span><br><span class="line">  fill: currentColor;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2-src目录下创建icon"><a href="#2-src目录下创建icon" class="headerlink" title="2 src目录下创建icon"></a>2 src目录下创建icon</h2><p>目录结构为</p>
+<p>icon/svg 此处放置svg图片</p>
+<p>icon/index.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">import SvgIcon from &apos;@/components/SvgIcon&apos;// svg组件</span><br><span class="line"></span><br><span class="line">// register globally</span><br><span class="line">Vue.component(&apos;svg-icon&apos;, SvgIcon)</span><br><span class="line"></span><br><span class="line">const requireAll = requireContext =&gt; requireContext.keys().map(requireContext)</span><br><span class="line">const req = require.context(&apos;./svg&apos;, false, /\.svg$/)</span><br><span class="line">requireAll(req)</span><br></pre></td></tr></table></figure>
+<h3 id="此处多补充一下扩展知识点-require-context"><a href="#此处多补充一下扩展知识点-require-context" class="headerlink" title="此处多补充一下扩展知识点  require.context"></a>此处多补充一下扩展知识点  require.context</h3><h3 id="可以使用-require-context-方法来创建自己的（模块）上下文，这个方法有-3-个参数："><a href="#可以使用-require-context-方法来创建自己的（模块）上下文，这个方法有-3-个参数：" class="headerlink" title="可以使用 require.context() 方法来创建自己的（模块）上下文，这个方法有 3 个参数："></a>可以使用 require.context() 方法来创建自己的（模块）上下文，这个方法有 3 个参数：</h3><ul>
+<li>要搜索的文件夹目录</li>
+<li>是否还应该搜索它的子目录</li>
+<li>以及一个匹配文件的正则表达式</li>
+</ul>
+<hr>
+<h4 id="require-context模块导出（返回）一个（require）函数，这个函数可以接收一个参数：request-函数–这里的-request-应该是指在-require-语句中的表达式"><a href="#require-context模块导出（返回）一个（require）函数，这个函数可以接收一个参数：request-函数–这里的-request-应该是指在-require-语句中的表达式" class="headerlink" title="require.context模块导出（返回）一个（require）函数，这个函数可以接收一个参数：request 函数–这里的 request 应该是指在 require() 语句中的表达式"></a>require.context模块导出（返回）一个（require）函数，这个函数可以接收一个参数：request 函数–这里的 request 应该是指在 require() 语句中的表达式</h4><p>导出的方法有 3 个属性： resolve, keys, id。</p>
+<p>resolve 是一个函数，它返回请求被解析后得到的模块 id。<br>keys 也是一个函数，它返回一个数组，由所有可能被上下文模块处理的请求组成。<br>id 是上下文模块里面所包含的模块 id. 它可能在你使用 module.hot.accept 的时候被用到</p>
+<h3 id="eg："><a href="#eg：" class="headerlink" title="eg："></a>eg：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">require.context(&quot;./test&quot;, false, /\.test\.js$/);</span><br><span class="line">//（创建了）一个包含了 test 文件夹（不包含子目录）下面的、所有文件名以 `.test.js` 结尾的、能被 require 请求到的文件的上下文。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">require.context(&quot;../&quot;, true, /\.stories\.js$/);</span><br><span class="line">////（创建了）一个包含了父级文件夹（包含子目录）下面，所有文件名以 `.stories.js` 结尾的文件的上下文。</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="3-webpack-base-conf中配置如下："><a href="#3-webpack-base-conf中配置如下：" class="headerlink" title="3 webpack.base.conf中配置如下："></a>3 webpack.base.conf中配置如下：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	test: /\.svg$/,</span><br><span class="line">	loader: &apos;svg-sprite-loader&apos;,</span><br><span class="line">	include: [resolve(&apos;src/icons&apos;)],</span><br><span class="line">	options: &#123;</span><br><span class="line">	  symbolId: &apos;icon-[name]&apos;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,</span><br><span class="line">	loader: &apos;url-loader&apos;,</span><br><span class="line">	exclude: [resolve(&apos;src/icons&apos;)],</span><br><span class="line">	options: &#123;</span><br><span class="line">	  limit: 10000,</span><br><span class="line">	  name: utils.assetsPath(&apos;img/[name].[hash:7].[ext]&apos;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>发现不同了没</p>
+<p>include 引入 src/icons<br>exclude 排除 src/icons </p>
+<p>不写exclude就会报错，因为它将svg处理了<br>否侧此处会报错</p>
+<p>引用</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg-icon</span> <span class="attr">icon-class</span>=<span class="string">"user"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>大功告成！</p>
+<p>当你想定义颜色时，通过定义class,直接定义样式</p>
+<p>很完美有么有</p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如果不知道-svg-sprite-是什么，"><span class="toc-number">1.</span> <span class="toc-text">如果不知道 svg-sprite 是什么，</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用svg-sprite的好处"><span class="toc-number"></span> <span class="toc-text">使用svg-sprite的好处</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-创建组件-SvgIcon"><span class="toc-number"></span> <span class="toc-text">1 创建组件 SvgIcon</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-src目录下创建icon"><span class="toc-number"></span> <span class="toc-text">2 src目录下创建icon</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#此处多补充一下扩展知识点-require-context"><span class="toc-number">1.</span> <span class="toc-text">此处多补充一下扩展知识点  require.context</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可以使用-require-context-方法来创建自己的（模块）上下文，这个方法有-3-个参数："><span class="toc-number">2.</span> <span class="toc-text">可以使用 require.context() 方法来创建自己的（模块）上下文，这个方法有 3 个参数：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#require-context模块导出（返回）一个（require）函数，这个函数可以接收一个参数：request-函数–这里的-request-应该是指在-require-语句中的表达式"><span class="toc-number">2.1.</span> <span class="toc-text">require.context模块导出（返回）一个（require）函数，这个函数可以接收一个参数：request 函数–这里的 request 应该是指在 require() 语句中的表达式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#eg："><span class="toc-number">3.</span> <span class="toc-text">eg：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-webpack-base-conf中配置如下："><span class="toc-number"></span> <span class="toc-text">3 webpack.base.conf中配置如下：</span></a>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

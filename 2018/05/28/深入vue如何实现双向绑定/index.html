@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang=>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>深入vue如何实现双向绑定 | lf小哇</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>lf小哇</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>深入vue如何实现双向绑定</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/05/28</time>
+            
+            
+          </div>
+          <h3 id="重点想说说这个Object-defineProperty"><a href="#重点想说说这个Object-defineProperty" class="headerlink" title="重点想说说这个Object.defineProperty"></a>重点想说说这个Object.defineProperty</h3><p>vue.js是通过它实现双向绑定的</p>
+<p>官方的定义</p>
+<ul>
+<li><p>Object.defineProperty()</p>
+</li>
+<li><p>方法会直接在一个对象上定义一个新属性，或者修改一个已经存在的属性， 并返回这个对象。</p>
+</li>
+<li><p>语法 Object.defineProperty(obj,prop,descriptor)</p>
+</li>
+<li><p>参数</p>
+<ul>
+<li><p>obj 需要定义属性的对象。</p>
+</li>
+<li><p>prop 需定义或修改的属性的名字。</p>
+</li>
+<li><p>descriptor 将被定义或修改的属性的描述符。</p>
+</li>
+</ul>
+</li>
+<li><p>返回值</p>
+<ul>
+<li>返回传入函数的对象，即第一个参数obj</li>
+</ul>
+</li>
+</ul>
+<p>对象里目前存在的属性描述符有两种主要形式：数据描述符和存取描述符。数据描述符是一个拥有可写或不可写值的属性。存取描述符是由一对 getter-setter 函数功能来描述的属性。描述符必须是两种形式之一；不能同时是两者。</p>
+<p>数据描述符和存取描述符均具有以下可选键值：</p>
+<ul>
+<li><p>configurable 当且仅当该属性的 configurable 为 true 时，该属性描述符才能够被改变，也能够被删除。默认为 false。</p>
+</li>
+<li><p>enumerable 当且仅当该属性的 enumerable 为 true 时，该属性才能够出现在对象的枚举属性中。默认为 false。</p>
+</li>
+</ul>
+<p>详情可以查看 👉 <a href="https://www.jianshu.com/p/07ba2b0c8fca" target="_blank" rel="noopener">https://www.jianshu.com/p/07ba2b0c8fca</a></p>
+<h3 id="视图和数据变化绑定"><a href="#视图和数据变化绑定" class="headerlink" title="视图和数据变化绑定"></a>视图和数据变化绑定</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span> </span><br><span class="line"> 	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span> </span><br><span class="line"> 	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Object<span class="tag">&lt;/<span class="name">title</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">p</span>&gt;</span>你好，<span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">'nickName'</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"introduce"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span>　　　　</span><br><span class="line"></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"> </span></span><br><span class="line"><span class="undefined"> 		//视图控制器</span></span><br><span class="line"><span class="undefined">		var userInfo = &#123;&#125;;</span></span><br><span class="line"><span class="undefined">		Object.defineProperty(userInfo, "nickName", &#123;</span></span><br><span class="line"><span class="undefined">		    get: function()&#123;</span></span><br><span class="line"><span class="undefined">		        return document.getElementById('nickName').innerHTML;</span></span><br><span class="line"><span class="undefined">		    &#125;,</span></span><br><span class="line"><span class="undefined">		    set: function(nick)&#123;</span></span><br><span class="line"><span class="undefined">		        document.getElementById('nickName').innerHTML = nick;</span></span><br><span class="line"><span class="undefined">		    &#125;</span></span><br><span class="line"><span class="undefined">		&#125;);</span></span><br><span class="line"><span class="undefined">		Object.defineProperty(userInfo, "introduce", &#123;</span></span><br><span class="line"><span class="undefined">		    get: function()&#123;</span></span><br><span class="line"><span class="undefined">		        return document.getElementById('introduce').innerHTML;</span></span><br><span class="line"><span class="undefined">		    &#125;,</span></span><br><span class="line"><span class="undefined">		    set: function(introduce)&#123;</span></span><br><span class="line"><span class="undefined">		        document.getElementById('introduce').innerHTML = introduce;</span></span><br><span class="line"><span class="undefined">		    &#125;</span></span><br><span class="line"><span class="undefined">		&#125;)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">		userInfo.nickName = "张三";</span></span><br><span class="line"><span class="undefined">		userInfo.introduce = "北京"</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"> 	</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#重点想说说这个Object-defineProperty"><span class="toc-number">1.</span> <span class="toc-text">重点想说说这个Object.defineProperty</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#视图和数据变化绑定"><span class="toc-number">2.</span> <span class="toc-text">视图和数据变化绑定</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

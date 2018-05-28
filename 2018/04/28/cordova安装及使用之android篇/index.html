@@ -1,1 +1,158 @@
-<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><link rel="shortcut icon" href=/static/favicon.ico><title>lf小哇</title><link href=/static/css/app.c64eadfc8d3abfc9d85514dba4054813.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.992b63bf2abbf3194771.js></script><script type=text/javascript src=/static/js/vendor.e12dc8c9af1f7aa12436.js></script><script type=text/javascript src=/static/js/app.bc036f9167871d39aecf.js></script></body></html>
+<!DOCTYPE html>
+<html lang=>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>cordova安装及使用之android篇 | lf小哇</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>lf小哇</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>cordova安装及使用之android篇</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/04/28</time>
+            
+            
+          </div>
+          <h3 id="机型：mac"><a href="#机型：mac" class="headerlink" title="机型：mac"></a>机型：mac</h3><h3 id="本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本"><a href="#本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本" class="headerlink" title="本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本"></a>本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本</h3><h3 id="纯属个人瞎搞，如果有不对的地方欢迎指正"><a href="#纯属个人瞎搞，如果有不对的地方欢迎指正" class="headerlink" title="纯属个人瞎搞，如果有不对的地方欢迎指正"></a>纯属个人瞎搞，如果有不对的地方欢迎指正</h3><p>先进入正题，使用此cordova首先是配备java环境，然后安装android-sdk</p>
+<p>一、安装jdk以及环境变量</p>
+<p>MAC系统安装JDK1.8及环境变量配置 👉 <a href="https://blog.csdn.net/deliciousion/article/details/78046007" target="_blank" rel="noopener">https://blog.csdn.net/deliciousion/article/details/78046007</a></p>
+<ul>
+<li><p>下载：jdk下载  👉 <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p>
+</li>
+<li><p>Mac设置安卓sdk环境变量   👉 <a href="https://blog.csdn.net/free_co/article/details/77115920" target="_blank" rel="noopener">https://blog.csdn.net/free_co/article/details/77115920</a></p>
+</li>
+</ul>
+<p>以下是我的配置</p>
+<p>设置JAVA_HOME环境变量，指定为JDK安装路径<br>设置ANDROID_HOME环境变量，指定为Android SDK安装路径<br>同时也建议你添加Android SDK的tools和platform-tools目录到你的PATH</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home</span><br><span class="line">export ANDROID_HOME=/Users/你的用户名/library/Android/sdk</span><br><span class="line">export PATH=$&#123;PATH&#125;:/Users/你的用户名/library/Android/sdk/platform-tools:/Users/你的用户名/library/Android/sdk/tool</span><br></pre></td></tr></table></figure>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#机型：mac"><span class="toc-number">1.</span> <span class="toc-text">机型：mac</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本"><span class="toc-number">2.</span> <span class="toc-text">本篇文章是我根据我的电脑来做，所以针对的是mac的童鞋，如果接下来有时间，将会推出window版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#纯属个人瞎搞，如果有不对的地方欢迎指正"><span class="toc-number">3.</span> <span class="toc-text">纯属个人瞎搞，如果有不对的地方欢迎指正</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
