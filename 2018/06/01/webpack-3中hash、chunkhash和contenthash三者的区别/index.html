@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang=>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>webpack 3中hash、chunkhash和contenthash三者的区别 | lf小哇</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>lf小哇</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>webpack 3中hash、chunkhash和contenthash三者的区别</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/06/01</time>
+            
+            
+          </div>
+          <p>首先在这里祝大家61儿童节快乐，新的一个月开始了，那么作为个人要有一个新的目标，那新的目标是什么呢？</p>
+<p>每天更新一篇博客，扩展横向纵向维度，并且加强深度，祝自己好运吧～！</p>
+<p>好了，那么来开始第一篇内容：</p>
+<p>在使用webpack 3中，文件名的hash值可以有三种hash生成方式，那具体使用哪一种呢？ </p>
+<h3 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h3><p>如果都使用hash的话，所有文件的hash都是一样的，而且每次修改任何一个文件，所有文件名的hash至都将改变。所以一旦修改了任何一个文件，整个项目的文件缓存都将失效</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">output:&#123;</span><br><span class="line"> 	path:path.resolve(__dirname,&apos;./dist&apos;),</span><br><span class="line"> 	publicPath: &apos;/dist/&apos;,</span><br><span class="line"> 	filename: &apos;[name]-[hash].js&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="chunkhash"><a href="#chunkhash" class="headerlink" title="chunkhash"></a>chunkhash</h3><p>既然hash的用法有这种缺陷，那是否有更好的办法，使只有被修改了的文件的文件名hash值修改呢？答案就是使用chunkhash。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">output:&#123;</span><br><span class="line">    path:path.resolve(__dirname,&apos;./dist&apos;),</span><br><span class="line">    publicPath: &apos;/dist/&apos;,</span><br><span class="line">    filename: &apos;[name]-[chunkhash].js&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然这样做还是有问题，就是如果我一个js文件里面引入了css文件。这时要是我修改了js，但没修改css，能否让css能够继续利用缓存呢？答案是可以！</p>
+<p>首先，我们使用Extract-text-webpack-plugin插件将css文件从js中分离出来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    test: /\.css$/,</span><br><span class="line">    use: ExtractTextPlugin.extract(&#123;</span><br><span class="line">        fallback: &quot;style-loader&quot;,</span><br><span class="line">        use: &#123;</span><br><span class="line">            loader:&quot;css-loader&quot;,</span><br><span class="line">            options:&#123;</span><br><span class="line">                minimize: true //css压缩</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后设置css的plugin</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">new ExtractTextPlugin(&#123;</span><br><span class="line">  	filename: &apos;css/[name]-[chunkhash].css&apos;,</span><br><span class="line">&#125;),</span><br></pre></td></tr></table></figure>
+<h3 id="contenthash"><a href="#contenthash" class="headerlink" title="contenthash"></a>contenthash</h3><p>对css使用了chunkhash之后，我们测试会发现，如果修改了js直接，css文件名的hash值确实没变，但这时要是我们修改css文件的话，我们就会发现css文件名的hash值居然没变化，这样就导致我们的非覆盖发布css文件失效了。所以这里需要注意就是css文件必须使用contenthash。将上面的css插件配置改为如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">new ExtractTextPlugin(&#123;</span><br><span class="line">    filename: &apos;css/[name]-[contenthash].css&apos;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#hash"><span class="toc-number">1.</span> <span class="toc-text">hash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#chunkhash"><span class="toc-number">2.</span> <span class="toc-text">chunkhash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#contenthash"><span class="toc-number">3.</span> <span class="toc-text">contenthash</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
