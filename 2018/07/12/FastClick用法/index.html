@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang=>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>FastClick用法 | lf小哇</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>lf小哇</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>FastClick用法</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/07/12</time>
+            
+            
+          </div>
+          <h3 id="为什么要使用FastClick"><a href="#为什么要使用FastClick" class="headerlink" title="为什么要使用FastClick"></a>为什么要使用FastClick</h3><p>移动设备上的浏览器默认会在用户点击屏幕大约延迟300毫秒后才会触发点击事件，这是为了检查用户是否在做双击。为了能够立即响应用户的点击事件，才有了FastClick。</p>
+<p>项目地址：<a href="https://github.com/ftlabs/fastclick" target="_blank" rel="noopener">https://github.com/ftlabs/fastclick</a></p>
+<h3 id="FastClick的使用"><a href="#FastClick的使用" class="headerlink" title="FastClick的使用"></a>FastClick的使用</h3><p>在页面直接引入fastclick.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&apos;application/javascript&apos; src=&apos;/path/to/fastclick.js&apos;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install fastclick</span><br></pre></td></tr></table></figure>
+<h3 id="初始化FastClick实例"><a href="#初始化FastClick实例" class="headerlink" title="初始化FastClick实例"></a>初始化FastClick实例</h3><p>初始化FastClick实例建议在页面的DOM文档加载完成后。</p>
+<p>1、纯Javascript版<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (&apos;addEventListener&apos; in document) &#123;</span><br><span class="line">	document.addEventListener(&apos;DOMContentLoaded&apos;, function() &#123;</span><br><span class="line">		FastClick.attach(document.body);</span><br><span class="line">	&#125;, false);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、jQuery版<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(function() &#123;</span><br><span class="line">	FastClick.attach(document.body);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>3、类似Common JS的模块系统方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var attachFastClick = require(&apos;fastclick&apos;);</span><br><span class="line">attachFastClick(document.body);</span><br></pre></td></tr></table></figure></p>
+<p>调用require(‘fastclick’)会返回FastClick.attach函数</p>
+<h3 id="使用needsclick过滤特定的元素"><a href="#使用needsclick过滤特定的元素" class="headerlink" title="使用needsclick过滤特定的元素"></a>使用needsclick过滤特定的元素</h3><p>如果页面上有一些特定的元素不需要使用fastclick来立刻触发点击事件，可以在元素的class上添加needsclick:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"needsclick"</span>&gt;</span>Ignored by FastClick<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="不需要使用fastclick的情况"><a href="#不需要使用fastclick的情况" class="headerlink" title="不需要使用fastclick的情况"></a>不需要使用fastclick的情况</h3><p>1、FastClick是不会对PC浏览器添加监听事件<br>2、Android版Chrome 32+浏览器，如果设置viewport meta的值为width=device-width，这种情况下浏览器会马上出发点击事件，不会延迟300毫秒。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>3、所有版本的Android Chrome浏览器，如果设置viewport meta的值有user-scalable=no，浏览器也是会马上出发点击事件。<br>4、IE11+浏览器设置了css的属性touch-action: manipulation，它会在某些标签（a，button等）禁止双击事件，IE10的为-ms-touch-action: manipulation</p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么要使用FastClick"><span class="toc-number">1.</span> <span class="toc-text">为什么要使用FastClick</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FastClick的使用"><span class="toc-number">2.</span> <span class="toc-text">FastClick的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化FastClick实例"><span class="toc-number">3.</span> <span class="toc-text">初始化FastClick实例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用needsclick过滤特定的元素"><span class="toc-number">4.</span> <span class="toc-text">使用needsclick过滤特定的元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不需要使用fastclick的情况"><span class="toc-number">5.</span> <span class="toc-text">不需要使用fastclick的情况</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
