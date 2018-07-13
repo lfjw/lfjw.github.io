@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang=>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>深入理解 JavaScript 异步系列（1）——基础 | lf小哇</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>lf小哇</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>深入理解 JavaScript 异步系列（1）——基础</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017/06/18</time>
+            
+            
+          </div>
+          <h2 id="第一部分，什么是异步"><a href="#第一部分，什么是异步" class="headerlink" title="第一部分，什么是异步"></a>第一部分，什么是异步</h2><p>提醒：如果你是初学 js 的同学，尚未有太多项目经验和基础知识，请就此打住，不要看这篇教程</p>
+<p>我思考问题、写文章一般都不按讨论出牌，别人写过的东西我不会再照着抄一遍。因此，后面所有的内容，都是我看了许多资料之后，个人重新思考提炼总结出来的，这肯定不能算是初级教程。</p>
+<p>如果你是已有 js 开发经验，并了解异步的基础知识，到这里来想深入了解一下Promise Generator和async-awati，那就太好了，非常欢迎。</p>
+<h3 id="本节内容概述"><a href="#本节内容概述" class="headerlink" title="本节内容概述"></a>本节内容概述</h3><p>1、JS 为何会有异步</p>
+<p>2、异步的实现原理是什么</p>
+<p>3、常用的异步操作有哪些</p>
+<h3 id="1、JS-为何会有异步"><a href="#1、JS-为何会有异步" class="headerlink" title="1、JS 为何会有异步"></a>1、JS 为何会有异步</h3><p>首先记住一句话 —— JS 是单线程的语言，所谓“单线程”就是一根筋，对于拿到的程序，一行一行的执行，上面的执行为完成，就傻傻的等着。例如</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i, t = <span class="built_in">Date</span>.now()</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">100000000</span>; i++) &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Date</span>.now() - t)  <span class="comment">// 250 （chrome浏览器）</span></span><br></pre></td></tr></table></figure>
+<p>上面的程序花费 250ms 的时间执行完成，执行过程中就会有卡顿，其他的事儿就先撂一边不管了。</p>
+<p>执行程序这样没有问题，但是对于 JS 最初使用的环境 ———— 浏览器客户端 ———— 就不一样了。因此在浏览器端运行的 js ，可能会有大量的网络请求，而一个网络资源啥时候返回，这个时间是不可预估的。这种情况也要傻傻的等着、卡顿着、啥都不做吗？———— 那肯定不行。</p>
+<p>因此，JS 对于这种场景就设计了异步 ———— 即，发起一个网络请求，就先不管这边了，先干其他事儿，网络请求啥时候返回结果，到时候再说。这样就能保证一个网页的流程运行。</p>
+<h3 id="2、异步的实现原理"><a href="#2、异步的实现原理" class="headerlink" title="2、异步的实现原理"></a>2、异步的实现原理</h3><p>先看一段比较常见的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ajax = $.ajax(&#123;</span><br><span class="line">    url: <span class="string">'/data/data1.json'</span>,</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'success'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上面代码中$.ajax()需要传入两个参数进去，url和success，其中url是请求的路由，success是一个函数。这个函数传递过去不会立即执行，而是等着请求成功之后才能执行。对于这种传递过去不执行，等出来结果之后再执行的函数，叫做callback，即回调函数</p>
+<p>再看一段更加能说明回调函数的 nodejs 代码。和上面代码基本一样，唯一区别就是：上面代码时网络请求，而下面代码时 IO 操作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line">fs.readFile(<span class="string">'data1.json'</span>, (err, data) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data.toString())</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>从上面两个 demo 看来，实现异步的最核心原理，就是将callback作为参数传递给异步执行函数，当有结果返回之后再触发 callback执行，就是如此简单！</p>
+<h3 id="3、常用的异步操作"><a href="#3、常用的异步操作" class="headerlink" title="3、常用的异步操作"></a>3、常用的异步操作</h3><p>开发中比较常用的异步操作有：</p>
+<p>· 网络请求，如ajax http.get</p>
+<p>· IO 操作，如readFile readdir</p>
+<p>· 定时函数，如setTimeout setInterval</p>
+<p>最后，请思考，事件绑定是不是也是异步操作？例如$btn.on(‘click’, function() {…})。这个问题很有意思，我会再后面的章节经过分析之后给出答案，各位先自己想一下。</p>
+<h2 id="第二部分，异步和-event-loop"><a href="#第二部分，异步和-event-loop" class="headerlink" title="第二部分，异步和 event-loop"></a>第二部分，异步和 event-loop</h2><p>提到异步，就必须提 event-loop 。event-loop 中文翻译叫做“事件轮询”，它是能体现出单线程中异步操作是如何被执行的。</p>
+<p>首先，强烈大家观看一个歪果仁的视频 <a href="http://new-play.tudou.com/v/XMjQ1OTczODMyMA==.html?" target="_blank" rel="noopener">《what the hack is event loop》</a>. ，只有不到半个小时的时间，但是将的非常详细。</p>
+<p>其次，再结合阮一峰老师的<a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html" target="_blank" rel="noopener">《什么是event loop》</a> 一起看一下。将这两个看完就基本了解 event loop 了</p>
+<p>最后，event-loop 是一块内容比较独立的技术性知识，它是什么样子就是什么样子，讲解起来可变通性非常小。因此，本节说一下我对 event-loop 的理解和体会</p>
+<h3 id="本节内容概述-1"><a href="#本节内容概述-1" class="headerlink" title="本节内容概述"></a>本节内容概述</h3><p>1、举例说明</p>
+<p>2、核心概念</p>
+<p>3、思考问题</p>
+<h3 id="1、举例说明"><a href="#1、举例说明" class="headerlink" title="1、举例说明"></a>1、举例说明</h3><p>给出一段简单的 js 代码，并用比较通俗、简单的说法介绍一下执行过程。详细过程还需各位去看视频，因为我没必要把半小时的视频都写到这里。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'line 1'</span>)</span><br><span class="line">setTimeout(<span class="built_in">console</span>.log, <span class="number">1000</span>, <span class="string">'line 2'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'line 3'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="2、核心概念"><a href="#2、核心概念" class="headerlink" title="2、核心概念"></a>2、核心概念</h3><p>以上一共三行代码，该程序被执行的时候，会依次挨行执行</p>
+<p>第一步，执行第一行，将结果line 1打印出来<br>第二步，执行第二行，注意此时会将这个操作暂时存储到其他地方，因为setTimeout是一个异步执行操作。<br>第三步，执行第三行，将结果line 3打印出出来<br>第四步，等待最后一行程序（一共三行）都全部执行完了，然后立马实时查看刚才暂存的异步操作有没有。如果有可执行的，就立即拿到出来继续执行。<br>第五步，执行完毕之后，再实时查看暂存位置中是否还有未执行的异步回调。</p>
+<p>以上只拿了setTimeout举例子，但是对于网络请求、IO操作、事件绑定道理都是一样的。如果我讲的简单例子你还是看不懂，一定要去看文章最初提到的《what the hack is event loop》视频，重要重要！！！</p>
+<h3 id="3、思考问题"><a href="#3、思考问题" class="headerlink" title="3、思考问题"></a>3、思考问题</h3><p>第一题，以下代码的输出顺序是什么</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="built_in">console</span>.log, <span class="number">0</span>, <span class="string">'a'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'b'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'c'</span>)</span><br></pre></td></tr></table></figure>
+<p>答案是b c a，有疑问的需要再去看上面的介绍或者那个视频。</p>
+<p>第二题，以下代码中，最后输出的结果是否是 500</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i, t = <span class="built_in">Date</span>.now()</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">100000000</span>; i++) &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">Date</span>.now() - t)  <span class="comment">// 输出多少？？？</span></span><br><span class="line">&#125;</span><br><span class="line">setTimeout(fn, <span class="number">500</span>)</span><br></pre></td></tr></table></figure>
+<p>答案是大于 500ms ，因为 for 函数需要花费一些时间，等 for 执行完之后再开始计算 500ms 之后执行 fn</p>
+<p>第三题，事件绑定是不是异步操作？</p>
+<p>这个问题大家根据 event-loop 的讲解和视频来思考，我们下一节再给出解答。</p>
+<h2 id="第三部分，事件绑定算不算异步？"><a href="#第三部分，事件绑定算不算异步？" class="headerlink" title="第三部分，事件绑定算不算异步？"></a>第三部分，事件绑定算不算异步？</h2><p>如果你认真看了上一节的 event-loop 的，你会发现原来事件绑定和异步操作的实现机制是一样的，那么事件绑定是不是就是异步操作呢？（声明一下，这里说的事件绑定是如下代码的形式）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$btn.on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'你点击了按钮'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>PS：这个问题貌似没有加过有人讨论或者发起讨论，但是当我了解了 event-loop 之后，我就发现这两者有很大联系，很早就像讨论一下这个话题。不知道哪位同仁跟我有一样的想法？</p>
+<p>本节内容概述</p>
+<p>· 共同之处<br>· 不同之处<br>· 我的观点</p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一部分，什么是异步"><span class="toc-number">1.</span> <span class="toc-text">第一部分，什么是异步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#本节内容概述"><span class="toc-number">1.1.</span> <span class="toc-text">本节内容概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1、JS-为何会有异步"><span class="toc-number">1.2.</span> <span class="toc-text">1、JS 为何会有异步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、异步的实现原理"><span class="toc-number">1.3.</span> <span class="toc-text">2、异步的实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、常用的异步操作"><span class="toc-number">1.4.</span> <span class="toc-text">3、常用的异步操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二部分，异步和-event-loop"><span class="toc-number">2.</span> <span class="toc-text">第二部分，异步和 event-loop</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#本节内容概述-1"><span class="toc-number">2.1.</span> <span class="toc-text">本节内容概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1、举例说明"><span class="toc-number">2.2.</span> <span class="toc-text">1、举例说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、核心概念"><span class="toc-number">2.3.</span> <span class="toc-text">2、核心概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、思考问题"><span class="toc-number">2.4.</span> <span class="toc-text">3、思考问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三部分，事件绑定算不算异步？"><span class="toc-number">3.</span> <span class="toc-text">第三部分，事件绑定算不算异步？</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
