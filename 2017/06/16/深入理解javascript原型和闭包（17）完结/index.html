@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang=>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>深入理解javascript原型和闭包（17）完结 | lf小哇</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>lf小哇</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>深入理解javascript原型和闭包（17）完结</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017/06/16</time>
+            
+            
+          </div>
+          <p>  之前一共用15篇文章，把javascript的原型和闭包。</p>
+<p>　　首先，javascript本来就“不容易学”。不是说它有多难，而是学习它的人，往往都是在学会了其他语言之后，又学javascript。有其他语言的学习经历和实践经历，再加上自学javascript，边学边用，肯定会产生许多误解，走许多弯路。我就没少经历，也算是一种教训。</p>
+<p>　　其次，原型和闭包又是一对难兄难弟，一来是他俩比较难懂，二来是他俩都或多或少的给初级开发人员带来许多BUG。不懂原型和闭包，你也可以开发javascript程序，但是你写不出高质量、符合设计原则的javascript程序。</p>
+<p> 因此，<font color="red" face="黑体" size="4">还是强调基础，强调理论！理论和实践相结合不是一句空话。</font></p>
+<p> 由此想到了我平时练习投篮。一般喜欢篮球的人都是周末和别人去一起打篮球玩，我之前也是如此。但是我从今年春天开始，每周另外抽出一小时时间，自己一个人去练习投篮。练习正确的投篮姿势，强迫自己在练习的时候使用正确姿势，时间长了就形成了肌肉记忆。<font color="red" face="黑体" size="4">所以，工作之余，切不可忘记充电。</font></p>
+<p> 最后，看到好多文章都是长篇大论，恨不得用一篇文章解释完所有的内容。而我的文章都是小步快跑，看完一篇估计也就十分钟。这是我在看《明朝那些事儿》时发现的一个思路。这本书一节只有很少的内容，而且语言简单，演绎性很强，一节紧扣着一节，能黏住读者。</p>
+<p>  因此，我在写文章时，会先用一个大家都知道的概念引入正题，然后进一步解释。在一篇文章的最后，要抛出一个疑问引出下一节。</p>
+<p>  原型和闭包这个系列，正好填补了javascript教程一个空缺，即使《javascript高级程序设计》中，都没有将原型和闭包讲解的如此深入。希望大家多多支持吧。</p>
+<p>  就此，结束。</p>
+<p>  其实在我们日常生活中，我们回答问题也是一样道理，需要有逻辑性以及合理的解释，不要长篇大论的解释，而是精辟.</p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

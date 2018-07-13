@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang=>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>深入理解javascript原型和闭包（4）隐式原型 | lf小哇</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>lf小哇</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>深入理解javascript原型和闭包（4）隐式原型</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017/06/04</time>
+            
+            
+          </div>
+          <p>注意：本文不是javascript基础教程，如果你没有接触过原型的基本知识，应该先去了解一下，推荐看《javascript高级程序设计（第三版）》第6章：面向对象的程序设计。</p>
+<p>上节已经提到，<font color="red" face="黑体" size="4">每个函数function都有一个prototype，即原型</font>这里再加一句话<font color="red" face="黑体" size="4">每个对象都有一个<strong>proto</strong>，可成为隐式原型。</font></p>
+<p>这个<strong>proto</strong>是一个隐藏的属性，javascript不希望开发者用到这个属性值，有的低版本浏览器甚至不支持这个属性值。所以你在Visual Studio 2012这样很高级很智能的编辑器中，都不会有<strong>proto</strong>的智能提示，但是你不用管它，直接写出来就是了。</p>
+<p><img src="/2017/06/04/深入理解javascript原型和闭包（4）隐式原型/1.png" alt="bg"></p>
+<p><img src="/2017/06/04/深入理解javascript原型和闭包（4）隐式原型/2.png" alt="bg"></p>
+<p>上面截图看来，obj.<strong>proto</strong>和Object.prototype的属性一样！这么巧！</p>
+<p>答案就是一样。</p>
+<p>obj这个对象本质上是被Object函数创建的，因此obj.<strong>proto</strong>=== Object.prototype。我们可以用一个图来表示。</p>
+<p><img src="/2017/06/04/深入理解javascript原型和闭包（4）隐式原型/3.png" alt="bg"></p>
+<p>即，<font color="red" face="黑体" size="4">每个对象都有一个<strong>proto</strong>属性，指向创建该对象的函数的prototype。</font></p>
+<p>那么上图中的“Object prototype”也是一个对象，它的<strong>proto</strong>指向哪里？</p>
+<p>好问题！</p>
+<p>在说明“Object prototype”之前，先说一下自定义函数的prototype。自定义函数的prototype本质上就是和 var obj = {} 是一样的，都是被Object创建，所以它的<strong>proto</strong>指向的就是Object.prototype。</p>
+<p>但是<font color="red" face="黑体" size="4">Object.prototype确是一个特例——它的<strong>proto</strong>指向的是null，切记切记！</font></p>
+<p><img src="/2017/06/04/深入理解javascript原型和闭包（4）隐式原型/4.png" alt="bg"></p>
+<p>还有——函数也是一种对象，函数也有<strong>proto</strong>吗？</p>
+<p>又一个好问题！——当然有。</p>
+<p>函数也不是从石头缝里蹦出来的，函数也是被创建出来的。谁创建了函数呢？——Function——注意这个大写的“F”。</p>
+<p>且看如下代码。</p>
+<p><img src="/2017/06/04/深入理解javascript原型和闭包（4）隐式原型/5.png" alt="bg"></p>
+<p>以上代码中，第一种方式是比较传统的函数创建方式，第二种是用new Functoin创建。</p>
+<font color="red" face="黑体" size="4">首先根本不推荐用第二种方式。</font>
+
+<p>这里只是向大家演示，函数是被Function创建的。</p>
+<p>好了，根据上面说的一句话——对象的<strong>proto</strong>指向的是创建它的函数的prototype，就会出现：Object.<strong>proto</strong> === Function.prototype。用一个图来表示。</p>
+<p><img src="/2017/06/04/深入理解javascript原型和闭包（4）隐式原型/6.png" alt="bg"></p>
+<p>上图中，很明显的标出了：自定义函数Foo.<strong>proto</strong>指向Function.prototype，Object.<strong>proto</strong>指向Function.prototype，唉，怎么还有一个……Function.<strong>proto</strong>指向Function.prototype？这不成了循环引用了？</p>
+<p>对！是一个环形结构。</p>
+<p>其实稍微想一下就明白了。Function也是一个函数，函数是一种对象，也有<strong>proto</strong>属性。既然是函数，那么它一定是被Function创建。所以——Function是被自身创建的。所以它的<strong>proto</strong>指向了自身的Prototype。</p>
+<p>篇幅不少了，估计也都看烦了。快结束了。</p>
+<p>最后一个问题：Function.prototype指向的对象，它的<strong>proto</strong>是不是也指向Object.prototype？</p>
+<p>答案是肯定的。因为Function.prototype指向的对象也是一个普通的被Object创建的对象，所以也遵循基本的规则。</p>
+<p><img src="/2017/06/04/深入理解javascript原型和闭包（4）隐式原型/7.png" alt="bg"></p>
+<p>OK 本节结束，是不是很乱？</p>
+<p>乱很正常。那这一节就让它先乱着，下一节我们将请另一个老朋友来帮忙，把它理清楚。这位老朋友就是——instanceof。</p>
+<p>具体内容，请看下节分解。</p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
