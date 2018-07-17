@@ -61,9 +61,11 @@
 <p>到此时，如果你已经解决了，那么恭喜你，接下来的不用看了，如果还提示异常，接着看：</p>
 <p>如果设置了依然不生效，无法保存为图片，那是因为缓存 </p>
 <p>当我们第一次访问时，图片加载慢，因为我们是从服务端请求而来，当我们请求下来之后，就缓存到了浏览器中。</p>
+<p>这也就是为什么设置了属性后还报错的情况，这时候你要看看是不是同时请求了同一张图片，这种情况下，第一次请求图片他会带请求头，第二次请求这张图片时，他会直接取缓存中的数据，然后就挂了。</p>
 <p>在图片链接后面拼接随机数。</p>
 <p>在生成图片就OK了</p>
-<p>分享一个链接，将的很不错 👉<a href="https://www.jianshu.com/p/c3aa975923de" target="_blank" rel="noopener">https://www.jianshu.com/p/c3aa975923de</a></p>
+<p>分享一个链接，讲的很不错 👉<a href="https://www.jianshu.com/p/c3aa975923de" target="_blank" rel="noopener">https://www.jianshu.com/p/c3aa975923de</a></p>
+<p>另外一篇： 👉<a href="https://www.cnblogs.com/superil/p/8462042.html" target="_blank" rel="noopener">https://www.cnblogs.com/superil/p/8462042.html</a></p>
 <p>分享两个非常好的查询问题的</p>
 <p>bug之家:    <a href="https://stackoverflow.com/" target="_blank" rel="noopener">https://stackoverflow.com/</a></p>
 <p>文档之家:   <a href="https://developer.mozilla.org/en-US/" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/</a></p>
