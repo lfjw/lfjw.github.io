@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang=>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>canvas图片问题浅析 | lf小哇</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>lf小哇</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>canvas图片问题浅析</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/07/16</time>
+            
+            
+          </div>
+          <p>说一下我的业务场景</p>
+<p>生成二维码并且在中间加上LOGO，因为LOGO是链接，所以，保存为图片的时候，会遇到跨域的问题</p>
+<p>受限于 CORS 策略，会存在跨域问题，虽然可以使用图像（比如append到页面上）但是绘制到画布上会污染画布，一旦一个画布被污染,就无法提取画布的数据，比如无法使用使用画布toBlob(),toDataURL(),或getImageData()方法;当使用这些方法的时候 会抛出一个安全错误</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uncaught DOMException: Failed to execute <span class="string">'toDataURL'</span> on <span class="string">'HTMLCanvasElement'</span>: Tainted canvases may not be exported.</span><br></pre></td></tr></table></figure>
+<p>解决方案如下</p>
+<p>如果是new Image()的话，要加上一下设置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用外部图片，需设置 crossOrigin 属性，否则 toDataURL 调用异常</span></span><br><span class="line">image.setAttribute(<span class="string">'crossOrigin'</span>, <span class="string">'anonymous'</span>);</span><br></pre></td></tr></table></figure>
+<p>完整如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var canvas=document.getElementById(&quot;canvas&quot;),//获取canvas</span><br><span class="line">    ctx = canvas.getContext(&quot;2d&quot;), //对应的CanvasRenderingContext2D对象(画笔)</span><br><span class="line">    img = new Image(),//创建新的图片对象</span><br><span class="line">    base64 = &apos;&apos; ;//base64 </span><br><span class="line">img.src = &apos;http://www.xxxx.png&apos;;</span><br><span class="line">img.setAttribute(&quot;crossOrigin&quot;,&apos;Anonymous&apos;)</span><br><span class="line">img.onload = function()&#123;//图片加载完，再draw 和 toDataURL</span><br><span class="line">     ctx.drawImage(img,0,0);    </span><br><span class="line">     base64 = canvas.toDataURL(&quot;image/png&quot;); </span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>到此时，如果你已经解决了，那么恭喜你，接下来的不用看了，如果还提示异常，接着看：</p>
+<p>如果设置了依然不生效，无法保存为图片，那是因为缓存 </p>
+<p>当我们第一次访问时，图片加载慢，因为我们是从服务端请求而来，当我们请求下来之后，就缓存到了浏览器中。</p>
+<p>在图片链接后面拼接随机数。</p>
+<p>在生成图片就OK了</p>
+<p>分享一个链接，将的很不错 👉<a href="https://www.jianshu.com/p/c3aa975923de" target="_blank" rel="noopener">https://www.jianshu.com/p/c3aa975923de</a></p>
+<p>分享两个非常好的查询问题的</p>
+<p>bug之家:    <a href="https://stackoverflow.com/" target="_blank" rel="noopener">https://stackoverflow.com/</a></p>
+<p>文档之家:   <a href="https://developer.mozilla.org/en-US/" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/</a></p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
