@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang=>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>浅谈移动端rem适配 | lf小哇</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>lf小哇</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>浅谈移动端rem适配</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/07/18</time>
+            
+            
+          </div>
+          <h3 id="rem是什么"><a href="#rem是什么" class="headerlink" title="rem是什么"></a>rem是什么</h3><p>rem（font size of the root element）是指相对于根元素的字体大小的单位。简单的说它就是一个相对单位。看到rem大家一定会想起em单位，em（font size of the element）是指相对于父元素的字体大小的单位。它们之间其实很相似，只不过rem计算的规则是依赖根元素,em是依赖父元素计算。</p>
+<h3 id="rem布局原理"><a href="#rem布局原理" class="headerlink" title="rem布局原理"></a>rem布局原理</h3><p>拿到设计稿，按照设计稿的宽去设置一个合适的rem ,配合js查询屏幕大小来改变html的font-size，从而达到适配各种屏幕的效果</p>
+<h3 id="rem布局优缺点"><a href="#rem布局优缺点" class="headerlink" title="rem布局优缺点"></a>rem布局优缺点</h3><p>优点，宽度自适应，可以完美适配不同宽度的屏幕</p>
+<p>缺点，高度不固定，如果遇到高度要求很严格的就实现不了</p>
+<p>网上有很多解决的方案，我常用的是</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 适配移动端</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> *    当拿到的设计图宽为750px时，在谷歌宽为375px的调试机上，如下设置</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> *    · 因为html根元素的字体大小是16px，那么换成rem单位，直接除以16就好； </span></span><br><span class="line"><span class="comment"> *     （375/16 = 23.4375px）也就是说htmlDom.style.fontSize = 375/23.4375 = 16px</span></span><br><span class="line"><span class="comment"> *    · 当图纸有一个宽为680px的盒子时，此时换算成rem的值为 680/16/2 = 21.25rem;也就是说680/32</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//得到手机屏幕的宽度</span></span><br><span class="line">  <span class="keyword">let</span> htmlWidth = <span class="built_in">document</span>.documentElement.clientWidth || <span class="built_in">document</span>.body.clientWidth;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//得到html的Dom元素</span></span><br><span class="line">  <span class="keyword">let</span> htmlDom = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'html'</span>)[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">//设置根元素字体大小</span></span><br><span class="line">  htmlDom.style.fontSize= htmlWidth/<span class="number">23.4375</span> + <span class="string">'px'</span>;</span><br><span class="line"></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#rem是什么"><span class="toc-number">1.</span> <span class="toc-text">rem是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rem布局原理"><span class="toc-number">2.</span> <span class="toc-text">rem布局原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rem布局优缺点"><span class="toc-number">3.</span> <span class="toc-text">rem布局优缺点</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
