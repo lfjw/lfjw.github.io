@@ -1,299 +1,2102 @@
 <!DOCTYPE html>
-<html lang=>
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+
+
+
+
+
+
+
+
+
+
+
+
   
-    <link rel="icon" href="">
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
   
-    
+
+
+
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="lf小哇">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="lf小哇">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="lf小哇">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
   <title>lf小哇</title>
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
 </head>
 
-<body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/">
-      <span>lf小哇</span>
-    </a>
-    <ul class="right-header">
-      
-        <li class="nav-item">
-          
-            <a href="/" class="item-link active">首页</a>
-          
-        </li>
-      
-        <li class="nav-item">
-          
-            <a href="/archives" class="item-link">归档</a>
-          
-        </li>
-      
-    </ul>
-  </div>
-</header>
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
 
-  <main id='index'>
-  <div class="posts-list">
+  
+  
     
-      <section>
-        <a href="/2018/07/18/浅谈移动端rem适配/">
-          <h3 class='post-head'>
-            浅谈移动端rem适配
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <h3 id="rem是什么"><a href="#rem是什么" class="headerlink" title="rem是什么"></a>rem是什么</h3><p>rem（font size of the root element）是指相对于根元素的字体大小的单位。简单的说它就是一个相对单位。看到rem大家一定会想起em单位，em（font size of the element）是指相对于父元素的字体大小的单位。它们之间其实很相似，只不过rem计算的规则是依赖根元素,em是依赖父元素计算。</p>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/07/18</time>
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2018/07/17/js获取当前域名、Url、相对路径和参数以及指定参数/">
-          <h3 class='post-head'>
-            js获取当前域名、Url、相对路径和参数以及指定参数
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <h3 id="window-location下的属性说明"><a href="#window-location下的属性说明" class="headerlink" title="window.location下的属性说明"></a>window.location下的属性说明</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> href  =  <span class="built_in">window</span>.location.href;<span class="comment">//完整的url</span></span><br><span class="line"><span class="keyword">var</span> protocol  =  <span class="built_in">window</span>.location.protocol;<span class="comment">//协议</span></span><br><span class="line"><span class="keyword">var</span> hostname  =  <span class="built_in">window</span>.location.hostname;<span class="comment">//主机名</span></span><br><span class="line"><span class="keyword">var</span> host  =  <span class="built_in">window</span>.location.host;<span class="comment">//主机名+端口号</span></span><br><span class="line"><span class="keyword">var</span> port = <span class="built_in">window</span>.location.port;<span class="comment">//端口号</span></span><br><span class="line"><span class="keyword">var</span> pathname = <span class="built_in">window</span>.location.pathname;<span class="comment">//当前URL的路径部分</span></span><br><span class="line"><span class="keyword">var</span> search = <span class="built_in">window</span>.location.search;<span class="comment">//路径的查询部分</span></span><br><span class="line"><span class="keyword">var</span> hash = <span class="built_in">window</span>.location.hash;<span class="comment">//开始的锚点</span></span><br></pre></td></tr></table></figure>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/07/17</time>
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2018/07/16/canvas图片问题浅析/">
-          <h3 class='post-head'>
-            canvas图片问题浅析
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <p>说一下我的业务场景</p>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/07/16</time>
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2018/07/12/FastClick用法/">
-          <h3 class='post-head'>
-            FastClick用法
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <h3 id="为什么要使用FastClick"><a href="#为什么要使用FastClick" class="headerlink" title="为什么要使用FastClick"></a>为什么要使用FastClick</h3><p>移动设备上的浏览器默认会在用户点击屏幕大约延迟300毫秒后才会触发点击事件，这是为了检查用户是否在做双击。为了能够立即响应用户的点击事件，才有了FastClick。</p>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/07/12</time>
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2018/07/04/vue裁剪图以及扩展的知识点/">
-          <h3 class='post-head'>
-            vue裁剪图以及扩展的知识点
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <p>vue的扩展插件cropperjs满足了基本的需求，那么当裁剪完成为了base64图的时候，接下里该如何处理呢？</p>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/07/04</time>
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2018/06/24/node进阶-二/">
-          <h3 class='post-head'>
-            node进阶(二)
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/06/24</time>
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2018/06/24/node进阶-一/">
-          <h3 class='post-head'>
-            node进阶(一)
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <p>作为当前前端必须掌握的内容之一，node已经成为了前端的标配，已经再也不是以前页面仔，而是向着工程师靠拢。这就要求我们除了熟悉浏览器端的要求之外，还需要更多熟悉服务端的一些内容，那么我们一起来在node方面来进阶吧。</p>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/06/24</time>
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2018/06/04/精通webpack之路（1）/">
-          <h3 class='post-head'>
-            精通webpack之路（1）
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <p>首先来个序言，从这篇开始，我将重点把webpack作为一个重点，来研究它的核心内容</p>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/06/04</time>
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2018/06/01/webpack-3中hash、chunkhash和contenthash三者的区别/">
-          <h3 class='post-head'>
-            webpack 3中hash、chunkhash和contenthash三者的区别
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <p>首先在这里祝大家61儿童节快乐，新的一个月开始了，那么作为个人要有一个新的目标，那新的目标是什么呢？</p>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/06/01</time>
-          
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2018/05/29/js判断类型的一些方法/">
-          <h3 class='post-head'>
-            js判断类型的一些方法
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <h3 id="如何判断是对象还是数组"><a href="#如何判断是对象还是数组" class="headerlink" title="如何判断是对象还是数组"></a>如何判断是对象还是数组</h3><p>1.对于Javascript 1.8.5（ECMAScript 5），变量名字.isArray( )可以实现这个目的</p>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/05/29</time>
-          
-          
-        </div>
-      </section>
-    
-  </div>
-  <aside>
-    
-    
-    
-    
-  </aside>
-</main>
+  
 
-  <div class="paging">
-  <div class="paging-container">
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
     
-    <div></div>    
-    
-    
-    <div class='page-next'>
-      <a href="/page/2/">Next</a>
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lf小哇</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
     
+      
+        <p class="site-subtitle">战斗到底！</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
   </div>
 </div>
 
 
 
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home menu-item-active">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/18/Mac-安装和使用MongoDB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小 哇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lf小哇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/18/Mac-安装和使用MongoDB/" itemprop="url">
+                  Mac 安装和使用MongoDB
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-18 16:27:24" itemprop="dateCreated datePublished" datetime="2018-07-18T16:27:24+08:00">2018-07-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-07-20 16:11:30" itemprop="dateModified" datetime="2018-07-20T16:11:30+08:00">2018-07-20</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="采用Homebrew"><a href="#采用Homebrew" class="headerlink" title="采用Homebrew:"></a>采用Homebrew:</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mongodb --<span class="keyword">with</span>-openssl</span><br></pre></td></tr></table></figure>
+<p>brew –cache    查看brew缓存地址</p>
+<p>mongod -version    查看mongodb版本</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>启动和停止mongodb数据库</p>
+<p>1、方法一：使用bash终端</p>
+<p>启动：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ongod --config /usr/local/etc/mongod.conf  <span class="comment">// 启动</span></span><br><span class="line"><span class="comment">//或</span></span><br><span class="line">mongod --dbpath .                           <span class="comment">// 启动</span></span><br></pre></td></tr></table></figure></p>
+<p>启动成功后可以在mac的“活动监视器”中看到进程mongod，停止则关闭进程。</p>
+<p>停止： </p>
+<p>使用command+T在同一窗口中建立多标签终端，在新的bash中输入：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mongo                                       # 进入mongo命令行</span><br><span class="line">&gt; use admin</span><br><span class="line">&gt; db.shutdownServer()                       # 停止</span><br><span class="line">&gt; ctrl+C                                    # 退出mongo命令行</span><br></pre></td></tr></table></figure>
+<p>进入mongo命令行可以在mac的“活动监视器”中看到进程mongo，退出则关闭进程。</p>
+<p>2、方法二：使用homebrew</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew services start mongodb                 # 启动</span><br><span class="line">brew services restart mongodb               # 重启</span><br><span class="line">brew services stop mongodb                  # 停止</span><br></pre></td></tr></table></figure>
+<p>启动成功之后：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&gt;mongo</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">MongoDB shell version v4<span class="number">.0</span><span class="number">.0</span></span><br><span class="line">connecting to: mongodb:<span class="comment">//127.0.0.1:27017</span></span><br><span class="line">MongoDB server version: <span class="number">4.0</span><span class="number">.0</span></span><br><span class="line">Server has startup warnings:</span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-18</span>T16:<span class="number">32</span>:<span class="number">33.724</span>+<span class="number">0800</span> I CONTROL  [initandlisten]</span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-18</span>T16:<span class="number">32</span>:<span class="number">33.724</span>+<span class="number">0800</span> I CONTROL  [initandlisten] ** WARNING: Access control is not enabled <span class="keyword">for</span> the database.</span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-18</span>T16:<span class="number">32</span>:<span class="number">33.724</span>+<span class="number">0800</span> I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.</span><br><span class="line"><span class="number">2018</span><span class="number">-07</span><span class="number">-18</span>T16:<span class="number">32</span>:<span class="number">33.724</span>+<span class="number">0800</span> I CONTROL  [initandlisten]</span><br><span class="line">---</span><br><span class="line">Enable MongoDB<span class="string">'s free cloud-based monitoring service to collect and display</span></span><br><span class="line"><span class="string">metrics about your deployment (disk utilization, CPU, operation statistics,</span></span><br><span class="line"><span class="string">etc).</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The monitoring data will be available on a MongoDB website with a unique</span></span><br><span class="line"><span class="string">URL created for you. Anyone you share theURL with will also be able to</span></span><br><span class="line"><span class="string">view this page. MongoDB may use this information to make product</span></span><br><span class="line"><span class="string">improvements and to suggest MongoDB products and deployment options to you.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">To enable free monitoring, run the following command:</span></span><br><span class="line"><span class="string">db.enableFreeMonitoring()</span></span><br><span class="line"><span class="string">---</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; show dbs</span><br><span class="line">admin  <span class="number">0.000</span>GB</span><br><span class="line">local  <span class="number">0.000</span>GB</span><br><span class="line">help</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
     </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/18/浅谈移动端rem适配/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小 哇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lf小哇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/18/浅谈移动端rem适配/" itemprop="url">
+                  浅谈移动端rem适配
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-18 13:05:05 / Modified: 13:11:25" itemprop="dateCreated datePublished" datetime="2018-07-18T13:05:05+08:00">2018-07-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="rem是什么"><a href="#rem是什么" class="headerlink" title="rem是什么"></a>rem是什么</h3><p>rem（font size of the root element）是指相对于根元素的字体大小的单位。简单的说它就是一个相对单位。看到rem大家一定会想起em单位，em（font size of the element）是指相对于父元素的字体大小的单位。它们之间其实很相似，只不过rem计算的规则是依赖根元素,em是依赖父元素计算。</p>
+<h3 id="rem布局原理"><a href="#rem布局原理" class="headerlink" title="rem布局原理"></a>rem布局原理</h3><p>拿到设计稿，按照设计稿的宽去设置一个合适的rem ,配合js查询屏幕大小来改变html的font-size，从而达到适配各种屏幕的效果</p>
+<h3 id="rem布局优缺点"><a href="#rem布局优缺点" class="headerlink" title="rem布局优缺点"></a>rem布局优缺点</h3><p>优点，宽度自适应，可以完美适配不同宽度的屏幕</p>
+<p>缺点，高度不固定，如果遇到高度要求很严格的就实现不了</p>
+<p>网上有很多解决的方案，我常用的是</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 适配移动端</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> *    当拿到的设计图宽为750px时，在谷歌宽为375px的调试机上，如下设置</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> *    · 因为html根元素的字体大小是16px，那么换成rem单位，直接除以16就好； </span></span><br><span class="line"><span class="comment"> *     （375/16 = 23.4375px）也就是说htmlDom.style.fontSize = 375/23.4375 = 16px</span></span><br><span class="line"><span class="comment"> *    · 当图纸有一个宽为680px的盒子时，此时换算成rem的值为 680/16/2 = 21.25rem;也就是说680/32</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//得到手机屏幕的宽度</span></span><br><span class="line">  <span class="keyword">let</span> htmlWidth = <span class="built_in">document</span>.documentElement.clientWidth || <span class="built_in">document</span>.body.clientWidth;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//得到html的Dom元素</span></span><br><span class="line">  <span class="keyword">let</span> htmlDom = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'html'</span>)[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">//设置根元素字体大小</span></span><br><span class="line">  htmlDom.style.fontSize= htmlWidth/<span class="number">23.4375</span> + <span class="string">'px'</span>;</span><br><span class="line"></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/js获取当前域名、Url、相对路径和参数以及指定参数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小 哇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lf小哇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/17/js获取当前域名、Url、相对路径和参数以及指定参数/" itemprop="url">
+                  js获取当前域名、Url、相对路径和参数以及指定参数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-17 14:43:26 / Modified: 15:13:47" itemprop="dateCreated datePublished" datetime="2018-07-17T14:43:26+08:00">2018-07-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="window-location下的属性说明"><a href="#window-location下的属性说明" class="headerlink" title="window.location下的属性说明"></a>window.location下的属性说明</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> href  =  <span class="built_in">window</span>.location.href;<span class="comment">//完整的url</span></span><br><span class="line"><span class="keyword">var</span> protocol  =  <span class="built_in">window</span>.location.protocol;<span class="comment">//协议</span></span><br><span class="line"><span class="keyword">var</span> hostname  =  <span class="built_in">window</span>.location.hostname;<span class="comment">//主机名</span></span><br><span class="line"><span class="keyword">var</span> host  =  <span class="built_in">window</span>.location.host;<span class="comment">//主机名+端口号</span></span><br><span class="line"><span class="keyword">var</span> port = <span class="built_in">window</span>.location.port;<span class="comment">//端口号</span></span><br><span class="line"><span class="keyword">var</span> pathname = <span class="built_in">window</span>.location.pathname;<span class="comment">//当前URL的路径部分</span></span><br><span class="line"><span class="keyword">var</span> search = <span class="built_in">window</span>.location.search;<span class="comment">//路径的查询部分</span></span><br><span class="line"><span class="keyword">var</span> hash = <span class="built_in">window</span>.location.hash;<span class="comment">//开始的锚点</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2018/07/17/js获取当前域名、Url、相对路径和参数以及指定参数/1.png" alt="bg"><br><img src="/2018/07/17/js获取当前域名、Url、相对路径和参数以及指定参数/2.png" alt="bg"></p>
+<h3 id="一、js获取当前域名有2种方法"><a href="#一、js获取当前域名有2种方法" class="headerlink" title="一、js获取当前域名有2种方法"></a>一、js获取当前域名有2种方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">　　<span class="comment">//1、方法一</span></span><br><span class="line">　　<span class="keyword">var</span> domain = <span class="built_in">document</span>.domain;</span><br><span class="line"></span><br><span class="line">　　<span class="comment">//2、方法二</span></span><br><span class="line">　　<span class="keyword">var</span> domain = <span class="built_in">window</span>.location.host;</span><br></pre></td></tr></table></figure>
+<h4 id="注意问题"><a href="#注意问题" class="headerlink" title="注意问题"></a>注意问题</h4><p>由于获取到的当前域名不包括 http://，所以把获取到的域名赋给 a 标签的 href 时，别忘了加上 http://，否则单击链接时导航会出错。</p>
+<h3 id="二、获取当前Url的4种方法"><a href="#二、获取当前Url的4种方法" class="headerlink" title="二、获取当前Url的4种方法"></a>二、获取当前Url的4种方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">　　<span class="keyword">var</span> url = <span class="built_in">window</span>.location.href;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">var</span> url = self.location.href;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">var</span> url = <span class="built_in">document</span>.URL;</span><br><span class="line"></span><br><span class="line">　　<span class="keyword">var</span> url = <span class="built_in">document</span>.location;</span><br></pre></td></tr></table></figure>
+<h3 id="三、获取当前相对路径的方法"><a href="#三、获取当前相对路径的方法" class="headerlink" title="三、获取当前相对路径的方法"></a>三、获取当前相对路径的方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//首先获取 Url，然后把 Url 通过 // 截成两部分，再从后一部分中截取相对路径。如果截取到的相对路径中有参数，则把参数去掉。</span></span><br><span class="line"></span><br><span class="line">　　<span class="function"><span class="keyword">function</span> <span class="title">GetUrlRelativePath</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">　　</span>&#123;</span><br><span class="line">　　　　<span class="keyword">var</span> url = <span class="built_in">document</span>.location.toString();</span><br><span class="line">　　　　<span class="keyword">var</span> arrUrl = url.split(<span class="string">"//"</span>);</span><br><span class="line"></span><br><span class="line">　　　　<span class="keyword">var</span> start = arrUrl[<span class="number">1</span>].indexOf(<span class="string">"/"</span>);</span><br><span class="line">　　　　<span class="keyword">var</span> relUrl = arrUrl[<span class="number">1</span>].substring(start);<span class="comment">//stop省略，截取从start开始到结尾的所有字符</span></span><br><span class="line"></span><br><span class="line">　　　　<span class="keyword">if</span>(relUrl.indexOf(<span class="string">"?"</span>) != <span class="number">-1</span>)&#123;</span><br><span class="line">　　　　　　relUrl = relUrl.split(<span class="string">"?"</span>)[<span class="number">0</span>];</span><br><span class="line">　　　　&#125;</span><br><span class="line">　　　　<span class="keyword">return</span> relUrl;</span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="comment">//调用方法：GetUrlRelativePath();</span></span><br></pre></td></tr></table></figure>
+<h3 id="四、获取当前Url参数的方法"><a href="#四、获取当前Url参数的方法" class="headerlink" title="四、获取当前Url参数的方法"></a>四、获取当前Url参数的方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1、获取Url参数部分</span></span><br><span class="line"></span><br><span class="line">　　<span class="function"><span class="keyword">function</span> <span class="title">GetUrlPara</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">　　</span>&#123;</span><br><span class="line">　　　　<span class="keyword">var</span> url = <span class="built_in">document</span>.location.toString();</span><br><span class="line">　　　　<span class="keyword">var</span> arrUrl = url.split(<span class="string">"?"</span>);</span><br><span class="line"></span><br><span class="line">　　　　<span class="keyword">var</span> para = arrUrl[<span class="number">1</span>];</span><br><span class="line">　　　　<span class="keyword">return</span> para;</span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="comment">//调用方法：GetUrlPara()</span></span><br></pre></td></tr></table></figure>
+<h3 id="五、获取指定Url参数的方法"><a href="#五、获取指定Url参数的方法" class="headerlink" title="五、获取指定Url参数的方法"></a>五、获取指定Url参数的方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">　<span class="comment">//paraName 等找参数的名称</span></span><br><span class="line">　　<span class="function"><span class="keyword">function</span> <span class="title">GetUrlParam</span>(<span class="params">paraName</span>) </span>&#123;</span><br><span class="line">　　　　<span class="keyword">var</span> url = <span class="built_in">document</span>.location.toString();</span><br><span class="line">　　　　<span class="keyword">var</span> arrObj = url.split(<span class="string">"?"</span>);</span><br><span class="line"></span><br><span class="line">　　　　<span class="keyword">if</span> (arrObj.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">　　　　　　<span class="keyword">var</span> arrPara = arrObj[<span class="number">1</span>].split(<span class="string">"&amp;"</span>);</span><br><span class="line">　　　　　　<span class="keyword">var</span> arr;</span><br><span class="line"></span><br><span class="line">　　　　　　<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arrPara.length; i++) &#123;</span><br><span class="line">　　　　　　　　arr = arrPara[i].split(<span class="string">"="</span>);</span><br><span class="line"></span><br><span class="line">　　　　　　　　<span class="keyword">if</span> (arr != <span class="literal">null</span> &amp;&amp; arr[<span class="number">0</span>] == paraName) &#123;</span><br><span class="line">　　　　　　　　　　<span class="keyword">return</span> arr[<span class="number">1</span>];</span><br><span class="line">　　　　　　　　&#125;</span><br><span class="line">　　　　　　&#125;</span><br><span class="line">　　　　　　<span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">　　　　&#125;</span><br><span class="line">　　　　<span class="keyword">else</span> &#123;</span><br><span class="line">　　　　　　<span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">　　　　&#125;</span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　<span class="comment">//　调用方法：GetUrlParam("id");</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/16/canvas图片问题浅析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小 哇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lf小哇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/16/canvas图片问题浅析/" itemprop="url">
+                  canvas图片问题浅析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-16 14:21:54" itemprop="dateCreated datePublished" datetime="2018-07-16T14:21:54+08:00">2018-07-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-07-17 14:49:39" itemprop="dateModified" datetime="2018-07-17T14:49:39+08:00">2018-07-17</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>说一下我的业务场景</p>
+<p>生成二维码并且在中间加上LOGO，因为LOGO是链接，所以，保存为图片的时候，会遇到跨域的问题</p>
+<p>受限于 CORS 策略，会存在跨域问题，虽然可以使用图像（比如append到页面上）但是绘制到画布上会污染画布，一旦一个画布被污染,就无法提取画布的数据，比如无法使用使用画布toBlob(),toDataURL(),或getImageData()方法;当使用这些方法的时候 会抛出一个安全错误</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uncaught DOMException: Failed to execute <span class="string">'toDataURL'</span> on <span class="string">'HTMLCanvasElement'</span>: Tainted canvases may not be exported.</span><br></pre></td></tr></table></figure>
+<p>解决方案如下</p>
+<p>如果是new Image()的话，要加上一下设置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用外部图片，需设置 crossOrigin 属性，否则 toDataURL 调用异常</span></span><br><span class="line">image.setAttribute(<span class="string">'crossOrigin'</span>, <span class="string">'anonymous'</span>);</span><br></pre></td></tr></table></figure>
+<p>完整如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var canvas=document.getElementById(&quot;canvas&quot;),//获取canvas</span><br><span class="line">    ctx = canvas.getContext(&quot;2d&quot;), //对应的CanvasRenderingContext2D对象(画笔)</span><br><span class="line">    img = new Image(),//创建新的图片对象</span><br><span class="line">    base64 = &apos;&apos; ;//base64 </span><br><span class="line">img.src = &apos;http://www.xxxx.png&apos;;</span><br><span class="line">img.setAttribute(&quot;crossOrigin&quot;,&apos;Anonymous&apos;)</span><br><span class="line">img.onload = function()&#123;//图片加载完，再draw 和 toDataURL</span><br><span class="line">     ctx.drawImage(img,0,0);    </span><br><span class="line">     base64 = canvas.toDataURL(&quot;image/png&quot;); </span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>到此时，如果你已经解决了，那么恭喜你，接下来的不用看了，如果还提示异常，接着看：</p>
+<p>如果设置了依然不生效，无法保存为图片，那是因为缓存 </p>
+<p>当我们第一次访问时，图片加载慢，因为我们是从服务端请求而来，当我们请求下来之后，就缓存到了浏览器中。</p>
+<p>这也就是为什么设置了属性后还报错的情况，这时候你要看看是不是同时请求了同一张图片，这种情况下，第一次请求图片他会带请求头，第二次请求这张图片时，他会直接取缓存中的数据，然后就挂了。</p>
+<p>在图片链接后面拼接随机数。</p>
+<p>在生成图片就OK了</p>
+<p>分享一个链接，讲的很不错 👉<a href="https://www.jianshu.com/p/c3aa975923de" target="_blank" rel="noopener">https://www.jianshu.com/p/c3aa975923de</a></p>
+<p>另外一篇： 👉<a href="https://www.cnblogs.com/superil/p/8462042.html" target="_blank" rel="noopener">https://www.cnblogs.com/superil/p/8462042.html</a></p>
+<p>分享两个非常好的查询问题的</p>
+<p>bug之家:    <a href="https://stackoverflow.com/" target="_blank" rel="noopener">https://stackoverflow.com/</a></p>
+<p>文档之家:   <a href="https://developer.mozilla.org/en-US/" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/FastClick用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小 哇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lf小哇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/12/FastClick用法/" itemprop="url">
+                  FastClick用法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-12 15:25:13 / Modified: 15:37:51" itemprop="dateCreated datePublished" datetime="2018-07-12T15:25:13+08:00">2018-07-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="为什么要使用FastClick"><a href="#为什么要使用FastClick" class="headerlink" title="为什么要使用FastClick"></a>为什么要使用FastClick</h3><p>移动设备上的浏览器默认会在用户点击屏幕大约延迟300毫秒后才会触发点击事件，这是为了检查用户是否在做双击。为了能够立即响应用户的点击事件，才有了FastClick。</p>
+<p>项目地址：<a href="https://github.com/ftlabs/fastclick" target="_blank" rel="noopener">https://github.com/ftlabs/fastclick</a></p>
+<h3 id="FastClick的使用"><a href="#FastClick的使用" class="headerlink" title="FastClick的使用"></a>FastClick的使用</h3><p>在页面直接引入fastclick.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&apos;application/javascript&apos; src=&apos;/path/to/fastclick.js&apos;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install fastclick</span><br></pre></td></tr></table></figure>
+<h3 id="初始化FastClick实例"><a href="#初始化FastClick实例" class="headerlink" title="初始化FastClick实例"></a>初始化FastClick实例</h3><p>初始化FastClick实例建议在页面的DOM文档加载完成后。</p>
+<p>1、纯Javascript版<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (&apos;addEventListener&apos; in document) &#123;</span><br><span class="line">	document.addEventListener(&apos;DOMContentLoaded&apos;, function() &#123;</span><br><span class="line">		FastClick.attach(document.body);</span><br><span class="line">	&#125;, false);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、jQuery版<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(function() &#123;</span><br><span class="line">	FastClick.attach(document.body);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>3、类似Common JS的模块系统方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var attachFastClick = require(&apos;fastclick&apos;);</span><br><span class="line">attachFastClick(document.body);</span><br></pre></td></tr></table></figure></p>
+<p>调用require(‘fastclick’)会返回FastClick.attach函数</p>
+<h3 id="使用needsclick过滤特定的元素"><a href="#使用needsclick过滤特定的元素" class="headerlink" title="使用needsclick过滤特定的元素"></a>使用needsclick过滤特定的元素</h3><p>如果页面上有一些特定的元素不需要使用fastclick来立刻触发点击事件，可以在元素的class上添加needsclick:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"needsclick"</span>&gt;</span>Ignored by FastClick<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="不需要使用fastclick的情况"><a href="#不需要使用fastclick的情况" class="headerlink" title="不需要使用fastclick的情况"></a>不需要使用fastclick的情况</h3><p>1、FastClick是不会对PC浏览器添加监听事件<br>2、Android版Chrome 32+浏览器，如果设置viewport meta的值为width=device-width，这种情况下浏览器会马上出发点击事件，不会延迟300毫秒。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>3、所有版本的Android Chrome浏览器，如果设置viewport meta的值有user-scalable=no，浏览器也是会马上出发点击事件。<br>4、IE11+浏览器设置了css的属性touch-action: manipulation，它会在某些标签（a，button等）禁止双击事件，IE10的为-ms-touch-action: manipulation</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/04/vue裁剪图以及扩展的知识点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小 哇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lf小哇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/04/vue裁剪图以及扩展的知识点/" itemprop="url">
+                  vue裁剪图以及扩展的知识点
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-04 18:16:06 / Modified: 18:27:20" itemprop="dateCreated datePublished" datetime="2018-07-04T18:16:06+08:00">2018-07-04</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>vue的扩展插件cropperjs满足了基本的需求，那么当裁剪完成为了base64图的时候，接下里该如何处理呢？</p>
+<h3 id="base64如何上传"><a href="#base64如何上传" class="headerlink" title="base64如何上传"></a>base64如何上传</h3><p>base64属于一个字符串，</p>
+<p>那么我们需要将base64转换二进制文件对象 Blob/Base64转换 File 对象</p>
+<p>表单中enctype=”multipart/form-data”的意思，是设置表单的MIME编码。</p>
+<p>默认情况，这个编码格式是application/x-www-form-urlencoded，不能用于文件上传；</p>
+<p>只有使用了multipart/form-data，才能完整的传递文件数据，进行下面的操作.</p>
+<p>form设置了enctype=”multipart/form-data” 属性后，就是2进制传输数据了</p>
+<p>base64转为Blob<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">dataURItoBlob(base64Data) &#123;</span><br><span class="line">	let byteString</span><br><span class="line">	if (base64Data.split(&apos;,&apos;)[0].indexOf(&apos;base64&apos;) &gt;= 0)&#123;</span><br><span class="line">		byteString = atob(base64Data.split(&apos;,&apos;)[1])</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		byteString = unescape(base64Data.split(&apos;,&apos;)[1])</span><br><span class="line">	&#125;</span><br><span class="line">	let mimeString = base64Data.split(&apos;,&apos;)[0].split(&apos;:&apos;)[1].split(&apos;;&apos;)[0]</span><br><span class="line">	let ia = new Uint8Array(byteString.length)</span><br><span class="line">	for (var i = 0; i &lt; byteString.length; i++) &#123;</span><br><span class="line">		ia[i] = byteString.charCodeAt(i);</span><br><span class="line">	&#125;</span><br><span class="line">	return new Blob([ia], &#123;type:mimeString&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/node进阶-二/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小 哇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lf小哇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/24/node进阶-二/" itemprop="url">
+                  node进阶(二)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-06-24 16:49:46 / Modified: 16:52:02" itemprop="dateCreated datePublished" datetime="2018-06-24T16:49:46+08:00">2018-06-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/24/node进阶-一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小 哇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lf小哇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/24/node进阶-一/" itemprop="url">
+                  node进阶(一)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-06-24 01:36:40 / Modified: 16:34:56" itemprop="dateCreated datePublished" datetime="2018-06-24T01:36:40+08:00">2018-06-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>作为当前前端必须掌握的内容之一，node已经成为了前端的标配，已经再也不是以前页面仔，而是向着工程师靠拢。这就要求我们除了熟悉浏览器端的要求之外，还需要更多熟悉服务端的一些内容，那么我们一起来在node方面来进阶吧。</p>
+<p>首先来看一个内容</p>
+<p>开发环境和调试工具</p>
+<h3 id="1、环境"><a href="#1、环境" class="headerlink" title="1、环境"></a>1、环境</h3><h4 id="CommonJs"><a href="#CommonJs" class="headerlink" title="CommonJs"></a>CommonJs</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">这是一个JS模块管理规范</span><br><span class="line"></span><br><span class="line">JS中的模块规范（CommonJS，AMD，CMD）</span><br><span class="line"></span><br><span class="line">在浏览器环境下，没有模块也不是特别大的问题，毕竟网页程序的复杂性有限</span><br><span class="line"></span><br><span class="line">但是在服务器端，一定要有模块，与操作系统和其他应用程序互动，否则根本没法编程。</span><br><span class="line"></span><br><span class="line">NodeJS是CommonJS规范的实现，webpack 也是以CommonJS的形式来书写。</span><br><span class="line"></span><br><span class="line">CommonJS定义的模块分为:&#123;模块引用(require)&#125; &#123;模块定义(exports)&#125; &#123;模块标识(module)&#125;</span><br><span class="line"></span><br><span class="line">require()用来引入外部模块</span><br><span class="line"></span><br><span class="line">exports对象用于导出当前模块的方法或变量，唯一的导出口</span><br><span class="line"></span><br><span class="line">module对象就代表模块本身。</span><br></pre></td></tr></table></figure>
+<h4 id="global"><a href="#global" class="headerlink" title="global"></a>global</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">服务器端端没有BOM、DOM，没有了window全局对象，成了global</span><br></pre></td></tr></table></figure>
+<h4 id="process"><a href="#process" class="headerlink" title="process"></a>process</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">全局进程</span><br></pre></td></tr></table></figure>
+<h3 id="2、调试工具"><a href="#2、调试工具" class="headerlink" title="2、调试工具"></a>2、调试工具</h3><p>新建一个js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\\app.js</span><br><span class="line"></span><br><span class="line">console.log(&quot;this is test&quot;);</span><br></pre></td></tr></table></figure>
+<p>开启终端，跑一下 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node app</span><br></pre></td></tr></table></figure>
+<p>然后在输入 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node --inspect-brk app.js</span><br></pre></td></tr></table></figure>
+<p>会出现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Debugger listening on ws://127.0.0.1:9229/1857a99c-6d02-4680-954d-29480f7bcc5e</span><br><span class="line">For help see https://nodejs.org/en/docs/inspector</span><br><span class="line">Debugger attached.</span><br></pre></td></tr></table></figure>
+<p>打开谷歌浏览器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chrome://inspect</span><br></pre></td></tr></table></figure>
+<p>出现如下内容</p>
+<p><img src="/2018/06/24/node进阶-一/node_1.png" alt="bg"></p>
+<p>点击 inspect</p>
+<p><img src="/2018/06/24/node进阶-一/node_2.png" alt="bg"></p>
+<p>这就是node私底下跑的内容，它将很多我们看不到的内容进行了编译，生成了块级作用域；</p>
+<h3 id="3、require的特性"><a href="#3、require的特性" class="headerlink" title="3、require的特性"></a>3、require的特性</h3><p>先看一个demo    </p>
+<p>创建一个文件夹用来储存模块内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//a.js</span><br><span class="line"></span><br><span class="line">console.log(&quot;this is a&quot;);</span><br><span class="line"></span><br><span class="line">let a = 1;</span><br><span class="line"></span><br><span class="line">module.exports.a = a;</span><br></pre></td></tr></table></figure>
+<p>在外在建一个js文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// b.js</span><br><span class="line"></span><br><span class="line">let a = require(&apos;./a&apos;);</span><br><span class="line"></span><br><span class="line">console.log(a.a) //1</span><br></pre></td></tr></table></figure>
+<p>到此我们来分析它的几个特性</p>
+<h4 id="module-被加载的时候执行，加载后缓存"><a href="#module-被加载的时候执行，加载后缓存" class="headerlink" title="module 被加载的时候执行，加载后缓存"></a>module 被加载的时候执行，加载后缓存</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">只加载一次，之后用的存在缓存的值</span><br><span class="line"></span><br><span class="line">例如：</span><br><span class="line"></span><br><span class="line">require(&apos;./a&apos;);</span><br><span class="line"></span><br><span class="line">require(&apos;./a&apos;);</span><br><span class="line"></span><br><span class="line">这时候会输出一个this is a,而不是两个,</span><br></pre></td></tr></table></figure>
+<h4 id="一旦出现某个模块被循环加载，就输出以执行的部分-还未执行的部分不会输出"><a href="#一旦出现某个模块被循环加载，就输出以执行的部分-还未执行的部分不会输出" class="headerlink" title="一旦出现某个模块被循环加载，就输出以执行的部分,还未执行的部分不会输出"></a>一旦出现某个模块被循环加载，就输出以执行的部分,还未执行的部分不会输出</h4><p>举个例子，在此处建立三个文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//06_run.js</span><br><span class="line"></span><br><span class="line">const A = require(&apos;./05_require/a&apos;);</span><br><span class="line"></span><br><span class="line">//此处因为上面已经引入过了B，所以不会再进行处理，所以此处直接从缓存中取值;</span><br><span class="line">const B = require(&apos;./05_require/b&apos;);</span><br></pre></td></tr></table></figure></p>
+<p>此处建立模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//05_require/a</span><br><span class="line"></span><br><span class="line">module.exports.test = &apos;这是A&apos;;</span><br><span class="line"></span><br><span class="line">const B = require(&apos;./b&apos;);</span><br><span class="line"></span><br><span class="line">console.log(&apos;这是在A里面的引入的B&apos;+B.test);</span><br><span class="line"></span><br><span class="line">module.exports.test = &apos;这是AA&apos;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//05_require/b</span><br><span class="line"></span><br><span class="line">module.exports.test = &apos;这是B&apos;;</span><br><span class="line"></span><br><span class="line">const A = require(&apos;./a&apos;);</span><br><span class="line"></span><br><span class="line">console.log(&apos;这是在B里面的引入的A&apos;+A.test);</span><br><span class="line"></span><br><span class="line">module.exports.test = &apos;这是BB&apos;;</span><br></pre></td></tr></table></figure>
+<p>执行node 06_run之后，我们会发现输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这是在B里面的引入的A这是A</span><br><span class="line">这是在A里面的引入的B这是BB</span><br></pre></td></tr></table></figure>
+<p>这就是require的会遇到的问题，有时候我们深入刨析一个问题，了解他的利弊，好的方面应用，不好的方面避免它，不然，当代码上千行的时候，我们在更改，可能就为时已晚，悔不当初。所以，了解一门语言的深层次的东西，是我们必须要掌握的内容。    </p>
+<h3 id="4、系统内置模块"><a href="#4、系统内置模块" class="headerlink" title="4、系统内置模块"></a>4、系统内置模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 07_run.js</span><br><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//读文件为异步操作，需要回掉来获取值</span><br><span class="line">const nnn = fs.readFile(&apos;./07_fs.js&apos;, (error, data) =&gt; &#123;</span><br><span class="line">   </span><br><span class="line">    if(error)&#123;</span><br><span class="line">        console.log(error)</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        console.log(data)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(nnn)</span><br><span class="line"></span><br><span class="line">//&lt;Buffer 0a 63 6f 6e 73 74 20 66 73 20 3d 20 72 65 71 75 69 72 65 28 27 66 73 27 29 3b 0a 0a 2f 2f e8 af bb e6 96 87 e4 bb b6 e4 b8 ba e5 bc 82 e6 ad a5 e6 93 ... &gt;</span><br><span class="line">这是一个16进制的数字</span><br><span class="line"></span><br><span class="line">fs操作二进制流</span><br></pre></td></tr></table></figure>
+<p>当更改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">//读文件为异步操作，需要回掉来获取值</span><br><span class="line">const nnn = fs.readFile(&apos;./07_fs.js&apos;, (error, data) =&gt; &#123;</span><br><span class="line">   </span><br><span class="line">    if(error)&#123;</span><br><span class="line">        console.log(error)</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        console.log(data.toString())</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">console.log(nnn) //输出的就是当前的内容</span><br></pre></td></tr></table></figure>
+<h3 id="5、系统外置模块"><a href="#5、系统外置模块" class="headerlink" title="5、系统外置模块"></a>5、系统外置模块</h3><p>例如引入chalk，颜色模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm init </span><br><span class="line"></span><br><span class="line">npm install chalk --save-dev</span><br></pre></td></tr></table></figure>
+<p>在这里有个注意的点</p>
+<p>dependencies： 打包的依赖</p>
+<p>devDependencies： 开发的依赖</p>
+<ul>
+<li>npm做了一个优化所有的内容，都会放置第一层，而不是全放在文件夹内部，所以我们明明下载了一个chalk,但是却有好几个包，以前会全部放置到chalk内部的node_modules，但是现在不会了。这样就在一级node_modules，否侧依赖太多，会导致node_modules,会非常大</li>
+</ul>
+<p>我们可以通过一个命令查看全局安装的地点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm root -g</span><br></pre></td></tr></table></figure>
+<p>会得到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/lib/node_modules</span><br></pre></td></tr></table></figure>
+<p>这里就是我们全局安装的一些内容</p>
+<h3 id="6、exports-和-module-exports的区别"><a href="#6、exports-和-module-exports的区别" class="headerlink" title="6、exports 和 module.exports的区别"></a>6、exports 和 module.exports的区别</h3><p>node中每个模块抛出的其实是module来定义的，exports其实是module.exports 的简写，但是这里我们需要注意的是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 08_require.js</span><br><span class="line"></span><br><span class="line">const v = require(&apos;./08_run&apos;);</span><br><span class="line"></span><br><span class="line">console.log(v.test);</span><br><span class="line"></span><br><span class="line">//08_run.js</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line"></span><br><span class="line">    a:1,</span><br><span class="line"></span><br><span class="line">    test: 10,</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果直接写exports = {} ,这是错误的，为什么呢，因为你改变了他的指向</p>
+<p>module.exports 这个的指向是module，而exports = {} ,这个指向不是module了，所以读取不到</p>
+<h3 id="7、global"><a href="#7、global" class="headerlink" title="7、global"></a>7、global</h3><p>浏览器的全局window，node则是global</p>
+<p>这里我们重点介绍一下setImmediate</p>
+<p>我们先在这里扩展一下知识点：</p>
+<ul>
+<li><p>同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务；</p>
+</li>
+<li><p>异步任务指的是，不进入主线程、而进入”任务队列”（task queue）的任务，只有”任务队列”通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。</p>
+</li>
+</ul>
+<p>“任务队列”是一个事件的队列（也可以理解成消息的队列），IO设备完成一项任务，就在”任务队列”中添加一个事件，表示相关的异步任务可以进入”执行栈”了。主线程读取”任务队列”，就是读取里面有哪些事件。</p>
+<p>“任务队列”中的事件，除了IO设备的事件以外，还包括一些用户产生的事件（比如鼠标点击、页面滚动等等）。只要指定过回调函数，这些事件发生时就会进入”任务队列”，等待主线程读取。</p>
+<p>所谓”回调函数”（callback），就是那些会被主线程挂起来的代码。异步任务必须指定回调函数，当主线程开始执行异步任务，就是执行对应的回调函数。</p>
+<p>“任务队列”是一个先进先出的数据结构，排在前面的事件，优先被主线程读取。主线程的读取过程基本上是自动的，只要执行栈一清空，”任务队列”上第一位的事件就自动进入主线程。但是，由于存在后文提到的”定时器”功能，主线程首先要检查一下执行时间，某些事件只有到了规定的时间，才能返回主线程。</p>
+<p>这里可以详细查看这个 <a href="https://www.cnblogs.com/c3gen/p/6170504.html" target="_blank" rel="noopener">https://www.cnblogs.com/c3gen/p/6170504.html</a></p>
+<p>这里setImmediate 和 setTimeout类似，是一个异步的函数，它是进入任务队列，当完成的时候，就会执行它;</p>
+<h3 id="8、process进程"><a href="#8、process进程" class="headerlink" title="8、process进程"></a>8、process进程</h3><p>类似于我们常用的</p>
+<h3 id="9、debug"><a href="#9、debug" class="headerlink" title="9、debug"></a>9、debug</h3>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/精通webpack之路（1）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小 哇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lf小哇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/04/精通webpack之路（1）/" itemprop="url">
+                  精通webpack之路（1）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-06-04 09:47:23 / Modified: 10:11:14" itemprop="dateCreated datePublished" datetime="2018-06-04T09:47:23+08:00">2018-06-04</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>首先来个序言，从这篇开始，我将重点把webpack作为一个重点，来研究它的核心内容</p>
+<p>1、</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mkdir webpack-demo</span><br><span class="line"></span><br><span class="line">npm init </span><br><span class="line"></span><br><span class="line">npm install --save-dev webpack</span><br></pre></td></tr></table></figure>
+<p>这里需要注意的点（这里的参数–save是要保存到package.json中，dev是在开发时使用这个包，而生产环境中不使用。）</p>
+<p>至此，我们安装完毕</p>
+<p>那么问题就来了</p>
+<p>这里的参数–save是要保存到package.json中，dev是在开发时使用这个包，而生产环境中不使用。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/webpack-3中hash、chunkhash和contenthash三者的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小 哇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lf小哇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/01/webpack-3中hash、chunkhash和contenthash三者的区别/" itemprop="url">
+                  webpack 3中hash、chunkhash和contenthash三者的区别
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-06-01 17:33:37 / Modified: 17:51:23" itemprop="dateCreated datePublished" datetime="2018-06-01T17:33:37+08:00">2018-06-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>首先在这里祝大家61儿童节快乐，新的一个月开始了，那么作为个人要有一个新的目标，那新的目标是什么呢？</p>
+<p>每天更新一篇博客，扩展横向纵向维度，并且加强深度，祝自己好运吧～！</p>
+<p>好了，那么来开始第一篇内容：</p>
+<p>在使用webpack 3中，文件名的hash值可以有三种hash生成方式，那具体使用哪一种呢？ </p>
+<h3 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h3><p>如果都使用hash的话，所有文件的hash都是一样的，而且每次修改任何一个文件，所有文件名的hash至都将改变。所以一旦修改了任何一个文件，整个项目的文件缓存都将失效</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">output:&#123;</span><br><span class="line"> 	path:path.resolve(__dirname,&apos;./dist&apos;),</span><br><span class="line"> 	publicPath: &apos;/dist/&apos;,</span><br><span class="line"> 	filename: &apos;[name]-[hash].js&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="chunkhash"><a href="#chunkhash" class="headerlink" title="chunkhash"></a>chunkhash</h3><p>既然hash的用法有这种缺陷，那是否有更好的办法，使只有被修改了的文件的文件名hash值修改呢？答案就是使用chunkhash。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">output:&#123;</span><br><span class="line">    path:path.resolve(__dirname,&apos;./dist&apos;),</span><br><span class="line">    publicPath: &apos;/dist/&apos;,</span><br><span class="line">    filename: &apos;[name]-[chunkhash].js&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然这样做还是有问题，就是如果我一个js文件里面引入了css文件。这时要是我修改了js，但没修改css，能否让css能够继续利用缓存呢？答案是可以！</p>
+<p>首先，我们使用Extract-text-webpack-plugin插件将css文件从js中分离出来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    test: /\.css$/,</span><br><span class="line">    use: ExtractTextPlugin.extract(&#123;</span><br><span class="line">        fallback: &quot;style-loader&quot;,</span><br><span class="line">        use: &#123;</span><br><span class="line">            loader:&quot;css-loader&quot;,</span><br><span class="line">            options:&#123;</span><br><span class="line">                minimize: true //css压缩</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后设置css的plugin</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">new ExtractTextPlugin(&#123;</span><br><span class="line">  	filename: &apos;css/[name]-[chunkhash].css&apos;,</span><br><span class="line">&#125;),</span><br></pre></td></tr></table></figure>
+<h3 id="contenthash"><a href="#contenthash" class="headerlink" title="contenthash"></a>contenthash</h3><p>对css使用了chunkhash之后，我们测试会发现，如果修改了js直接，css文件名的hash值确实没变，但这时要是我们修改css文件的话，我们就会发现css文件名的hash值居然没变化，这样就导致我们的非覆盖发布css文件失效了。所以这里需要注意就是css文件必须使用contenthash。将上面的css插件配置改为如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">new ExtractTextPlugin(&#123;</span><br><span class="line">    filename: &apos;css/[name]-[contenthash].css&apos;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
   </div>
-</footer>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">小 哇</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
 
 
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小 哇</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

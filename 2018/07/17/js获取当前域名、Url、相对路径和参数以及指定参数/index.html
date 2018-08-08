@@ -1,56 +1,373 @@
 <!DOCTYPE html>
-<html lang=>
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+
+
+
+
+
+
+
+
+
+
+
+
   
-    <link rel="icon" href="">
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
   
-    
+
+
+
+
+  <meta name="description" content="window.location下的属性说明12345678var href  =  window.location.href;//完整的urlvar protocol  =  window.location.protocol;//协议var hostname  =  window.location.hostname;//主机名var host  =  window.location.host;//">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js获取当前域名、Url、相对路径和参数以及指定参数">
+<meta property="og:url" content="http://yoursite.com/2018/07/17/js获取当前域名、Url、相对路径和参数以及指定参数/index.html">
+<meta property="og:site_name" content="lf小哇">
+<meta property="og:description" content="window.location下的属性说明12345678var href  =  window.location.href;//完整的urlvar protocol  =  window.location.protocol;//协议var hostname  =  window.location.hostname;//主机名var host  =  window.location.host;//">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/07/17/js获取当前域名、Url、相对路径和参数以及指定参数/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/17/js获取当前域名、Url、相对路径和参数以及指定参数/2.png">
+<meta property="og:updated_time" content="2018-07-17T07:13:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js获取当前域名、Url、相对路径和参数以及指定参数">
+<meta name="twitter:description" content="window.location下的属性说明12345678var href  =  window.location.href;//完整的urlvar protocol  =  window.location.protocol;//协议var hostname  =  window.location.hostname;//主机名var host  =  window.location.host;//">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/17/js获取当前域名、Url、相对路径和参数以及指定参数/1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/17/js获取当前域名、Url、相对路径和参数以及指定参数/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
   <title>js获取当前域名、Url、相对路径和参数以及指定参数 | lf小哇</title>
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
 </head>
 
-<body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/">
-      <span>lf小哇</span>
-    </a>
-    <ul class="right-header">
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lf小哇</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
       
-        <li class="nav-item">
-          
-            <a href="/" class="item-link">首页</a>
-          
-        </li>
+        <p class="site-subtitle">战斗到底！</p>
       
-        <li class="nav-item">
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
           
-            <a href="/archives" class="item-link">归档</a>
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
           
-        </li>
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
       
     </ul>
-  </div>
-</header>
+  
 
-  <main id='post'>
-  <div class="content">
-    <article>
-        <section class="content markdown-body">
-          <h1>js获取当前域名、Url、相对路径和参数以及指定参数</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/07/17</time>
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/js获取当前域名、Url、相对路径和参数以及指定参数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小 哇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lf小哇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">js获取当前域名、Url、相对路径和参数以及指定参数
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
             
             
-          </div>
-          <h3 id="window-location下的属性说明"><a href="#window-location下的属性说明" class="headerlink" title="window.location下的属性说明"></a>window.location下的属性说明</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> href  =  <span class="built_in">window</span>.location.href;<span class="comment">//完整的url</span></span><br><span class="line"><span class="keyword">var</span> protocol  =  <span class="built_in">window</span>.location.protocol;<span class="comment">//协议</span></span><br><span class="line"><span class="keyword">var</span> hostname  =  <span class="built_in">window</span>.location.hostname;<span class="comment">//主机名</span></span><br><span class="line"><span class="keyword">var</span> host  =  <span class="built_in">window</span>.location.host;<span class="comment">//主机名+端口号</span></span><br><span class="line"><span class="keyword">var</span> port = <span class="built_in">window</span>.location.port;<span class="comment">//端口号</span></span><br><span class="line"><span class="keyword">var</span> pathname = <span class="built_in">window</span>.location.pathname;<span class="comment">//当前URL的路径部分</span></span><br><span class="line"><span class="keyword">var</span> search = <span class="built_in">window</span>.location.search;<span class="comment">//路径的查询部分</span></span><br><span class="line"><span class="keyword">var</span> hash = <span class="built_in">window</span>.location.hash;<span class="comment">//开始的锚点</span></span><br></pre></td></tr></table></figure>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-17 14:43:26 / Modified: 15:13:47" itemprop="dateCreated datePublished" datetime="2018-07-17T14:43:26+08:00">2018-07-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="window-location下的属性说明"><a href="#window-location下的属性说明" class="headerlink" title="window.location下的属性说明"></a>window.location下的属性说明</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> href  =  <span class="built_in">window</span>.location.href;<span class="comment">//完整的url</span></span><br><span class="line"><span class="keyword">var</span> protocol  =  <span class="built_in">window</span>.location.protocol;<span class="comment">//协议</span></span><br><span class="line"><span class="keyword">var</span> hostname  =  <span class="built_in">window</span>.location.hostname;<span class="comment">//主机名</span></span><br><span class="line"><span class="keyword">var</span> host  =  <span class="built_in">window</span>.location.host;<span class="comment">//主机名+端口号</span></span><br><span class="line"><span class="keyword">var</span> port = <span class="built_in">window</span>.location.port;<span class="comment">//端口号</span></span><br><span class="line"><span class="keyword">var</span> pathname = <span class="built_in">window</span>.location.pathname;<span class="comment">//当前URL的路径部分</span></span><br><span class="line"><span class="keyword">var</span> search = <span class="built_in">window</span>.location.search;<span class="comment">//路径的查询部分</span></span><br><span class="line"><span class="keyword">var</span> hash = <span class="built_in">window</span>.location.hash;<span class="comment">//开始的锚点</span></span><br></pre></td></tr></table></figure>
 <p><img src="/2018/07/17/js获取当前域名、Url、相对路径和参数以及指定参数/1.png" alt="bg"><br><img src="/2018/07/17/js获取当前域名、Url、相对路径和参数以及指定参数/2.png" alt="bg"></p>
 <h3 id="一、js获取当前域名有2种方法"><a href="#一、js获取当前域名有2种方法" class="headerlink" title="一、js获取当前域名有2种方法"></a>一、js获取当前域名有2种方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">　　<span class="comment">//1、方法一</span></span><br><span class="line">　　<span class="keyword">var</span> domain = <span class="built_in">document</span>.domain;</span><br><span class="line"></span><br><span class="line">　　<span class="comment">//2、方法二</span></span><br><span class="line">　　<span class="keyword">var</span> domain = <span class="built_in">window</span>.location.host;</span><br></pre></td></tr></table></figure>
 <h4 id="注意问题"><a href="#注意问题" class="headerlink" title="注意问题"></a>注意问题</h4><p>由于获取到的当前域名不包括 http://，所以把获取到的域名赋给 a 标签的 href 时，别忘了加上 http://，否则单击链接时导航会出错。</p>
@@ -59,96 +376,343 @@
 <h3 id="四、获取当前Url参数的方法"><a href="#四、获取当前Url参数的方法" class="headerlink" title="四、获取当前Url参数的方法"></a>四、获取当前Url参数的方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1、获取Url参数部分</span></span><br><span class="line"></span><br><span class="line">　　<span class="function"><span class="keyword">function</span> <span class="title">GetUrlPara</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">　　</span>&#123;</span><br><span class="line">　　　　<span class="keyword">var</span> url = <span class="built_in">document</span>.location.toString();</span><br><span class="line">　　　　<span class="keyword">var</span> arrUrl = url.split(<span class="string">"?"</span>);</span><br><span class="line"></span><br><span class="line">　　　　<span class="keyword">var</span> para = arrUrl[<span class="number">1</span>];</span><br><span class="line">　　　　<span class="keyword">return</span> para;</span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　　<span class="comment">//调用方法：GetUrlPara()</span></span><br></pre></td></tr></table></figure>
 <h3 id="五、获取指定Url参数的方法"><a href="#五、获取指定Url参数的方法" class="headerlink" title="五、获取指定Url参数的方法"></a>五、获取指定Url参数的方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">　<span class="comment">//paraName 等找参数的名称</span></span><br><span class="line">　　<span class="function"><span class="keyword">function</span> <span class="title">GetUrlParam</span>(<span class="params">paraName</span>) </span>&#123;</span><br><span class="line">　　　　<span class="keyword">var</span> url = <span class="built_in">document</span>.location.toString();</span><br><span class="line">　　　　<span class="keyword">var</span> arrObj = url.split(<span class="string">"?"</span>);</span><br><span class="line"></span><br><span class="line">　　　　<span class="keyword">if</span> (arrObj.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">　　　　　　<span class="keyword">var</span> arrPara = arrObj[<span class="number">1</span>].split(<span class="string">"&amp;"</span>);</span><br><span class="line">　　　　　　<span class="keyword">var</span> arr;</span><br><span class="line"></span><br><span class="line">　　　　　　<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arrPara.length; i++) &#123;</span><br><span class="line">　　　　　　　　arr = arrPara[i].split(<span class="string">"="</span>);</span><br><span class="line"></span><br><span class="line">　　　　　　　　<span class="keyword">if</span> (arr != <span class="literal">null</span> &amp;&amp; arr[<span class="number">0</span>] == paraName) &#123;</span><br><span class="line">　　　　　　　　　　<span class="keyword">return</span> arr[<span class="number">1</span>];</span><br><span class="line">　　　　　　　　&#125;</span><br><span class="line">　　　　　　&#125;</span><br><span class="line">　　　　　　<span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">　　　　&#125;</span><br><span class="line">　　　　<span class="keyword">else</span> &#123;</span><br><span class="line">　　　　　　<span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">　　　　&#125;</span><br><span class="line">　　&#125;</span><br><span class="line"></span><br><span class="line">　<span class="comment">//　调用方法：GetUrlParam("id");</span></span><br></pre></td></tr></table></figure>
 
-        </section>
-    </article>
-    
-        
-  </div>
-  <aside>
-    
-    <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#window-location下的属性说明"><span class="toc-number">1.</span> <span class="toc-text">window.location下的属性说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、js获取当前域名有2种方法"><span class="toc-number">2.</span> <span class="toc-text">一、js获取当前域名有2种方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意问题"><span class="toc-number">2.1.</span> <span class="toc-text">注意问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、获取当前Url的4种方法"><span class="toc-number">3.</span> <span class="toc-text">二、获取当前Url的4种方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、获取当前相对路径的方法"><span class="toc-number">4.</span> <span class="toc-text">三、获取当前相对路径的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、获取当前Url参数的方法"><span class="toc-number">5.</span> <span class="toc-text">四、获取当前Url参数的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、获取指定Url参数的方法"><span class="toc-number">6.</span> <span class="toc-text">五、获取指定Url参数的方法</span></a></li></ol>
-        </div>
-    </div>
-    
-  </aside>
-</main>
-
-
-
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-  </div>
-</footer>
-
-
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/lib/in-view.min.js"></script>
-<script src="/lib/lodash.min.js"></script>
-<script>
-  var isDown = true
-  var oldY = 0
-  inView.offset(50)
-
-  document.body.addEventListener('touchstart', function(){});
-  
-  window.addEventListener('scroll', _.throttle(e => {
-    var currentY = window.scrollY
-    if((oldY - currentY) < 0) {
-      isDown = true
-    } else {
-      isDown = false
-    }
-    oldY = currentY
-  }, 250))
-
-  $("article img").each(function() {
-      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
-  });
-
-  $('.toc-link').each(function() {
-      var href = $(this).attr("href");
       
-      inView(href).on('exit', () => {
-        if (isDown) {
-          handleActive(href)
-        }
-      })
+    </div>
 
-      inView(href).on('enter', () => {
-        if (!isDown) {
-          handleActive(href)
-        }
-      })
+    
 
-      this.onclick = function(e) {
-        var pos = $(href).offset().top - 10;
-        $("html,body").animate({scrollTop: pos}, 300);
-        setTimeout(() => {
-          handleActive(href)
-        }, 350)
-        return false
-      }
-  })
+    
+    
+    
 
-  function handleActive(href) {
-    document.querySelectorAll('.toc-link').forEach(elm => {
-      elm.classList.remove('active')
-    })
-    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/16/canvas图片问题浅析/" rel="next" title="canvas图片问题浅析">
+                <i class="fa fa-chevron-left"></i> canvas图片问题浅析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/18/浅谈移动端rem适配/" rel="prev" title="浅谈移动端rem适配">
+                浅谈移动端rem适配 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">小 哇</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#window-location下的属性说明"><span class="nav-number">1.</span> <span class="nav-text">window.location下的属性说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一、js获取当前域名有2种方法"><span class="nav-number">2.</span> <span class="nav-text">一、js获取当前域名有2种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注意问题"><span class="nav-number">2.1.</span> <span class="nav-text">注意问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、获取当前Url的4种方法"><span class="nav-number">3.</span> <span class="nav-text">二、获取当前Url的4种方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、获取当前相对路径的方法"><span class="nav-number">4.</span> <span class="nav-text">三、获取当前相对路径的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、获取当前Url参数的方法"><span class="nav-number">5.</span> <span class="nav-text">四、获取当前Url参数的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、获取指定Url参数的方法"><span class="nav-number">6.</span> <span class="nav-text">五、获取指定Url参数的方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小 哇</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
   }
 </script>
-<script src="/lib/jquery.fancybox.min.js"></script>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

@@ -1,56 +1,382 @@
 <!DOCTYPE html>
-<html lang=>
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+
+
+
+
+
+
+
+
+
+
+
+
   
-    <link rel="icon" href="">
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
   
-    
+
+
+
+
+  <meta name="description" content="第一部分，什么是异步提醒：如果你是初学 js 的同学，尚未有太多项目经验和基础知识，请就此打住，不要看这篇教程 我思考问题、写文章一般都不按讨论出牌，别人写过的东西我不会再照着抄一遍。因此，后面所有的内容，都是我看了许多资料之后，个人重新思考提炼总结出来的，这肯定不能算是初级教程。 如果你是已有 js 开发经验，并了解异步的基础知识，到这里来想深入了解一下Promise Generator和asy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解 JavaScript 异步系列（1）——基础">
+<meta property="og:url" content="http://yoursite.com/2017/06/18/深入理解-JavaScript-异步系列（1）——基础/index.html">
+<meta property="og:site_name" content="lf小哇">
+<meta property="og:description" content="第一部分，什么是异步提醒：如果你是初学 js 的同学，尚未有太多项目经验和基础知识，请就此打住，不要看这篇教程 我思考问题、写文章一般都不按讨论出牌，别人写过的东西我不会再照着抄一遍。因此，后面所有的内容，都是我看了许多资料之后，个人重新思考提炼总结出来的，这肯定不能算是初级教程。 如果你是已有 js 开发经验，并了解异步的基础知识，到这里来想深入了解一下Promise Generator和asy">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-13T16:07:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解 JavaScript 异步系列（1）——基础">
+<meta name="twitter:description" content="第一部分，什么是异步提醒：如果你是初学 js 的同学，尚未有太多项目经验和基础知识，请就此打住，不要看这篇教程 我思考问题、写文章一般都不按讨论出牌，别人写过的东西我不会再照着抄一遍。因此，后面所有的内容，都是我看了许多资料之后，个人重新思考提炼总结出来的，这肯定不能算是初级教程。 如果你是已有 js 开发经验，并了解异步的基础知识，到这里来想深入了解一下Promise Generator和asy">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/18/深入理解-JavaScript-异步系列（1）——基础/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
   <title>深入理解 JavaScript 异步系列（1）——基础 | lf小哇</title>
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
 </head>
 
-<body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/">
-      <span>lf小哇</span>
-    </a>
-    <ul class="right-header">
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lf小哇</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
       
-        <li class="nav-item">
-          
-            <a href="/" class="item-link">首页</a>
-          
-        </li>
+        <p class="site-subtitle">战斗到底！</p>
       
-        <li class="nav-item">
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
           
-            <a href="/archives" class="item-link">归档</a>
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
           
-        </li>
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
       
     </ul>
-  </div>
-</header>
+  
 
-  <main id='post'>
-  <div class="content">
-    <article>
-        <section class="content markdown-body">
-          <h1>深入理解 JavaScript 异步系列（1）——基础</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017/06/18</time>
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/18/深入理解-JavaScript-异步系列（1）——基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小 哇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lf小哇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深入理解 JavaScript 异步系列（1）——基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
             
             
-          </div>
-          <h2 id="第一部分，什么是异步"><a href="#第一部分，什么是异步" class="headerlink" title="第一部分，什么是异步"></a>第一部分，什么是异步</h2><p>提醒：如果你是初学 js 的同学，尚未有太多项目经验和基础知识，请就此打住，不要看这篇教程</p>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-06-18 18:27:40" itemprop="dateCreated datePublished" datetime="2017-06-18T18:27:40+08:00">2017-06-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-07-14 00:07:41" itemprop="dateModified" datetime="2018-07-14T00:07:41+08:00">2018-07-14</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="第一部分，什么是异步"><a href="#第一部分，什么是异步" class="headerlink" title="第一部分，什么是异步"></a>第一部分，什么是异步</h2><p>提醒：如果你是初学 js 的同学，尚未有太多项目经验和基础知识，请就此打住，不要看这篇教程</p>
 <p>我思考问题、写文章一般都不按讨论出牌，别人写过的东西我不会再照着抄一遍。因此，后面所有的内容，都是我看了许多资料之后，个人重新思考提炼总结出来的，这肯定不能算是初级教程。</p>
 <p>如果你是已有 js 开发经验，并了解异步的基础知识，到这里来想深入了解一下Promise Generator和async-awati，那就太好了，非常欢迎。</p>
 <h3 id="本节内容概述"><a href="#本节内容概述" class="headerlink" title="本节内容概述"></a>本节内容概述</h3><p>1、JS 为何会有异步</p>
@@ -98,96 +424,343 @@
 <p>本节内容概述</p>
 <p>· 共同之处<br>· 不同之处<br>· 我的观点</p>
 
-        </section>
-    </article>
-    
-        
-  </div>
-  <aside>
-    
-    <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一部分，什么是异步"><span class="toc-number">1.</span> <span class="toc-text">第一部分，什么是异步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#本节内容概述"><span class="toc-number">1.1.</span> <span class="toc-text">本节内容概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1、JS-为何会有异步"><span class="toc-number">1.2.</span> <span class="toc-text">1、JS 为何会有异步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、异步的实现原理"><span class="toc-number">1.3.</span> <span class="toc-text">2、异步的实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、常用的异步操作"><span class="toc-number">1.4.</span> <span class="toc-text">3、常用的异步操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二部分，异步和-event-loop"><span class="toc-number">2.</span> <span class="toc-text">第二部分，异步和 event-loop</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#本节内容概述-1"><span class="toc-number">2.1.</span> <span class="toc-text">本节内容概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1、举例说明"><span class="toc-number">2.2.</span> <span class="toc-text">1、举例说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、核心概念"><span class="toc-number">2.3.</span> <span class="toc-text">2、核心概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、思考问题"><span class="toc-number">2.4.</span> <span class="toc-text">3、思考问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三部分，事件绑定算不算异步？"><span class="toc-number">3.</span> <span class="toc-text">第三部分，事件绑定算不算异步？</span></a></li></ol>
-        </div>
-    </div>
-    
-  </aside>
-</main>
-
-
-
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-  </div>
-</footer>
-
-
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/lib/in-view.min.js"></script>
-<script src="/lib/lodash.min.js"></script>
-<script>
-  var isDown = true
-  var oldY = 0
-  inView.offset(50)
-
-  document.body.addEventListener('touchstart', function(){});
-  
-  window.addEventListener('scroll', _.throttle(e => {
-    var currentY = window.scrollY
-    if((oldY - currentY) < 0) {
-      isDown = true
-    } else {
-      isDown = false
-    }
-    oldY = currentY
-  }, 250))
-
-  $("article img").each(function() {
-      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
-      $(this).wrapAll(strA);
-  });
-
-  $('.toc-link').each(function() {
-      var href = $(this).attr("href");
       
-      inView(href).on('exit', () => {
-        if (isDown) {
-          handleActive(href)
-        }
-      })
+    </div>
 
-      inView(href).on('enter', () => {
-        if (!isDown) {
-          handleActive(href)
-        }
-      })
+    
 
-      this.onclick = function(e) {
-        var pos = $(href).offset().top - 10;
-        $("html,body").animate({scrollTop: pos}, 300);
-        setTimeout(() => {
-          handleActive(href)
-        }, 350)
-        return false
-      }
-  })
+    
+    
+    
 
-  function handleActive(href) {
-    document.querySelectorAll('.toc-link').forEach(elm => {
-      elm.classList.remove('active')
-    })
-    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/16/深入理解javascript原型和闭包（17）完结/" rel="next" title="深入理解javascript原型和闭包（17）完结">
+                <i class="fa fa-chevron-left"></i> 深入理解javascript原型和闭包（17）完结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/12/前端开发栈所需要了解的内容/" rel="prev" title="前端开发栈所需要了解的内容">
+                前端开发栈所需要了解的内容 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">小 哇</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一部分，什么是异步"><span class="nav-number">1.</span> <span class="nav-text">第一部分，什么是异步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本节内容概述"><span class="nav-number">1.1.</span> <span class="nav-text">本节内容概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、JS-为何会有异步"><span class="nav-number">1.2.</span> <span class="nav-text">1、JS 为何会有异步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、异步的实现原理"><span class="nav-number">1.3.</span> <span class="nav-text">2、异步的实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、常用的异步操作"><span class="nav-number">1.4.</span> <span class="nav-text">3、常用的异步操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二部分，异步和-event-loop"><span class="nav-number">2.</span> <span class="nav-text">第二部分，异步和 event-loop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本节内容概述-1"><span class="nav-number">2.1.</span> <span class="nav-text">本节内容概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、举例说明"><span class="nav-number">2.2.</span> <span class="nav-text">1、举例说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、核心概念"><span class="nav-number">2.3.</span> <span class="nav-text">2、核心概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、思考问题"><span class="nav-number">2.4.</span> <span class="nav-text">3、思考问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三部分，事件绑定算不算异步？"><span class="nav-number">3.</span> <span class="nav-text">第三部分，事件绑定算不算异步？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小 哇</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
   }
 </script>
-<script src="/lib/jquery.fancybox.min.js"></script>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>
