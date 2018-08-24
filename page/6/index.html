@@ -312,6 +312,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/04/深入理解javascript原型和闭包（4）隐式原型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="七夜">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="七夜博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/04/深入理解javascript原型和闭包（4）隐式原型/" itemprop="url">
+                  深入理解javascript原型和闭包（4）隐式原型
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-06-04 15:16:07" itemprop="dateCreated datePublished" datetime="2017-06-04T15:16:07+08:00">2017-06-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-07-13 15:57:43" itemprop="dateModified" datetime="2018-07-13T15:57:43+08:00">2018-07-13</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>注意：本文不是javascript基础教程，如果你没有接触过原型的基本知识，应该先去了解一下，推荐看《javascript高级程序设计（第三版）》第6章：面向对象的程序设计。</p>
+<p>上节已经提到，<font color="red" face="黑体" size="4">每个函数function都有一个prototype，即原型</font>这里再加一句话<font color="red" face="黑体" size="4">每个对象都有一个<strong>proto</strong>，可成为隐式原型。</font></p>
+<p>这个<strong>proto</strong>是一个隐藏的属性，javascript不希望开发者用到这个属性值，有的低版本浏览器甚至不支持这个属性值。所以你在Visual Studio 2012这样很高级很智能的编辑器中，都不会有<strong>proto</strong>的智能提示，但是你不用管它，直接写出来就是了。</p>
+<p><img src="/2017/06/04/深入理解javascript原型和闭包（4）隐式原型/1.png" alt="bg"></p>
+<p><img src="/2017/06/04/深入理解javascript原型和闭包（4）隐式原型/2.png" alt="bg"></p>
+<p>上面截图看来，obj.<strong>proto</strong>和Object.prototype的属性一样！这么巧！</p>
+<p>答案就是一样。</p>
+<p>obj这个对象本质上是被Object函数创建的，因此obj.<strong>proto</strong>=== Object.prototype。我们可以用一个图来表示。</p>
+<p><img src="/2017/06/04/深入理解javascript原型和闭包（4）隐式原型/3.png" alt="bg"></p>
+<p>即，<font color="red" face="黑体" size="4">每个对象都有一个<strong>proto</strong>属性，指向创建该对象的函数的prototype。</font></p>
+<p>那么上图中的“Object prototype”也是一个对象，它的<strong>proto</strong>指向哪里？</p>
+<p>好问题！</p>
+<p>在说明“Object prototype”之前，先说一下自定义函数的prototype。自定义函数的prototype本质上就是和 var obj = {} 是一样的，都是被Object创建，所以它的<strong>proto</strong>指向的就是Object.prototype。</p>
+<p>但是<font color="red" face="黑体" size="4">Object.prototype确是一个特例——它的<strong>proto</strong>指向的是null，切记切记！</font></p>
+<p><img src="/2017/06/04/深入理解javascript原型和闭包（4）隐式原型/4.png" alt="bg"></p>
+<p>还有——函数也是一种对象，函数也有<strong>proto</strong>吗？</p>
+<p>又一个好问题！——当然有。</p>
+<p>函数也不是从石头缝里蹦出来的，函数也是被创建出来的。谁创建了函数呢？——Function——注意这个大写的“F”。</p>
+<p>且看如下代码。</p>
+<p><img src="/2017/06/04/深入理解javascript原型和闭包（4）隐式原型/5.png" alt="bg"></p>
+<p>以上代码中，第一种方式是比较传统的函数创建方式，第二种是用new Functoin创建。</p>
+<font color="red" face="黑体" size="4">首先根本不推荐用第二种方式。</font>
+
+<p>这里只是向大家演示，函数是被Function创建的。</p>
+<p>好了，根据上面说的一句话——对象的<strong>proto</strong>指向的是创建它的函数的prototype，就会出现：Object.<strong>proto</strong> === Function.prototype。用一个图来表示。</p>
+<p><img src="/2017/06/04/深入理解javascript原型和闭包（4）隐式原型/6.png" alt="bg"></p>
+<p>上图中，很明显的标出了：自定义函数Foo.<strong>proto</strong>指向Function.prototype，Object.<strong>proto</strong>指向Function.prototype，唉，怎么还有一个……Function.<strong>proto</strong>指向Function.prototype？这不成了循环引用了？</p>
+<p>对！是一个环形结构。</p>
+<p>其实稍微想一下就明白了。Function也是一个函数，函数是一种对象，也有<strong>proto</strong>属性。既然是函数，那么它一定是被Function创建。所以——Function是被自身创建的。所以它的<strong>proto</strong>指向了自身的Prototype。</p>
+<p>篇幅不少了，估计也都看烦了。快结束了。</p>
+<p>最后一个问题：Function.prototype指向的对象，它的<strong>proto</strong>是不是也指向Object.prototype？</p>
+<p>答案是肯定的。因为Function.prototype指向的对象也是一个普通的被Object创建的对象，所以也遵循基本的规则。</p>
+<p><img src="/2017/06/04/深入理解javascript原型和闭包（4）隐式原型/7.png" alt="bg"></p>
+<p>OK 本节结束，是不是很乱？</p>
+<p>乱很正常。那这一节就让它先乱着，下一节我们将请另一个老朋友来帮忙，把它理清楚。这位老朋友就是——instanceof。</p>
+<p>具体内容，请看下节分解。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/03/深入理解javascript原型和闭包（3）prototype原型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1035,7 +1224,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-count">55</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
